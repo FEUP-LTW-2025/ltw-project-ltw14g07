@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Imperial+Script&family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ruda:wght@400..900&display=swap');
+
+html {
+    font-family: "Poppins";
+
+}
+
+body {
+    --primary-green: rgba(34,195,48, 1);
+    --white-color: #dae6c6;
+    --dark-grey-color: #3b3c3d;
+    --light-grey-color: #eef1f7;
+    margin:0;
+}
+
+body > header {
+    color: white;
+    background: rgb(152,227,34);
+    background: linear-gradient(0deg, rgba(152,227,34,1) 0%, rgba(34,195,48,1) 100%); 
+    padding:1em;
+
+    h1, h3 {
+        margin:0;
+    }
+}
+
+body > header > div {
+    max-width: 80em;
+    margin: auto;
+}
+
+#signup {
+    text-align: right;
+}
+
+#signup a{
+    text-decoration: underline;
+    border:1px none;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+body header ~ * {
+    max-width: 70em;
+    margin: auto;
+}
+
+body article {
+    margin-top:3em;
+    padding: 1em;
+    border: 1px solid var(--dark-grey-color);
+    background-color: var(--light-grey-color);
+    border-radius: 20px;
+
+}

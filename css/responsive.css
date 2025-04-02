@@ -1,0 +1,10 @@
+#signup a{
+    transition: background-color 200ms;
+}
+
+#signup a:hover {
+    background-color: white;
+    border-style: solid;
+    color: black;
+    cursor: pointer;
+}
