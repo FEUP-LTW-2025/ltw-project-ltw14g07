@@ -45,7 +45,7 @@ CREATE TABLE Request (
 	notes TEXT,
 	creationDate DATE NOT NULL,
 	completionDate DATE,
-	status TEXT NOT NULL CHECK(status IN ('pending', 'accepted', 'denied', 'done')),           
+	status TEXT NOT NULL CHECK(status IN ('pending', 'accepted', 'denied', 'done')),      --dar update para carrinho  
 	review INTEGER CHECK (review BETWEEN 1 AND 5) DEFAULT NULL,
 
 	FOREIGN KEY (serviceID) REFERENCES Service(serviceID)

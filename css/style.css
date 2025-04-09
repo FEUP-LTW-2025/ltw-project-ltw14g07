@@ -5,18 +5,20 @@ html {
 
 }
 
-body {
-    --primary-green: rgba(34,195,48, 1);
+:root {
+    --primary-green: rgb(108,215,90);
+    --secondary-green: rgba(152,227,34,1);
     --white-color: #dae6c6;
-    --dark-grey-color: #3b3c3d;
-    --light-grey-color: #eef1f7;
+    --dark-grey-color: rgb(217 217 217);
+}
+
+body {
     margin:0;
 }
 
 body > header {
     color: white;
-    background: rgb(152,227,34);
-    background: linear-gradient(0deg, rgba(152,227,34,1) 0%, rgba(34,195,48,1) 100%); 
+    background: var(--primary-green);
     padding:1em;
 
     h1, h3 {
@@ -25,7 +27,7 @@ body > header {
 }
 
 body > header > div {
-    max-width: 80em;
+    max-width:90em;
     margin: auto;
 }
 
@@ -41,15 +43,36 @@ body > header > div {
 }
 
 body header ~ * {
-    max-width: 70em;
+    max-width: 80em;
     margin: auto;
 }
 
-body article {
+.card {
     margin-top:3em;
     padding: 1em;
-    border: 1px solid var(--dark-grey-color);
-    background-color: var(--light-grey-color);
-    border-radius: 20px;
+    background-color: var(--dark-grey-color);
+    border-radius: 50px;
+}
 
+#listing{
+    display: flex;
+    gap: 4em;
+}
+
+
+.filters {
+    width: 12em;
+    padding-left: 1em;
+
+    .group-input {
+        padding-left: 2em;
+
+        label {
+            display:block
+        }
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
 }
