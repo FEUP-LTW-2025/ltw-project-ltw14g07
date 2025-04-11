@@ -1,4 +1,62 @@
-body > header section {
+
+/*----------------- GENERAL ------------------*/
+
+body {
+    margin: 0;
+}
+
+.card {
+    margin-top:3em;
+    padding: 1em;
+}
+
+/*----------------- HEADER ------------------*/
+
+body > header {
+    section {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    > div {
+        max-width:90em;
+        margin: auto;
+    }
+
+    ~ * {
+        max-width: 80em;
+        margin: auto;
+    }
+}
+
+
+#signup {
+    text-align: right;
+
+    a {
+        padding: 0.5em;
+    }
+}
+
+
+
+/*----------------- MAIN PAGE ------------------*/
+
+#listing{
     display: flex;
-    justify-content: space-between;
+    gap: 4em;
+}
+
+#listing aside {
+    width: 20em;
+    padding-left: 1em;
+
+    .group-input {
+        padding-left: 2em;
+
+        label {
+            display:block
+        }
+    }
+
 }
