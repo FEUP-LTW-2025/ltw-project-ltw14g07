@@ -1,14 +1,25 @@
 
 /*----------------- GENERAL ------------------*/
 
-body {
-    margin: 0;
+* {
+    box-sizing: border-box
 }
 
+body {
+    margin: 0;
+
+    header ~ * {                    /* maybe change to main for footer */
+        padding: 1em;
+    }
+}
+
+
+/*----------------- TEMPLATE ------------------*/
+
 .card {
-    margin-top:3em;
     padding: 1em;
 }
+
 
 /*----------------- HEADER ------------------*/
 
@@ -39,12 +50,13 @@ body > header {
 }
 
 
-
 /*----------------- MAIN PAGE ------------------*/
 
-#listing{
+#listing {
     display: flex;
+    align-items: flex-start;
     gap: 4em;
+    margin-top: 3em;
 }
 
 #listing aside {
@@ -59,4 +71,55 @@ body > header {
         }
     }
 
+}
+
+
+/*----------------- CREATE SERVICE PAGE ------------------*/
+
+#createService {
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 2em;    
+    }
+
+    h3 {
+        margin: 0;
+        margin-bottom: 1em;
+    } 
+
+    h1 {
+        text-align: center;
+    }
+
+    section {
+        margin-top: 2em;
+    }
+}
+
+#createService form > section {
+    textarea {
+        width: 100%;
+    }
+
+    &:nth-child(1) input {
+        width: 40em;
+    }
+}
+
+#createService form > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 3em;
+
+    section {
+        width: 50%;
+    }
+}
+
+#createService div[class="card"] {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
 }

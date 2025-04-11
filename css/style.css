@@ -1,18 +1,32 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Imperial+Script&family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ruda:wght@400..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Imperial+Script&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ruda:wght@400..900&display=swap');
 
 /*----------------- GENERAL ------------------*/
 
 html {
-    font-family: "Poppins";
-
+    font-family: "Inter";
 }
 
 :root {
     --primary-green: rgb(108,215,90);
     --white-color: #dae6c6;
     --dark-grey-color: rgb(217 217 217);
+
+    --big-label: 2.25rem;
+    --med-label: 2rem;
+    --label: 1.5rem;
+    --big-text: 1.50rem;
+    --med-text: 1.25rem;
+}
+
+
+/*----------------- TEMPLATE ------------------*/
+
+.card {
+    background-color: var(--dark-grey-color);
+    border: 1px solid;
+    border-radius: 50px;
 }
 
 
@@ -22,6 +36,7 @@ body > header {
     color: white;
     background: var(--primary-green);
     padding:1em;
+    font-family: "Poppins";
 
     h1, h3 {
         margin:0;
@@ -34,15 +49,31 @@ body > header {
     border-radius: 20px;
 }
 
-.card {
-    background-color: var(--dark-grey-color);
-    border: 1px solid;
-    border-radius: 50px;
-}
-
 
 /*----------------- MAIN PAGE ------------------*/
 
 #listing aside p{
     font-size: 1.2rem;
+}
+
+
+/*----------------- CREATE SERVICE PAGE ------------------*/
+
+#createService {
+    h1 {
+        font-size: var(--big-label);
+    }
+
+    h3 {
+        font-size: var(--label);
+    }
+
+    font-size: var(--med-text);
+}
+
+#createService button {
+    padding: 1em;
+    border-radius: 50px;
+    border: 1px solid;
+    background-color: var(--primary-green);
 }
