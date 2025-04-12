@@ -4,28 +4,31 @@
 
 /*----------------- GENERAL ------------------*/
 
-html {
-    font-family: "Inter";
-}
-
 :root {
     --primary-green: rgb(108,215,90);
     --white-color: #dae6c6;
     --dark-grey-color: rgb(217 217 217);
 
-    --big-label: 2.25rem;
-    --med-label: 2rem;
-    --label: 1.5rem;
-    --big-text: 1.50rem;
-    --med-text: 1.25rem;
+    --big-label: 2.0rem;
+    --med-label: 1.75rem;
+    --label: 1.25rem;
+    --big-text: 1.25rem;
+    --med-text: 1.0rem;
 }
 
+html {
+    background-color: white;
+}
+
+* {
+    font-family: "Inter";
+}
 
 /*----------------- TEMPLATE ------------------*/
 
 .card {
     background-color: var(--dark-grey-color);
-    border: 1px solid;
+    border: 2px solid;
     border-radius: 50px;
 }
 
@@ -36,7 +39,6 @@ body > header {
     color: white;
     background: var(--primary-green);
     padding:1em;
-    font-family: "Poppins";
 
     h1, h3 {
         margin:0;
@@ -62,18 +64,25 @@ body > header {
 #createService {
     h1 {
         font-size: var(--big-label);
+        font-weight: 600
     }
 
     h3 {
         font-size: var(--label);
+        font-weight: 500;
+    }
+
+    input, textarea {
+        font-size: var(--med-text);
     }
 
     font-size: var(--med-text);
 }
 
 #createService button {
-    padding: 1em;
-    border-radius: 50px;
-    border: 1px solid;
     background-color: var(--primary-green);
+    font-size: var(--label);
+    padding: 0.5em;
+    border: 1px solid;
+    border-radius: 50px;
 }
