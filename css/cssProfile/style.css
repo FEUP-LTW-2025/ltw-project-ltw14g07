@@ -37,7 +37,20 @@ html {
 }
 
 .card {
+    display: flex;
+    flex-direction: column;     /* Stack children vertically */
+    gap: 1em;                   /* Space between title and paragraph */
+    padding: 2em;               /* Add space around the content */
     background-color: var(--dark-grey-color);
+    border: 2px solid;
+    border-radius: 50px;
+}
+.bigCard{
+    display: flex;
+    flex-direction: column;     /* Stack children vertically */
+    gap: 1em;                   /* Space between title and paragraph */
+    padding: 2em;               /* Add space around the content */
+    background-color: whitesmoke;
     border: 2px solid;
     border-radius: 50px;
 }
@@ -79,6 +92,12 @@ body > header {
     border-radius: 20px;
 }
 
+
+/*----------------- MAIN PAGE ------------------*/
+
+#listing aside p{
+    font-size: 1.2rem;
+}
 .skills, .pricing {
     h1 {
         font-size: var(--med-label);
@@ -89,23 +108,7 @@ body > header {
         margin: 0;
     }
 }
-.carrer {
-    h1 {
-        font-size: var(--med-label);
-        font-weight: 500;
-    }
 
-    p {
-        margin: 0;
-    }
-}
-
-
-/*----------------- MAIN PAGE ------------------*/
-
-#listing aside p{
-    font-size: 1.2rem;
-}
 
 
 /*----------------- CREATE SERVICE PAGE ------------------*/

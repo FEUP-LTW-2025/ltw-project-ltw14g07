@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Placeholder</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../ltw-project-ltw14g07/css/cssProfile/style.css">
+        <link rel="stylesheet" href="../ltw-project-ltw14g07/css/cssProfile/layout.css">
+        <link rel="stylesheet" href="../ltw-project-ltw14g07/css/cssProfile/responsive.css">
+    </head>
+
+    <body>
+        <header>
+            <div>
+                <h1><a>Placeholder</a></h1>
+                <section>
+                    <h3>Let programmers work for you</h3>
+                    <div id="signup">
+                        <a>Edit Profile</a>
+                    </div>
+                </section>
+            </div>
+        </header>
+        <main id="selectService">
+            <section>
+                <article>
+                    <div class="card">
+                        <h1 class="title">Hi, welcome to my profile page!</h1>
+                        <p>
+                            As a UI UX designer, I put much value on trustful, transparent, long-term relationships. That's why I'm very accurate in performing a professional approach. Your privacy, terms, and deadlines will always be respected. 
+                            All I need to start is your specifications, a description of a problem you face, or just an initial idea of the future design product. But in case you are not sure at all - no problem. We will work out the product's vision together, and I will provide you with fresh and unique ideas and efficient methods to create something outstanding and productive. I will manage your design project from start to final result. Feel free to contact me to discuss the details.
+                        </p>
+                    </div>    
+                </article>
+            </section>
+            
+            <div class="action-buttons">
+                <button type="button" onclick="handleAccept()">Accept</button>
+                <button type="button" onclick="handleDecline()">Decline</button>
+            </div>
+           
+            <section>
+                <div class="chat">
+                    <div class="bigCard">
+                        <h2>Chat</h2>
+                        <div class="card">
+                            <h3>Username1</h3>
+                            <p>This is the description of the first card. You can add more information here as needed.</p>
+                        </div>
+                        
+                        <!-- Card 2 -->
+                        <div class="card">
+                            <h3>Username2</h3>
+                            <p>This is the description of the second card. You can add more information here as needed.</p>
+                        </div>
+                        
+                        <!-- Card 3 -->
+                        <div class="card">
+                            <form action="chat_handler.php" method="POST">
+                                <label for="chatMessage"></label>
+                                <textarea id="chatMessage" name="chatMessage" rows="4" cols="30" placeholder="Type your message here..."></textarea>
+                                <button type="submit">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
