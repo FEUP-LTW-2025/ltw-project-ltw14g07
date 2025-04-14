@@ -20,6 +20,19 @@ body {
     padding: 1em;
 }
 
+.labeled-input {
+    h3 {
+        margin: 0;
+        margin-bottom: 0.5em;
+    } 
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
 
 /*----------------- HEADER ------------------*/
 
@@ -80,21 +93,11 @@ body > header {
     form {
         display: flex;
         flex-direction: column;
-        gap: 1em;    
+        gap: 4em;    
     }
-
-    h3 {
-        margin: 0;
-        margin-bottom: 0.5em;
-    } 
 
     h1 {
         text-align: center;
-        margin-bottom: 0;
-    }
-
-    section {
-        margin-top: 2em;
     }
 
     & > :last-child {
@@ -129,4 +132,44 @@ body > header {
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
+}
+
+
+/*----------------- SELECT SERVICE PAGE ------------------*/
+
+#selectService {
+    > section {
+        display: flex;
+        gap: 4em;
+    }
+
+    h2, aside p {
+        text-align: center;
+    }
+
+    h2 {
+        margin-top: 6em;
+    }
+
+    input {
+        width: 40em;
+        margin-bottom: 3em;
+    }
+
+    textarea {
+        width: 100%;
+    }
+}
+
+#selectService > section > article {
+    div {
+        display: flex;
+        justify-content: space-between;
+    }
+} 
+
+.skills, .pricing {
+    h1 {
+        margin: 0;
+    }
 }

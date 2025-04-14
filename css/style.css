@@ -26,10 +26,38 @@ html {
 
 /*----------------- TEMPLATE ------------------*/
 
+.title {
+    font-size: var(--big-label);
+    font-weight: 600
+}
+
+.med-label {
+    font-size: var(--label);
+    font-weight: 500;
+}
+
 .card {
     background-color: var(--dark-grey-color);
     border: 2px solid;
     border-radius: 50px;
+}
+
+.green-button {
+    background-color: var(--primary-green);    /* make general button*/
+    font-size: var(--label);
+    padding: 0.5em;
+    border: 1px solid;
+    border-radius: 50px;
+}
+
+.tag-list {
+    span {
+        background-color: var(--dark-grey-color);
+        padding: 0.3em;
+        border: 1px solid;
+        border-radius: 50px;
+        font-size: var(--big-text);
+    }
 }
 
 
@@ -67,11 +95,6 @@ body > header {
         font-weight: 600
     }
 
-    h3 {
-        font-size: var(--label);
-        font-weight: 500;
-    }
-
     input, textarea {
         font-size: var(--med-text);
     }
@@ -79,10 +102,39 @@ body > header {
     font-size: var(--med-text);
 }
 
-#createService button {
-    background-color: var(--primary-green);
-    font-size: var(--label);
-    padding: 0.5em;
-    border: 1px solid;
-    border-radius: 50px;
+
+
+
+/*----------------- SELECT SERVICE PAGE ------------------*/
+
+#selectService {
+    img {
+        border-radius: 300px;
+        width: 150px;
+        height: 150px;
+    }
+
+    h2 {
+        font-weight: 500;
+    }
+
+    p {
+        font-size: var(--big-text);
+    }
+
+    input, textarea {
+        font-size: var(--med-text);
+    }
+
+    .skills, .pricing {
+        h1 {
+            font-size: var(--med-label);
+            font-weight: 500;
+        }
+
+        p {
+            margin: 0;
+        }
+    }
+
 }
