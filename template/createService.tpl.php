@@ -5,13 +5,14 @@
 ?>
 
 
-<?php function draw_form() { ?>
+<?php function draw_form($filters, $userID) { ?>
     <h1 class="title">Create and Publish your own Service</h1>
-    <form id="serviceForm">
+    <form id="serviceForm" action="/../action/actionCreateService.php" method="post">
         <?php 
             draw_text_inputs(); 
-            draw_hor_filters();
+            draw_hor_filters($filters);
         ?>
+        <input type="hidden" value="<?=$userID?>" name="userID">
     </form>    
     <?php 
     draw_pub_button();

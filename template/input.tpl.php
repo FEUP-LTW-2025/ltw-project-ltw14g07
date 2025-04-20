@@ -1,7 +1,7 @@
 <?php function draw_text_inputs() { ?>
     <section class="labeled-input">
         <h3 class="med-label">Title</h3>
-        <input class="card" type="textarea" placeholder="Write your Title..">
+        <input class="card" type="textarea" name="title" placeholder="Write your Title..">
     </section>
 
     <section class="labeled-input">
@@ -12,6 +12,6 @@
 
 <?php function draw_pub_button() { ?>
     <div>
-        <button class="green-button">Publish</button>
+        <button type="submit" class="green-button" form="serviceForm">Publish</button>
     </div>
 <?php } ?>

@@ -33,7 +33,7 @@
 <?php function draw_footer() { ?>
             </main>
             <a href='/pages/createService.php'>create service (temporary)</a>
-            <a href="/pages/service.php">select service (temporary)</a>
+            <a href="/pages/service.php?id=1">select service (temporary)</a>
             <a href="/pages/index.php">go to main (temporary)</a>
 
         </body>
