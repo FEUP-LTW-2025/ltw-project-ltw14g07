@@ -122,3 +122,97 @@ CREATE TABLE ServiceField (
 		ON UPDATE CASCADE
 );
 
+
+
+INSERT INTO USERS (UserID, name, email, password, description, role)
+	VALUES (1, 'Roberto Céu', 'email@gmail.com', '123456', 'this is who i am', 'freelancer');
+
+INSERT INTO Service (serviceID, userID, title, description, hourlyRate, deliveryTime, creationDate) VALUES 
+(1,
+1,
+'I will do modern mobile app ui ux design or website ui ux design',
+'As a UI UX designer, I put much value on trustful, transparent, long-term relationships. Thats why Im very accurate in performing a professional approach. Your privacy, terms, and deadlines will always be respected. All I need to start is your specifications, a description of a problem you face, or just an initial idea of the future design product. But in case you are not sure at all - no problem. We will work out the products vision together, and I will provide you with fresh and unique ideas and efficient methods to create something outstanding and productive. I will manage your design project from start to final result. Feel free to contact me to discuss the details.', 
+12, 
+3,
+'2024-01-15'
+),
+
+(2,
+1,
+'I will do modern mobile app ui ux design or website ui ux design',
+'As a UI UX designer, I put much value on trustful, transparent, long-term relationships. Thats why Im very accurate in performing a professional approach. Your privacy, terms, and deadlines will always be respected. All I need to start is your specifications, a description of a problem you face, or just an initial idea of the future design product. But in case you are not sure at all - no problem. We will work out the products vision together, and I will provide you with fresh and unique ideas and efficient methods to create something outstanding and productive. I will manage your design project from start to final result. Feel free to contact me to discuss the details.', 
+15, 
+4,
+'2024-01-15'
+);
+
+
+
+INSERT INTO Language VALUES
+('PHP'),
+('JavaScript'),
+('Python'),
+('TypeScript'),
+('Ruby'),
+('Java'),
+('HTML'),
+('CSS'),
+('React'),
+('SQL');
+
+INSERT INTO Field VALUES
+('UI/UX'),
+('Game Development'),
+('Neural Network'),
+('Graphics Programming'),
+('Cybersecurity'),
+('Compiler'),
+('Kernel'),
+('Systems Programming'),
+('Full Stack'),
+('Backend');
+
+INSERT INTO ServiceLanguage (serviceID, language) VALUES
+(1, 'PHP'),
+(1, 'CSS'),
+(1, 'HTML'),
+
+(2, 'PHP'),
+(2, 'CSS'),
+(2, 'HTML'),
+(2, 'JavaScript'),
+(2, 'SQL');
+
+INSERT INTO ServiceField (serviceID, field) VALUES
+(1, 'UI/UX'),
+
+(2, 'UI/UX');
+
+
+--CREATE TABLE ServiceLanguage (  
+--	serviceID INTEGER,
+--	language TEXT,
+--
+--	PRIMARY KEY (serviceID, language),
+--
+--    FOREIGN KEY (serviceID) REFERENCES Service(serviceID)
+--		ON DELETE CASCADE
+--		ON UPDATE CASCADE,
+--	FOREIGN KEY (language) REFERENCES Language(language)
+--		ON DELETE CASCADE
+--		ON UPDATE CASCADE
+--);
+--
+--CREATE TABLE ServiceField (  
+--	serviceID INTEGER,
+--	field TEXT,
+--
+--	PRIMARY KEY (serviceID, field),
+--
+--	FOREIGN KEY (serviceID) REFERENCES Service(serviceID)
+--		ON DELETE CASCADE
+--		ON UPDATE CASCADE,
+--	FOREIGN KEY (field) REFERENCES Field(field)
+--		ON DELETE CASCADE
+--		ON UPDATE CASCADE
+--);
