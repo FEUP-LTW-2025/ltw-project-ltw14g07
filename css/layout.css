@@ -191,6 +191,7 @@ body > header {
         display: flex;
         justify-content: space-between;
     }
+    width: 100%;
 } 
 
 .skills, .pricing {

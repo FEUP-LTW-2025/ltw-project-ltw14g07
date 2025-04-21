@@ -11,6 +11,7 @@
             <link rel="stylesheet" href="../css/style.css">
             <link rel="stylesheet" href="../css/layout.css">
             <link rel="stylesheet" href="../css/responsive.css">
+            <script src="../js/click.js" defer></script>
         </head>
         <body>
             <header>
