@@ -1,6 +1,5 @@
 <?php
     require_once(__DIR__ . '/../database/service.class.php');
-
 ?>
 
 
@@ -27,7 +26,7 @@
 
                     <article>
                         <h1>Languages:</h1>
-                        <?php draw_tags($service->fields) ?>
+                        <?php draw_tags($service->languages) ?>
                     </article>
                 </section>
 
@@ -107,31 +106,3 @@
     </div>
 <?php } ?> 
 
-
-
-
-
-
-
-
-
-
-<?php function draw_request_form() { ?>
-    <form id="requestForm">
-        <h2>Hire John Doe and make your Request</h2>
-
-        <section class="labeled-input">
-            <h3 class="med-label">Title</h3>
-            <input class="card" type="textarea" placeholder="Write your Title..">
-        </section>
-
-        <section class="labeled-input">
-            <h3 class="med-label">Description</h3>
-            <textarea class="card" name="description" rows="7" placeholder="Write your Description..."></textarea>
-        </section>
-    </form>
-
-    <div>
-        <button class="green-button">Hire</button>
-    </div>
-<?php } ?>
