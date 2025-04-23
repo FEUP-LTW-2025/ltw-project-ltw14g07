@@ -16,7 +16,7 @@
         <body>
             <header>
                 <div>
-                    <h1><a>Placeholder</a></h1>
+                    <h1><a href="index.php">Placeholder</ahref></h1>
                     <section class="spaced">
                         <h3>Let programmers work for you</h3>
                         <div id="signup">
@@ -33,11 +33,10 @@
 
 <?php function draw_footer() { ?>
             </main>
-            <a href='/pages/createService.php'>create service (temporary)</a>
-            <a href="/pages/service.php?id=1">select service (temporary)</a>
-            <a href="/pages/index.php">go to main (temporary)</a>
+            <a href='/pages/createService.php'>service </a>
+            <a href="/pages/service.php?id=1">select service </a>
+            <a href="/pages/index.php">go to main </a>
             <a href ="/pages/profile.php">  got to profile</a>
-
         </body>
     </html>
 <?php } ?>

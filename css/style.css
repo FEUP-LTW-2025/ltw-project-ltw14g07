@@ -20,6 +20,14 @@ html {
     background-color: white;
 }
 
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
 
 /*----------------- FONTS ------------------*/
 
@@ -57,6 +65,11 @@ input, textarea {
     background-color: var(--dark-grey-color);
     border: 2px solid;
     border-radius: 50px;
+
+    > h1, > h2 {
+        text-align: center;
+        margin: 0;
+    }
 }
 
 .service-card {
@@ -125,9 +138,16 @@ body > header {
 /*----------------- MAIN PAGE ------------------*/
 
 #mainPage {
-    > section {
-        padding: 3em;
-    }
+
 }
+
+
+
+#profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 
 

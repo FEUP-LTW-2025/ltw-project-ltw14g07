@@ -1,5 +1,6 @@
 <?php function draw_vert_filters($filters) { ?>
     <aside class="card">
+        <h1>Filters</h1>
         <form>
            <?php 
             draw_fields($filters->fields);

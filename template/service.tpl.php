@@ -49,9 +49,12 @@
 
 <?php function draw_service_cards($services) { ?>
     <section class="card listing">
+        <h1>Services</h1>
+        <ul>
         <?php foreach($services as $service) { 
             draw_service_card($service);
         } ?>
+        </ul>
     </section>
 <?php } ?>
 
@@ -66,8 +69,8 @@
     }
     ?>
     
-    <article class="service-card">
-        <section>
+    <li class="service-card">
+        <section class>
             <img src="https://picsum.photos/id/237/200/300">
             <div>
                 <h3><?=$service->title?></h3>
@@ -94,7 +97,7 @@
             </article>
         </section>
         <input type="hidden" name="serviceID" value="<?=$service->serviceID?>">
-    </article>
+</li>
 <?php } ?> 
 
 
