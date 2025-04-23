@@ -8,9 +8,13 @@
 body {
     margin: 0;
 
-    header ~ * {                    /* maybe change to main for footer */
+    header ~ * {                 
         padding: 1em;
     }
+}
+
+textarea {
+    width: 100%;
 }
 
 
@@ -18,6 +22,24 @@ body {
 
 .card {
     padding: 1em;
+}
+
+.wrap-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-bottom: 5px;
+}
+
+.listing {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.spaced {
+    display: flex;
+    justify-content: space-between;
 }
 
 .service-card {
@@ -28,7 +50,7 @@ body {
     }
 
     h2, h3, h4 {
-        margin:0;
+        margin: 0;
     }
 
     h4 ~ p {
@@ -36,27 +58,40 @@ body {
     }
 }
 
+.service {
+    display: flex;
+    gap: 4em;
+
+    aside p {
+        text-align: center;
+    }
+
+    > article {
+        width: 100%;
+    }
+}
+
 .labeled-input {
+    margin-bottom: 2em;
+
     h3 {
         margin: 0;
         margin-bottom: 0.5em;
     } 
 }
 
-.tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
-    margin-bottom: 5px;
+.skills, .pricing {
+    h1, h2, p {
+        margin: 0;
+    }
 }
 
 
 /*----------------- HEADER ------------------*/
 
 body > header {
-    section {
-        display: flex;
-        justify-content: space-between;
+    h1, h3 {
+        margin:0;
     }
 
     > div {
@@ -82,32 +117,15 @@ body > header {
 
 /*----------------- MAIN PAGE ------------------*/
 
-#listing {
+#mainPage {
+    margin-top: 3em;
     display: flex;
     align-items: flex-start;
     gap: 4em;
-    margin-top: 3em;
 
-    > section {
-        display: flex;
-        flex-direction: column;
-        gap: 2em;
-    }
-}
-
-#listing aside {
-    width: 35em;
-    padding-left: 1em;
-
-    div {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5em;
-    }
-
-    section  {
-        margin-top: 1em;
-        margin-bottom: 1em;
+    aside {
+        width: 35em;
+        padding: 1em;
     }
 }
 
@@ -115,87 +133,44 @@ body > header {
 /*----------------- CREATE SERVICE PAGE ------------------*/
 
 #createService {
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 4em;    
-    }
-
     h1 {
         text-align: center;
     }
 
-    & > :last-child {
+    form {
+        > section input {
+            width: 40em;
+        }
+
+        > div {
+            gap: 4em;
+
+            section {
+                width: 50%;
+            }
+        }
+    }
+
+    > :last-child {
         display: flex;
         justify-content: right;
     }
-
-}
-
-#createService form > section {
-    textarea {
-        width: 100%;
-    }
-
-    &:nth-child(1) input {
-        width: 40em;
-    }
-}
-
-#createService form > div {
-    display: flex;
-    justify-content: space-between;
-    gap: 4em;
-
-    section {
-        width: 50%;
-    }
-}
-
-#createService div[class="card"] {
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
 }
 
 
 /*----------------- SELECT SERVICE PAGE ------------------*/
 
 #selectService {
-    > section {
-        display: flex;
-        gap: 4em;
-    }
-
-    h2, aside p {
+    > h2 {
         text-align: center;
-    }
-
-    h2 {
-        margin-top: 6em;
+        margin-top: 5em;
     }
 
     input {
         width: 40em;
-        margin-bottom: 3em;
-    }
-
-    textarea {
-        width: 100%;
     }
 }
 
-#selectService > section > article {
-    div {
-        display: flex;
-        justify-content: space-between;
-    }
-    width: 100%;
-} 
 
-.skills, .pricing {
-    h1 {
-        margin: 0;
-    }
-}
+
+

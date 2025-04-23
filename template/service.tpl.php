@@ -8,36 +8,36 @@
         $hourlyRate = "$service->hourlyRate" . "$/h";
         $deliveryTime = "$service->deliveryTime" . " weeks";
     ?>
-    <section>
+    <section class='service'>
         <aside>
             <img src="https://picsum.photos/id/237/200/300">
             <p><?=$service->userName?></p>
         </aside>
         <article>
-            <h1 class="title"><?=$service->title?></h1>
+            <h1><?=$service->title?></h1>
             <p><?=$service->description?></p>
 
-            <div>
+            <div class="spaced">
                 <section class="skills">
                     <article>
-                        <h1>Fields:</h1>
+                        <h2>Fields:</h2>
                         <?php draw_tags($service->fields) ?>  
                     </article>
 
                     <article>
-                        <h1>Languages:</h1>
+                        <h2>Languages:</h2>
                         <?php draw_tags($service->languages) ?>
                     </article>
                 </section>
 
                 <section class="pricing">
                     <article>
-                        <h1>Hourly Rate:</h1>
+                        <h2>Hourly Rate:</h2>
                         <p><?=$hourlyRate?></p>
                     </article>
 
                     <article>
-                        <h1>Delivery Time:</h1>
+                        <h2>Delivery Time:</h2>
                         <p><?=$deliveryTime?></p>
                     </article>
                 </section>
@@ -48,7 +48,7 @@
 
 
 <?php function draw_service_cards($services) { ?>
-    <section class="card">
+    <section class="card listing">
         <?php foreach($services as $service) { 
             draw_service_card($service);
         } ?>
@@ -70,7 +70,7 @@
         <section>
             <img src="https://picsum.photos/id/237/200/300">
             <div>
-                <h3 class="med-label"><?=$service->title?></h3>
+                <h3><?=$service->title?></h3>
                 <p><?=$service->userName?></p>
             </div>
         </section>
@@ -99,7 +99,7 @@
 
 
 <?php function draw_tags($tagList) { ?>
-    <div class="tag-list">
+    <div class="wrap-list">
         <?php foreach ($tagList as $tag) { ?>
             <span><?=$tag?></span>
         <?php } ?>

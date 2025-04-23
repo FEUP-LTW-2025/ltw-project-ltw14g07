@@ -17,7 +17,7 @@
             <header>
                 <div>
                     <h1><a>Placeholder</a></h1>
-                    <section>
+                    <section class="spaced">
                         <h3>Let programmers work for you</h3>
                         <div id="signup">
                             <a>Register</a>
@@ -36,6 +36,7 @@
             <a href='/pages/createService.php'>create service (temporary)</a>
             <a href="/pages/service.php?id=1">select service (temporary)</a>
             <a href="/pages/index.php">go to main (temporary)</a>
+            <a href ="/pages/profile.php">  got to profile</a>
 
         </body>
     </html>

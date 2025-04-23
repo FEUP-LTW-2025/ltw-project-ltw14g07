@@ -20,6 +20,8 @@
         $this->status = $status;
     }
 
+    // public function getRequestByID($db, $id) {
+
     public function insertIntoDatabase($db) {
         $stmt = $db->prepare('INSERT INTO Request (requestID, serviceID, userID, title, notes, creationDate, completionDate, status) VALUES 
         (?, ?, ?, ?, ?, ?, ?, ?)');

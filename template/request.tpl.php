@@ -4,8 +4,8 @@
 ?>
 
 <?php function draw_request_form($userName, $userID, $serviceID) { ?>
+    <h2>Hire <?=$userName?> and make your Request</h2>
     <form id="requestForm" action="/../action/actionCreateRequest.php" method="post">
-        <h2>Hire <?=$userName?> and make your Request</h2>
         <?php draw_text_inputs(); ?>
         <input type="hidden" value="<?=$userID?>" name="userID">
         <input type="hidden" value="<?=$serviceID?>" name="serviceID">

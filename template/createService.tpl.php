@@ -6,7 +6,7 @@
 
 
 <?php function draw_form($filters, $userID) { ?>
-    <h1 class="title">Create and Publish your own Service</h1>
+    <h1>Create and Publish your own Service</h1>
     <form id="serviceForm" action="/../action/actionCreateService.php" method="post">
         <?php 
             draw_text_inputs(); 
