@@ -10,14 +10,10 @@
 
     //session_start();
 
-    $db = getDatabaseConnection();
-    //$user = User::getUserByID();
 
-    $services = Service::getAllServices($db, 8);
 
     draw_header('profile');
     draw_profile_resume();
-    draw_service_cards($services);
     
     draw_footer();
 ?>

@@ -16,7 +16,8 @@
         </article>
     </section>
 
-    <h2>Here are your published services, create, edit or delete them</h2>
+    <a>Edit Profile</a>
+
 <?php } 
 
 

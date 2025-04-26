@@ -36,6 +36,18 @@
     }
 
 
+    public static function getAllServicesByUserID($db, $userID) {
+        $stmt = $db->prepare('SELECT serviceID FROM Service WHERE userID = ?');
+        $stmt->execute(array($userID));
+
+        $services = array();
+        while($row = $stmt->fetch()) {
+            $services[] = Service::getService($db, $row['serviceID']);
+        }
+        return $services;
+    }
+
+
     public static function getService($db, $serviceID) {
         $stmt1 = $db->prepare('SELECT * FROM Service WHERE serviceID = ? ');
         $stmt2 = $db->prepare('SELECT language FROM ServiceLanguage WHERE serviceID = ? ');

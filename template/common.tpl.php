@@ -1,5 +1,7 @@
 <?php
     declare(strict_types=1);
+    //            <script src="../js/click.js" defer></script>
+
 ?>
 
 <?php function draw_header($id) { ?>
@@ -11,7 +13,6 @@
             <link rel="stylesheet" href="../css/style.css">
             <link rel="stylesheet" href="../css/layout.css">
             <link rel="stylesheet" href="../css/responsive.css">
-            <script src="../js/click.js" defer></script>
         </head>
         <body>
             <header>
@@ -37,6 +38,7 @@
             <a href="/pages/service.php?id=1">select service </a>
             <a href="/pages/index.php">go to main </a>
             <a href ="/pages/profile.php">  got to profile</a>
+            <a href ="/pages/manageServices.php">manage services</a>
         </body>
     </html>
 <?php } ?>

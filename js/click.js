@@ -1,7 +1,7 @@
 
 
 function addClickEvent() {
-    const service_cards = document.querySelectorAll('.service-card')
+    const service_cards = document.querySelectorAll('.info-card')
     for (const card of service_cards) {
         const input = card.querySelector('input')
         const id = input.value

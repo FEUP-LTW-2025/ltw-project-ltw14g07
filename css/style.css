@@ -26,6 +26,7 @@ ul {
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 
@@ -63,7 +64,7 @@ input, textarea {
 
 .card {
     background-color: var(--dark-grey-color);
-    border: 2px solid;
+    border: 1px solid;
     border-radius: 50px;
 
     > h1, > h2 {
@@ -72,13 +73,13 @@ input, textarea {
     }
 }
 
-.service-card {
+.info-card {
     border: 5px solid var(--primary-green);
     border-radius: 50px;
     background-color: white;
     padding: 1.5em;
 
-    h4 ~ p {
+    h4 ~ p, h2 {
         text-align: center;
     }
 
@@ -135,12 +136,7 @@ body > header {
 }
 
 
-/*----------------- MAIN PAGE ------------------*/
-
-#mainPage {
-
-}
-
+/*----------------- PROFILE ------------------*/
 
 
 #profile {

@@ -1,6 +1,16 @@
 <?php
     require_once(__DIR__ . '/../database/service.class.php');
+    require_once(__DIR__ . '/../template/request.tpl.php');
 ?>
+
+<?php function draw_service_page($service, $userID, $requests) { ?>
+    <?php
+    draw_service($service);
+    draw_request_form($service->userName, $userID, $service->serviceID);
+    draw_request_cards($requests);
+    ?>
+
+<?php } ?>
 
 
 <?php function draw_service($service) { ?>
@@ -68,36 +78,37 @@
         $shortDescription .= '...';
     }
     ?>
-    
-    <li class="service-card">
-        <section class>
-            <img src="https://picsum.photos/id/237/200/300">
-            <div>
-                <h3><?=$service->title?></h3>
-                <p><?=$service->userName?></p>
-            </div>
-        </section>
-        <p><?=$shortDescription?></p>
-        <section>
-            <div>
-                <h4>Hourly Rate</h4>
-                <p><?=$hourlyRate?></p>
-            </div>
+    <li class="info-card">
+        <a href="service.php?id=<?=$service->serviceID?>">
+            <section>
+                <img src="https://picsum.photos/id/237/200/300">
+                <div>
+                    <h3><?=$service->title?></h3>
+                    <p><?=$service->userName?></p>
+                </div>
+            </section>
+            <p><?=$shortDescription?></p>
+            <section>
+                <div>
+                    <h4>Hourly Rate</h4>
+                    <p><?=$hourlyRate?></p>
+                </div>
 
-            <div>
-                <h4>Delivery Time</h4>
-                <p><?=$deliveryTime?></p>
-            </div>
+                <div>
+                    <h4>Delivery Time</h4>
+                    <p><?=$deliveryTime?></p>
+                </div>
 
-            <article>
-                <?php 
-                draw_tags($service->languages);
-                draw_tags($service->fields);
-                ?>
-            </article>
-        </section>
-        <input type="hidden" name="serviceID" value="<?=$service->serviceID?>">
-</li>
+                <article>
+                    <?php 
+                    draw_tags($service->languages);
+                    draw_tags($service->fields);
+                    ?>
+                </article>
+            </section>
+            <input type="hidden" name="serviceID" value="<?=$service->serviceID?>">
+        </a>
+    </li>
 <?php } ?> 
 
 

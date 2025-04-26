@@ -34,11 +34,6 @@ ul {
 
 /*----------------- TEMPLATE ------------------*/
 
-.card {
-    display: inline-block;
-    padding: 1em;
-}
-
 .wrap-list {
     display: flex;
     flex-wrap: wrap;
@@ -52,9 +47,17 @@ ul {
     justify-content: space-between;
 }
 
-.service-card {
+.card {
+    padding: 1em;
+}
+/*    display: inline-block;
+*/
+
+.info-card {
     max-width: 50em;
-    > section {
+    overflow-wrap: break-word;
+
+    a > section {
         display: flex;
         gap: 2em;
         align-items: center
@@ -67,6 +70,7 @@ ul {
     h4 ~ p {
         margin: 0;
     }
+        
 }
 
 .service {
@@ -178,6 +182,19 @@ body > header {
     input {
         width: 40em;
     }
+
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2em;
+        
+        li {
+            max-width: 20em;
+        }
+    }
+     
+
 }
 
 
@@ -190,6 +207,32 @@ body > header {
     gap: 3em;
 }
 
+/*----------------- PROFILE PAGE ------------------*/
+
+#manageServices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 
+/*----------------- PROFILE PAGE ------------------*/
+ 
+#request {
+    .info-card {
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+
+
+        p {
+            margin:0;
+        }
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
 

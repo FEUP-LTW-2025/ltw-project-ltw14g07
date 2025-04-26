@@ -20,7 +20,67 @@
         $this->status = $status;
     }
 
-    // public function getRequestByID($db, $id) {
+
+    public static function getRequestByID($db, $requestID) {
+        $stmt = $db->prepare('SELECT * FROM Request where requestID = ?');
+        $stmt->execute(array($requestID));
+
+        $service = $stmt->fetch();
+
+        return new Request(
+            $service['requestID'],
+            $service['serviceID'],
+            $service['userID'],
+            $service['title'],
+            $service['notes'],
+            $service['creationDate'],
+            $service['completionDate'],
+            $service['status']
+        );
+    }
+
+
+
+     public static function getRequestByUserID($db, $userID) {
+        $stmt = $db->prepare('SELECT * FROM Request where userID = ?');
+        $stmt->execute(array($userID));
+
+        $services = array();
+        while($row = $stmt->fetch()) {
+            $services[] = new Request(
+                $row['requestID'],
+                $row['serviceID'],
+                $row['userID'],
+                $row['title'],
+                $row['notes'],
+                $row['creationDate'],
+                $row['completionDate'],
+                $row['status']
+            );
+        }
+        return $services;
+     }
+
+     public static function getRequestByServiceID($db, $serviceID) {
+        $stmt = $db->prepare('SELECT * FROM Request where serviceID = ?');
+        $stmt->execute(array($serviceID));
+
+        $services = array();
+        while($row = $stmt->fetch()) {
+            $services[] = new Request(
+                $row['requestID'],
+                $row['serviceID'],
+                $row['userID'],
+                $row['title'],
+                $row['notes'],
+                $row['creationDate'],
+                $row['completionDate'],
+                $row['status']
+            );
+        }
+        return $services;
+     }
+
 
     public function insertIntoDatabase($db) {
         $stmt = $db->prepare('INSERT INTO Request (requestID, serviceID, userID, title, notes, creationDate, completionDate, status) VALUES 

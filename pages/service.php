@@ -8,14 +8,18 @@
 
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/service.class.php');
+    require_once(__DIR__ . '/../database/request.class.php');
+
 
     $db = getDatabaseConnection();
     $service = Service::getService($db, $_GET['id']);
 
     $userID = 1;    //temp
 
+    $requests = Request::getRequestByServiceID($db, $_GET['id']);
+
+
     draw_header('selectService');
-    draw_service($service);
-    draw_request_form($service->userName, $userID, $_GET['id']);
+    draw_service_page($service, $userID, $requests);
     draw_footer();
 ?>
