@@ -16,14 +16,20 @@
       $this->profilePicture = $profilePicture;
     }
 
-   // public static function getUserByID($db, int $userID) {
-   //   $stmt1 = $db->prepare('SELECT * FROM User WHERE userID = ? ');
-   //   $stmt1->execute(array($userID));
-//
-   //   return new User(
-   //     
-   //   ) 
-   // }
+    public static function getUserByID($db, int $userID) {
+      $stmt = $db->prepare('SELECT * FROM Users WHERE userID = ? ');
+      $stmt->execute(array($userID));
+
+      $user = $stmt->fetch();
+      return new User(
+        $user['UserID'],
+        $user['name'],
+        $user['email'],
+        $user['description'],
+        $user['role'],
+        $user['profilePicture']
+      );
+    }
 
     
 

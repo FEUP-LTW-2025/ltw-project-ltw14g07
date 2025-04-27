@@ -1,36 +1,38 @@
 
 <?php 
     require_once(__DIR__ . '/../template/input.tpl.php');
+    require_once(__DIR__ . '/../template/comment.tpl.php');
 ?>
 
-<?php function draw_request_page($request, $comments) { ?>
+<?php function draw_request_page($request, $comments, $user) { ?>
     <?php
         draw_request($request);
         draw_decision_buttons();
-        draw_request_chat($comments);
+        draw_request_chat($comments, $request->requestID, $user);
         
     ?>
 <?php } ?>
 
-<?php function draw_request_chat($comments) { ?>
+<?php function draw_request_chat($comments, $requestID, $user) { ?>
     <section class="card listing">
         <h1>Chat</h1>
         <ul>
             <?php
-                foreach($comments as $comment) {
-                    draw_comment($comment);
+                if (!empty($comments)) {
+                    draw_comments($comments);
                 }
-            ?>
+                else { ?>
+                    <h3>No comments yet</h3>
+                <?php } ?>
         </ul>
+        <form action="/../action/actionCreateComment.php" method="post">
+            <input type="text" name="message" placeholder="type your message">
+            <input type="hidden" value=<?=$requestID?> name="requestID">
+            <input type="hidden" value=<?=$user->userID?> name="userID">
+            <button type="submit">Send</button>
+        </form>
     </section>
 <?php } ?>
-
-<?php function draw_comment($comment) { ?>
-    <li class="info-card">
-        <p><?=$comment->userName?></p>
-        <p><?=$comment->text?></p>
-     </li>
- <?php } ?>
 
 
 <?php function draw_decision_buttons() { ?>
