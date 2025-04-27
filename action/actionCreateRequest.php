@@ -5,18 +5,29 @@
 
     $db = getDatabaseConnection();
 
-    $userID = $_POST['userID'];
+    $request = null;
+    $requestID = null;
+    $status = 'pending';
+
+    if (!empty($_POST['requestID'])) {
+        $r = Request::getRequestByID($db, $_POST['requestID']);
+        $requestID = $r->requestID;
+        $status = $r->status;
+    } 
+
+    $userID = 1;  //temp until session start
+    //$userID = $_POST['userID'];
     $serviceID = $_POST['serviceID'];
     $title = $_POST['title'];
-    $notes = $_POST['description'];
+    $description = $_POST['description'];
 
     $creationDate = '2025-04-20';
 
+    $request = new Request($requestID, $serviceID, $userID, $title,
+                        $description, $creationDate, null, $status);
+    
 
-    $request = new Request(null, $serviceID, $userID, $title,
-                        $notes, $creationDate, null, 'pending');
-
-    $request->insertIntoDatabase($db);
+    $request->save($db);   
 
     header('Location: ../pages');
 ?>

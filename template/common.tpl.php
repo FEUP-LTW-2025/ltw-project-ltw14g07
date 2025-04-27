@@ -35,7 +35,7 @@
 <?php function draw_footer() { ?>
             </main>
             <a href='/pages/createService.php'>service </a>
-            <a href="/pages/service.php?id=1">select service </a>
+            <a href="/pages/service.php?serviceID=1">select service </a>
             <a href="/pages/index.php">go to main </a>
             <a href ="/pages/profile.php">  got to profile</a>
             <a href ="/pages/manageServices.php">manage services</a>

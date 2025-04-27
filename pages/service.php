@@ -12,14 +12,19 @@
 
 
     $db = getDatabaseConnection();
-    $service = Service::getService($db, $_GET['id']);
+    $service = Service::getService($db, $_GET['serviceID']);
 
-    $userID = 1;    //temp
-
-    $requests = Request::getRequestByServiceID($db, $_GET['id']);
+    $request = null;
+    if (isset($_GET['requestID'])) {
+        $request = Request::getRequestByID($db, $_GET['requestID']);
+    }    
+    
+    $requests = Request::getRequestByServiceID($db, $_GET['serviceID']);
 
 
     draw_header('selectService');
-    draw_service_page($service, $userID, $requests);
+
+    //make conditional if user is who created page, makes less bloated
+    draw_service_page($service, $requests, $request);
     draw_footer();
 ?>

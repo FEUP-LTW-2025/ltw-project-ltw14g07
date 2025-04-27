@@ -7,7 +7,7 @@
 <?php function draw_request_page($request, $comments, $user) { ?>
     <?php
         draw_request($request);
-        draw_decision_buttons();
+        draw_decision_buttons($request);
         draw_request_chat($comments, $request->requestID, $user);
         
     ?>
@@ -35,15 +35,16 @@
 <?php } ?>
 
 
-<?php function draw_decision_buttons() { ?>
+<?php function draw_decision_buttons($request) { ?>
     <button>Accept</button>
     <button>Deny</button>
+    <a href="/../pages/service.php?serviceID=<?=$request->serviceID?>&requestID=<?=$request->requestID?>">Edit Request</a>
 <?php } ?>
 
 
 <?php function draw_request($request) { ?>
     <h1><?=$request->title?></h1>
-    <p><?=$request->notes?></p>
+    <p><?=$request->description?></p>
 <?php } ?>
 
 
@@ -64,18 +65,23 @@
     <li class="info-card">
         <a href="request.php?id=<?=$request->requestID?>">
             <h2><?=$request->title?></h2>
-            <p><?=$request->notes?></p>
+            <p><?=$request->description?></p>
         </a>
     </li>
  <?php } ?>
 
 
-<?php function draw_request_form($userName, $userID, $serviceID) { ?>
+<?php function draw_request_form($userName, $serviceID, $request) { ?>
+    <?php
+        $requestID="";
+        if(isset($request)) $requestID = $request->requestID;
+    ?>
+
     <h2>Hire <?=$userName?> and make your Request</h2>
     <form id="requestForm" action="/../action/actionCreateRequest.php" method="post">
-        <?php draw_text_inputs(); ?>
-        <input type="hidden" value="<?=$userID?>" name="userID">
+        <?php draw_text_inputs($request); ?>
         <input type="hidden" value="<?=$serviceID?>" name="serviceID">
+        <input type="hidden" value="<?=$requestID?>" name="requestID">
     </form>
 
     <div>

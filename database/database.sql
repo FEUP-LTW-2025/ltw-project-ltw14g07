@@ -42,7 +42,7 @@ CREATE TABLE Request (
 	serviceID INTEGER NOT NULL,   --service to request
 	userID INTEGER NOT NULL,      --user who requested
 	title TEXT NOT NULL,
-	notes TEXT,
+	description TEXT,
 	creationDate DATE NOT NULL,
 	completionDate DATE,
 	status TEXT NOT NULL CHECK(status IN ('pending', 'accepted', 'denied', 'done')),      --dar update para carrinho  

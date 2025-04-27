@@ -4,17 +4,17 @@
         public int $serviceID;
         public int $userID;
         public string $title;
-        public string $notes;
+        public string $description;
         public string $creationDate;
         public ?string $completionDate;
         public ?string $status = 'pending';
 
-    public function __construct(?int $requestID, int $serviceID, int $userID, string $title, string $notes, string $creationDate, ?string $completionDate, ?string $status) {
+    public function __construct(?int $requestID, int $serviceID, int $userID, string $title, string $description, string $creationDate, ?string $completionDate, ?string $status) {
         $this->requestID = $requestID;
         $this->serviceID = $serviceID;
         $this->userID = $userID;
         $this->title = $title;
-        $this->notes = $notes;
+        $this->description = $description;
         $this->creationDate = $creationDate;
         $this->completionDate = $completionDate;
         $this->status = $status;
@@ -32,7 +32,7 @@
             $service['serviceID'],
             $service['userID'],
             $service['title'],
-            $service['notes'],
+            $service['description'],
             $service['creationDate'],
             $service['completionDate'],
             $service['status']
@@ -52,7 +52,7 @@
                 $row['serviceID'],
                 $row['userID'],
                 $row['title'],
-                $row['notes'],
+                $row['description'],
                 $row['creationDate'],
                 $row['completionDate'],
                 $row['status']
@@ -72,7 +72,7 @@
                 $row['serviceID'],
                 $row['userID'],
                 $row['title'],
-                $row['notes'],
+                $row['description'],
                 $row['creationDate'],
                 $row['completionDate'],
                 $row['status']
@@ -82,11 +82,26 @@
      }
 
 
+    public function save($db) {
+        if (!empty($this->requestID)) $this->updateDatabase($db);
+        else $this->insertIntoDatabase($db);
+    }
+
+    
+    public function updateDatabase($db) {
+        $stmt = $db->prepare('UPDATE Request 
+                            SET title = ?, description = ?, status = ?
+                            WHERE requestID = ?');
+
+        $stmt->execute(array($this->title, $this->description, $this->status, $this->requestID));
+    }
+
+
     public function insertIntoDatabase($db) {
-        $stmt = $db->prepare('INSERT INTO Request (requestID, serviceID, userID, title, notes, creationDate, completionDate, status) VALUES 
+        $stmt = $db->prepare('INSERT INTO Request (requestID, serviceID, userID, title, description, creationDate, completionDate, status) VALUES 
         (?, ?, ?, ?, ?, ?, ?, ?)');
 
-        $stmt->execute(array(null, $this->serviceID, $this->userID, $this->title, $this->notes, $this->creationDate, $this->completionDate, $this->status));
+        $stmt->execute(array(null, $this->serviceID, $this->userID, $this->title, $this->description, $this->creationDate, $this->completionDate, $this->status));
 
     }
 }

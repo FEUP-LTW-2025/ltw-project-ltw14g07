@@ -3,10 +3,10 @@
     require_once(__DIR__ . '/../template/request.tpl.php');
 ?>
 
-<?php function draw_service_page($service, $userID, $requests) { ?>
+<?php function draw_service_page($service, $requests, $request) { ?>
     <?php
     draw_service($service);
-    draw_request_form($service->userName, $userID, $service->serviceID);
+    draw_request_form($service->userName, $service->serviceID, $request);
     draw_request_cards($requests);
     ?>
 
@@ -79,7 +79,7 @@
     }
     ?>
     <li class="info-card">
-        <a href="service.php?id=<?=$service->serviceID?>">
+        <a href="/pages/service.php?serviceID=<?=$service->serviceID?>">
             <section>
                 <img src="https://picsum.photos/id/237/200/300">
                 <div>
