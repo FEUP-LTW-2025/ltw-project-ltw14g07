@@ -41,9 +41,9 @@
 
 
 
-     public static function getRequestByUserID($db, $userID) {
-        $stmt = $db->prepare('SELECT * FROM Request where userID = ?');
-        $stmt->execute(array($userID));
+     public static function getRequestByUserID($db, $userID, $status = null) {
+        $stmt = $db->prepare('SELECT * FROM Request where userID = ? AND status = ?');
+        $stmt->execute(array($userID, $status));
 
         $services = array();
         while($row = $stmt->fetch()) {

@@ -13,6 +13,20 @@
     ?>
 <?php } ?>
 
+<?php function draw_request($request) { ?>
+    <h1><?=$request->title?></h1>
+    <p><?=$request->description?></p>
+<?php } ?>
+
+
+<?php function draw_decision_buttons($request) {  // TEMPORARY, different function when users are distinguishable?>
+    <button>Accept</button>
+    <button>Deny</button>
+    <a href="/../pages/service.php?serviceID=<?=$request->serviceID?>&requestID=<?=$request->requestID?>">Edit Request</a>
+<?php } ?>
+
+
+
 <?php function draw_request_chat($comments, $requestID, $user) { ?>
     <section class="card listing">
         <h1>Chat</h1>
@@ -35,23 +49,14 @@
 <?php } ?>
 
 
-<?php function draw_decision_buttons($request) { ?>
-    <button>Accept</button>
-    <button>Deny</button>
-    <a href="/../pages/service.php?serviceID=<?=$request->serviceID?>&requestID=<?=$request->requestID?>">Edit Request</a>
-<?php } ?>
-
-
-<?php function draw_request($request) { ?>
-    <h1><?=$request->title?></h1>
-    <p><?=$request->description?></p>
-<?php } ?>
-
-
-
-<?php function draw_request_cards($requests) { ?>
+<?php function draw_request_cards($requests, $status = null) { ?>
     <section class="card listing">
-        <h1>Requests</h1>
+        <h1><?=$status?> Requests</h1>
+        <?php
+            if (empty($requests)) { ?>
+                <h2> No <?=$status?> requests yet</h2>
+            <?php }
+        ?>
         <ul>
             <?php foreach($requests as $request) { 
                 draw_request_card($request);
@@ -71,13 +76,20 @@
  <?php } ?>
 
 
+
+
 <?php function draw_request_form($userName, $serviceID, $request) { ?>
     <?php
-        $requestID="";
-        if(isset($request)) $requestID = $request->requestID;
+    $requestID = "";
+    $label = "Hire " . $userName . " and make your Request";
+    $button = "Hire";
+    if(isset($request)) {
+        $requestID = $request->requestID;
+        $label = "Update your Request";
+        $button = "Save";
+    }
     ?>
-
-    <h2>Hire <?=$userName?> and make your Request</h2>
+    <h2><?=$label?></h2>
     <form id="requestForm" action="/../action/actionCreateRequest.php" method="post">
         <?php draw_text_inputs($request); ?>
         <input type="hidden" value="<?=$serviceID?>" name="serviceID">
@@ -85,6 +97,7 @@
     </form>
 
     <div>
-        <button type="submit" class="green-button" form="requestForm">Hire</button>
+        <button type="submit" class="green-button" form="requestForm"><?=$button?></button>
     </div>
+
 <?php } ?>
