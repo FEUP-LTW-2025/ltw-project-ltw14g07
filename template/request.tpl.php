@@ -7,24 +7,31 @@
 <?php function draw_request_page($request, $comments, $user) { ?>
     <?php
         draw_request($request);
-        draw_decision_buttons($request);
+        if ($request->status === 'pending') draw_decision_buttons($request);
+        draw_edit_request($request);
         draw_request_chat($comments, $request->requestID, $user);
-        
     ?>
 <?php } ?>
 
 <?php function draw_request($request) { ?>
     <h1><?=$request->title?></h1>
     <p><?=$request->description?></p>
+    <p>Status: <?=$request->status?></p>
 <?php } ?>
 
 
-<?php function draw_decision_buttons($request) {  // TEMPORARY, different function when users are distinguishable?>
-    <button>Accept</button>
-    <button>Deny</button>
+<?php function draw_decision_buttons($request) {  ?>
+    <form method="post" action="/../action/actionCreateRequest.php">
+        <input type="hidden" name="requestID" value="<?=$request->requestID?>">
+        <input type="hidden" name="serviceID" value="<?=$request->serviceID?>">
+        <button type="submit" name="decision" value="accepted">Accept</button>
+        <button type="submit" name="decision" value="denied">Deny</button>
+    </form>
+<?php } ?>
+
+<?php function draw_edit_request($request) { ?>
     <a href="/../pages/service.php?serviceID=<?=$request->serviceID?>&requestID=<?=$request->requestID?>">Edit Request</a>
 <?php } ?>
-
 
 
 <?php function draw_request_chat($comments, $requestID, $user) { ?>
@@ -37,7 +44,8 @@
                 }
                 else { ?>
                     <h3>No comments yet</h3>
-                <?php } ?>
+                <?php } 
+            ?>
         </ul>
         <form action="/../action/actionCreateComment.php" method="post">
             <input type="text" name="message" placeholder="type your message">

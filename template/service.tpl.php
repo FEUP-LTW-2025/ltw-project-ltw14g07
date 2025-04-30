@@ -7,7 +7,7 @@
     <?php
     draw_service($service);
     draw_request_form($service->userName, $service->serviceID, $request);
-    draw_request_cards($requests);
+    draw_request_cards($requests, 'Pending');
     ?>
 
 <?php } ?>

@@ -5,28 +5,30 @@
 
     $db = getDatabaseConnection();
 
-    $request = null;
-    $requestID = null;
-    $status = 'pending';
-
+    //updating request
     if (!empty($_POST['requestID'])) {
         $r = Request::getRequestByID($db, $_POST['requestID']);
-        $requestID = $r->requestID;
-        $status = $r->status;
+        $r->title =  (!empty($_POST['title'])) ? $_POST['title'] : $r->title;
+        $r->description =  (!empty($_POST['description'])) ? $_POST['description'] : $r->description;
+        $r->status = (!empty($_POST['decision'])) ? $_POST['decision'] : $r->status;
+        $r->save($db);
+
+        header('Location: ../pages/request.php?id=' . $r->requestID);
+        return;
     } 
 
-    $userID = 1;  //temp until session start
+    //creating request
     //$userID = $_POST['userID'];
+    $userID = 1;  //temp until session start
     $serviceID = $_POST['serviceID'];
     $title = $_POST['title'];
     $description = $_POST['description'];
 
     $creationDate = '2025-04-20';
 
-    $request = new Request($requestID, $serviceID, $userID, $title,
-                        $description, $creationDate, null, $status);
+    $request = new Request(null, $serviceID, $userID, $title,
+                        $description, $creationDate, null, 'pending');
     
-
     $request->save($db);   
 
     header('Location: ../pages');
