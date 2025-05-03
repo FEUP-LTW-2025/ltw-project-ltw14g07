@@ -5,7 +5,14 @@
 
     $db = getDatabaseConnection();
 
-    $userID = $_POST['userID'];
+    if (!empty($_POST['serviceID'])) {
+        $s = Service::getService($db, $_POST['serviceID']);
+
+    }
+
+    $serviceID = ((int)$_POST['serviceID']) ?? null;
+
+    $userID = $_POST['userID'];   //TEMPPPPP
     $title = $_POST['title'];
     $description = $_POST['description'];
 
@@ -18,11 +25,11 @@
     $creationDate = '2025-04-20';
 
 
-    $service = new Service(null, $userID, null, $title,
+    $service = new Service($serviceID, $userID, null, $title,
                         $description, $hourlyRate, $deliveryTime,
                         $creationDate, $languages, $fields);
 
-    $service->insertIntoDatabase($db);
+    $service->save($db);
 
     header('Location: ../pages');
 ?>

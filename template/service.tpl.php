@@ -6,6 +6,7 @@
 <?php function draw_service_page($service, $requests, $request) { ?>
     <?php
     draw_service($service);
+    draw_edit_service($service->serviceID);
     draw_request_form($service->userName, $service->serviceID, $request);
     draw_request_cards($requests, 'Pending');
     ?>
@@ -54,6 +55,11 @@
             </div>
         </article>
     </section>
+<?php } ?>
+
+
+<?php function draw_edit_service($serviceID) { ?>
+    <a href="/../pages/createService.php?serviceID=<?=$serviceID?>">Edit Service</a>
 <?php } ?>
 
 

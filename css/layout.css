@@ -152,6 +152,7 @@ body > header {
     }
 
     form {
+        
         > section input {
             width: 40em;
         }
@@ -163,11 +164,6 @@ body > header {
                 width: 50%;
             }
         }
-    }
-
-    > :last-child {
-        display: flex;
-        justify-content: right;
     }
 }
 

@@ -78,6 +78,11 @@
         );
     }
 
+    public function save($db) {
+        if (!empty($this->serviceID)) $this->updateDatabase($db);
+        else $this->insertIntoDatabase($db);
+    }
+
     public function insertIntoDatabase($db) {
         $stmt = $db->prepare('INSERT INTO Service (userID, title, description, hourlyRate, deliveryTime, creationDate) VALUES 
         (?, ?, ?, ?, ?, ?)');
@@ -94,9 +99,37 @@
         $stmtField = $db->prepare('INSERT INTO ServiceField (serviceID, field) VALUES (?, ?)');
         foreach ($this->fields as $field) {
             $stmtField->execute(array($this->serviceID, $field));
+        }
+    } 
+
+    public function updateDatabase($db) {
+        $stmt = $db->prepare('UPDATE Service 
+                            SET title = ?, description = ?, hourlyRate = ?, deliveryTime = ?
+                            WHERE serviceID = ?');
+
+        $stmt->execute(array($this->title, $this->description, $this->hourlyRate, $this->deliveryTime, $this->serviceID));
+
+
+        $stmt = $db->prepare('DELETE FROM ServiceLanguage WHERE serviceID = ?');
+        $stmt->execute(array($this->serviceID));
+
+        $stmt = $db->prepare('INSERT INTO ServiceLanguage (serviceID, language) VALUES (?, ?)');
+        foreach ($this->languages as $language) {
+            $stmt->execute(array($this->serviceID, $language));
+        }
+
+
+        $stmt = $db->prepare('DELETE FROM ServiceField WHERE serviceID = ?');
+        $stmt->execute(array($this->serviceID));
+
+        $stmt = $db->prepare('INSERT INTO ServiceField (serviceID, field) VALUES (?, ?)');
+        foreach ($this->fields as $field) {
+            $stmt->execute(array($this->serviceID, $field));
+        }
+
+
     }
 
-    } 
 
 
 }
