@@ -81,6 +81,7 @@
     public function save($db) {
         if (!empty($this->serviceID)) $this->updateDatabase($db);
         else $this->insertIntoDatabase($db);
+        return $this->serviceID;
     }
 
     public function insertIntoDatabase($db) {

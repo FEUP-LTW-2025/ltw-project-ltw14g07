@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS ServiceField;
 
 
 CREATE TABLE Users (
-	UserID INTEGER NOT NULL PRIMARY KEY,
+	UserID INTEGER  NOT NULL PRIMARY KEY,
 	name TEXT NOT NULL,
 	profilePicture TEXT,    --filepath, not sure how to actually store it
 	email TEXT NOT NULL UNIQUE,
@@ -23,7 +23,7 @@ CREATE TABLE Users (
 
 
 CREATE TABLE Service (
-	serviceID INTEGER NOT NULL PRIMARY KEY,
+	serviceID INTEGER  NOT NULL PRIMARY KEY,
 	userID INTEGER NOT NULL,
 	title TEXT NOT NULL,
 	description TEXT NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE Service (
 
 
 CREATE TABLE Request (
-	requestID INTEGER NOT NULL PRIMARY KEY,
+	requestID INTEGER  NOT NULL PRIMARY KEY,
 	serviceID INTEGER NOT NULL,   --service to request
 	userID INTEGER NOT NULL,      --user who requested
 	title TEXT NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE Request (
 );
 
 CREATE TABLE Payment (
-	paymentID INTEGER PRIMARY KEY,
+	paymentID INTEGER  PRIMARY KEY,
 	requestID INTEGER NOT NULL,
 	amount DECIMAL(10, 2),
 	status TEXT CHECK (status IN ('pending', 'completed')),
@@ -69,7 +69,7 @@ CREATE TABLE Payment (
 
 
 CREATE TABLE Comment (
-	commentID INTEGER PRIMARY KEY,
+	commentID INTEGER  PRIMARY KEY,
 	requestID INTEGER NOT NULL,   --comment on this request
 	userID INTEGER NOT NULL,      --user who commented
 	text TEXT, 

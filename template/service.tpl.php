@@ -53,9 +53,23 @@
                     </article>
                 </section>
             </div>
+            <?php
+            draw_service_img($service->serviceID);
+            ?>
         </article>
     </section>
 <?php } ?>
+
+
+<?php function draw_service_img($serviceID)  { 
+        $path = __DIR__ . "/../images/service/$serviceID.jpg";
+        $src = "/../images/service/$serviceID.jpg";
+        if (file_exists($path)) { ?>
+            <h2>Attached Image:</h2>
+            <img src = <?=$src?> >
+    <?php }
+ } ?>
+
 
 
 <?php function draw_edit_service($serviceID) { ?>
