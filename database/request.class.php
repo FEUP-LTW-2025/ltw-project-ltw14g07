@@ -104,6 +104,11 @@
         $stmt->execute(array(null, $this->serviceID, $this->userID, $this->title, $this->description, $this->creationDate, $this->completionDate, $this->status));
 
     }
+
+    public static function delete($db, $requestID) {
+        $stmt = $db->prepare('DELETE FROM Request WHERE requestID = ?');
+        $stmt->execute(array($requestID));
+    }
 }
 
 

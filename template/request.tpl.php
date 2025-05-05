@@ -9,6 +9,7 @@
         draw_request($request);
         if ($request->status === 'pending') draw_decision_buttons($request);
         draw_edit_request($request);
+        draw_delete_request($request->requestID);
         draw_request_chat($comments, $request->requestID, $user);
     ?>
 <?php } ?>
@@ -17,6 +18,14 @@
     <h1><?=$request->title?></h1>
     <p><?=$request->description?></p>
     <p>Status: <?=$request->status?></p>
+<?php } ?>
+
+
+<?php function draw_delete_request($requestID) { ?>
+    <form action="/../action/actionDeleteRequest.php" method="post">
+        <input type="hidden" name="requestID" value=<?=$requestID?>>
+        <button type="submit">Delete</button>
+    </form>
 <?php } ?>
 
 

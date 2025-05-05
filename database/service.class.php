@@ -127,8 +127,11 @@
         foreach ($this->fields as $field) {
             $stmt->execute(array($this->serviceID, $field));
         }
+    }
 
-
+    public static function delete($db, $serviceID) {
+        $stmt = $db->prepare('DELETE FROM Service WHERE serviceID = ?');
+        $stmt->execute(array($serviceID));
     }
 
 

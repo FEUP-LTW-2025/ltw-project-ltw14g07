@@ -7,6 +7,7 @@
     <?php
     draw_service($service);
     draw_edit_service($service->serviceID);
+    draw_delete_service($service->serviceID);
     draw_request_form($service->userName, $service->serviceID, $request);
     draw_request_cards($requests, 'Pending');
     ?>
@@ -74,6 +75,14 @@
 
 <?php function draw_edit_service($serviceID) { ?>
     <a href="/../pages/createService.php?serviceID=<?=$serviceID?>">Edit Service</a>
+<?php } ?>
+
+
+<?php function draw_delete_service($serviceID) { ?>
+    <form action="/../action/actionDeleteService.php" method="post">
+        <input type="hidden" name="serviceID" value=<?=$serviceID?>>
+        <button type="submit">Delete Service</button>
+    </form>
 <?php } ?>
 
 
