@@ -46,16 +46,14 @@
 <?php function draw_request_chat($comments, $requestID, $user) { ?>
     <section class="card listing">
         <h1>Chat</h1>
-        <ul>
-            <?php
-                if (!empty($comments)) {
-                    draw_comments($comments);
-                }
-                else { ?>
-                    <h3>No comments yet</h3>
-                <?php } 
-            ?>
-        </ul>
+        <?php if (empty($comments)): ?>
+            <h3>No comments yet</h3>
+        <?php else: ?>
+            <ul class="overflow">
+                <?php draw_comments($comments) ?>
+            </ul>
+        <?php endif; ?>
+
         <form action="/../action/actionCreateComment.php" method="post">
             <input type="text" name="message" placeholder="type your message">
             <input type="hidden" value=<?=$requestID?> name="requestID">
@@ -69,25 +67,30 @@
 <?php function draw_request_cards($requests, $status = null) { ?>
     <section class="card listing">
         <h1><?=$status?> Requests</h1>
-        <?php
-            if (empty($requests)) { ?>
-                <h2> No <?=$status?> requests yet</h2>
-            <?php }
-        ?>
-        <ul>
-            <?php foreach($requests as $request) { 
-                draw_request_card($request);
-            } ?>
-        </ul>
+        <?php if (empty($requests)): ?>
+            <h2> No <?=$status?> requests yet</h2>
+        <?php else: ?>
+            <ul class="pin-board overflow">
+                <?php foreach($requests as $request)
+                    draw_request_card($request);
+                ?>
+            </ul>
+        <?php endif; ?>
     </section>
  <?php } ?>
 
 
 <?php function draw_request_card($request) { ?>
+    <?php
+        $shortDescription = substr($request->description, 0, 250);
+        if (strlen($request->description) > 250) {
+            $shortDescription .= '...';
+        }
+    ?>
     <li class="info-card">
         <a href="request.php?id=<?=$request->requestID?>">
             <h2><?=$request->title?></h2>
-            <p><?=$request->description?></p>
+            <p><?=$shortDescription?></p>
         </a>
     </li>
  <?php } ?>

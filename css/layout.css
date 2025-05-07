@@ -28,7 +28,7 @@ ul {
 
     li:not(:last-child) { 
         margin-bottom: 1em;  
-     }
+    }
 }
 
 
@@ -42,17 +42,34 @@ ul {
 }
 
 
-
 .spaced {
     display: flex;
     justify-content: space-between;
 }
 
+
+.overflow {
+    max-height: 30em;
+    overflow: scroll;
+}
+
+
 .card {
     padding: 1em;
 }
-/*    display: inline-block;
-*/
+
+
+.pin-board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em;
+    
+    li {
+        max-width: 20em;
+    }
+}
+
 
 .info-card {
     max-width: 50em;
@@ -179,19 +196,6 @@ body > header {
     input {
         width: 40em;
     }
-
-    ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 2em;
-        
-        li {
-            max-width: 20em;
-        }
-    }
-     
-
 }
 
 
@@ -203,27 +207,10 @@ body > header {
     align-items: center;
     gap: 3em;
 
-    ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 2em;
-        
-        li {
-            max-width: 20em;
-        }
-    }
-    .card.listing > .wrap-list {
-        height: 10em;
-        overflow: scroll;
-        scroll-margin: 2em;
-    }
 }
 
 
-
-
-/*----------------- PROFILE PAGE ------------------*/
+/*----------------- MANAGE PAGE ------------------*/
 
 #manageServices {
     display: flex;
@@ -248,14 +235,5 @@ body > header {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-    }
-}
-
-
-#request {
-    ul {
-        height: 25em;
-        overflow: scroll;
-        scroll-margin: 20em;
     }
 }
