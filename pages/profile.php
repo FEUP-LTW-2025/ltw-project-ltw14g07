@@ -23,13 +23,13 @@
 
     $pendingRequests = Request::getRequestByUserID($db, $userID, 'pending');
     $acceptedRequests = Request::getRequestByUserID($db, $userID, 'accepted');
-
-
+    $doneRequests= Request::getRequestByUserID($db, $userID, 'done');
 
 
     draw_header('profile');
     draw_profile_resume($user);
     draw_request_cards($pendingRequests, 'Pending');
     draw_request_cards($acceptedRequests, 'Accepted');
+    draw_request_cards($doneRequests, 'Done');
     draw_footer();
 ?>

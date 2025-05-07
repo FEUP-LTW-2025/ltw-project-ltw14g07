@@ -213,7 +213,15 @@ body > header {
             max-width: 20em;
         }
     }
+    .card.listing > .wrap-list {
+        height: 10em;
+        overflow: scroll;
+        scroll-margin: 2em;
+    }
 }
+
+
+
 
 /*----------------- PROFILE PAGE ------------------*/
 
