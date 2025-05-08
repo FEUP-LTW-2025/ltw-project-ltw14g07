@@ -30,6 +30,46 @@
         $user['profilePicture']
       );
     }
+    public static function login(PDO $db, string $email, string $password): ?User {
+      $stmt = $db->prepare('SELECT * FROM Users WHERE email = ?');
+      $stmt->execute([$email]);
+      $user = $stmt->fetch();
+  
+      if ($user && password_verify($password, $user['password'])) {
+          return new User(
+              (int)$user['UserID'],
+              $user['name'],
+              $user['email'],
+              $user['description'] ?? null,
+              $user['role'] ?? 'client',
+              $user['profilePicture'] ?? null
+          );
+      }
+      return null;
+  }
+  
+  public static function register(PDO $db, string $name, string $email, string $password, string $role = 'client'): bool {
+      // Validate email
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+          return false;
+      }
+  
+      // Check for existing email
+      $stmt = $db->prepare('SELECT 1 FROM Users WHERE email = ?');
+      $stmt->execute([$email]);
+      if ($stmt->fetch()) {
+          return false;
+      }
+  
+      // Insert new user
+      $stmt = $db->prepare('INSERT INTO Users (name, email, password, role) VALUES (?, ?, ?, ?)');
+      return $stmt->execute([
+          $name,
+          $email,
+          password_hash($password, PASSWORD_DEFAULT),
+          $role
+      ]);
+  }
 
     
 

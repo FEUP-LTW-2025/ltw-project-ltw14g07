@@ -21,8 +21,8 @@
                     <section class="spaced">
                         <h3>Let programmers work for you</h3>
                         <div id="signup">
-                            <a>Register</a>
-                            <a>Login</a>
+                        <a href="/pages/register.php">Register</a>
+                        <a href="/pages/login.php">Login</a>
                         </div>
                     </section>
                 </div>
