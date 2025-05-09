@@ -6,13 +6,8 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 echo "Checkpoint A<br>";
-//require_once(__DIR__ . '/../template/common.tpl.php');
-//require_once(__DIR__ . '/../template/profile.tpl.php');
-//require_once(__DIR__ . '/../template/request.tpl.php');
-
 
 require_once(__DIR__ . '/../database/connection.db.php');
-//require_once(__DIR__ . '/../database/request.class.php');
 require_once(__DIR__ . '/../database/user.class.php');
 
 
@@ -35,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "Checkpoint C: User found<br>";
         $_SESSION["userID"] = $user->userID;
         $_SESSION["username"] = $user->name;
-        header("Location: profile.php");
+        header("Location: ../pages/profile.php");
         
     } else {
         echo "Invalid credentials.";

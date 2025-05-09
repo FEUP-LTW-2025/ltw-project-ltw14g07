@@ -17,12 +17,12 @@
         <body>
             <header>
                 <div>
-                    <h1><a href="index.php">Placeholder</ahref></h1>
+                    <h1><a href="index.php">Placeholder</a></h1>
                     <section class="spaced">
                         <h3>Let programmers work for you</h3>
                         <div id="signup">
-                        <a href="/pages/register.php">Register</a>
-                        <a href="/pages/login.php">Login</a>
+                        <a href="/pages/signup.php?q=r">Register</a>
+                        <a href="/pages/signup.php?q=l">Login</a>
                         </div>
                     </section>
                 </div>

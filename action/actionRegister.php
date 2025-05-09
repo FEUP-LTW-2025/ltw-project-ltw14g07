@@ -23,7 +23,7 @@ try {
 
         if (User::register($db, $name, $email, $password)) {
             // Registration successful - redirect to login
-            header("Location: /html/createService.html");
+            header("Location: ../pages/index.php");
             exit;
         } else {
             echo "Registration failed (email may already exist)";
@@ -31,5 +31,10 @@ try {
     }
 } catch (PDOException $e) {
     echo "Database error: " . $e->getMessage();
+    header("Location: ../pages/index.php");
 }
+
+//    header('Location: ../pages/request.php?id=' . $_POST['requestID']);
+
 ?>
+
