@@ -13,13 +13,18 @@
     require_once(__DIR__ . '/../database/user.class.php');
 
 
-    //session_start();
+    session_start();
 
+    if (!isset($_SESSION['userID'])) {
+        header('Location: signup.php');  
+        exit();
+    }
+    
     $db = getDatabaseConnection();
-
-    $userID = 1; //temp
-
+    
+    $userID = $_SESSION['userID'];
     $user = User::getUserByID($db, $userID);
+    
 
     $pendingRequests = Request::getRequestByUserID($db, $userID, 'pending');
     $acceptedRequests = Request::getRequestByUserID($db, $userID, 'accepted');
