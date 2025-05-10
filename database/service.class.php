@@ -64,6 +64,8 @@
         $fields = $stmt3->fetchAll();
         $userName = $stmt4->fetch();
 
+        if ($service == NULL) return NULL;
+
         return new Service(
             $service['serviceID'],
             $service['userID'],
@@ -76,6 +78,14 @@
             array_column($languages, 'language'),
             array_column($fields, 'field')
         );
+    }
+
+
+    public static function getCreatorByID($db, $serviceID) {
+        $stmt = $db->prepare('SELECT userID FROM Service WHERE serviceID = ? ');
+        $stmt->execute(array($serviceID));
+        $row = $stmt->fetch();
+        return $row['userID'];
     }
 
     public function save($db) {

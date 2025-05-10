@@ -1,18 +1,20 @@
 <?php
     require_once(__DIR__ . '/../database/service.class.php');
     require_once(__DIR__ . '/../template/request.tpl.php');
+    session_start();
 ?>
 
-<?php function draw_service_page($service, $requests, $request) { ?>
-    <?php
+<?php function draw_service_page($service, $requests, $request) { 
     draw_service($service);
-    draw_edit_service($service->serviceID);
-    draw_delete_service($service->serviceID);
-    draw_request_form($service->userName, $service->serviceID, $request);
-    draw_request_cards($requests, 'Pending');
-    ?>
-
-<?php } ?>
+    if ($_SESSION['userID'] === $service->userID) {
+        draw_edit_service($service->serviceID);
+        draw_delete_service($service->serviceID);
+        draw_request_cards($requests, 'Pending');
+    } else {
+        draw_request_form($service->userName, $service->serviceID, $request);
+    }
+ } 
+ ?>
 
 
 <?php function draw_service($service) { ?>

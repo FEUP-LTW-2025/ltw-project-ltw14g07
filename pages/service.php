@@ -8,14 +8,23 @@
     require_once(__DIR__ . '/../database/service.class.php');
     require_once(__DIR__ . '/../database/request.class.php');
 
+    session_start();
 
     $db = getDatabaseConnection();
 
     $service = Service::getService($db, $_GET['serviceID']);
     $request = null;
+
+    if ($service == NULL) {
+        die ("Content does not exits");
+    }
     
     if (isset($_GET['requestID'])) {
         $request = Request::getRequestByID($db, $_GET['requestID']);
+
+        if ($_SESSION['userID'] !== $request->userID) {
+            die("Forbidden access to content");
+        }
     }    
     
     $requests = Request::getRequestByServiceID($db, $_GET['serviceID']);

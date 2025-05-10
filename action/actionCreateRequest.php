@@ -3,6 +3,9 @@
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/request.class.php');
 
+    session_start();
+    if (!isset($_SESSION['userID'])) header('Location: ../pages/signup.php');
+
     $db = getDatabaseConnection();
 
     //updating request
@@ -18,8 +21,7 @@
     } 
 
     //creating request
-    //$userID = $_POST['userID'];
-    $userID = 1;  //temp until session start
+    $userID = $_SESSION['userID'];
     $serviceID = $_POST['serviceID'];
     $title = $_POST['title'];
     $description = $_POST['description'];

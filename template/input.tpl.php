@@ -10,12 +10,12 @@
     ?>
     <section class="labeled-input">
         <h3>Title</h3>
-        <input class="card" type="textarea" name="title" placeholder="Write your Title.." value="<?=$title?>">
+        <input class="card" minlength="10" type="textarea" name="title" placeholder="Write your Title.." value="<?=$title?>" required>
     </section>
 
     <section class="labeled-input">
         <h3>Description</h3>
-        <textarea class="card" name="description" rows="7" placeholder="Write your Description..."><?=$description?></textarea>
+        <textarea class="card" minlength="50" name="description" rows="7" placeholder="Write your Description..." required><?=$description?></textarea>
     </section>
 <?php } ?>
 

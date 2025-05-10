@@ -10,13 +10,12 @@
     $db = getDatabaseConnection();
     $filters = Filters::getAllFilters($db);
 
-    $userID = 1;  //temp until login is done
     $service = null;
     if (!empty($_GET['serviceID'])) {
         $service = Service::getService($db, $_GET['serviceID']);
     }
 
     draw_header('createService');
-    draw_createService_page($service, $filters, $userID);
+    draw_createService_page($service, $filters);
     draw_footer();
 ?>

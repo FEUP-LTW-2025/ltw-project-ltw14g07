@@ -1,7 +1,5 @@
 <?php
     declare(strict_types=1);
-    //            <script src="../js/click.js" defer></script>
-
 ?>
 
 <?php function draw_header($id) { ?>

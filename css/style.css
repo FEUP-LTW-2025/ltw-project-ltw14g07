@@ -29,6 +29,11 @@ a {
     color: inherit;
 }
 
+input:invalid, textarea:invalid {
+    border-color: red;
+    border-style: dashed;
+}
+
 
 /*----------------- FONTS ------------------*/
 

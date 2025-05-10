@@ -25,17 +25,19 @@
         $stmt = $db->prepare('SELECT * FROM Request where requestID = ?');
         $stmt->execute(array($requestID));
 
-        $service = $stmt->fetch();
+        $request = $stmt->fetch();
+
+        if ($request == NULL) return NULL;
 
         return new Request(
-            $service['requestID'],
-            $service['serviceID'],
-            $service['userID'],
-            $service['title'],
-            $service['description'],
-            $service['creationDate'],
-            $service['completionDate'],
-            $service['status']
+            $request['requestID'],
+            $request['serviceID'],
+            $request['userID'],
+            $request['title'],
+            $request['description'],
+            $request['creationDate'],
+            $request['completionDate'],
+            $request['status']
         );
     }
 
@@ -80,6 +82,13 @@
         }
         return $services;
      }
+
+     public static function getCreatorByID($db, $requestID) {
+        $stmt = $db->prepare('SELECT userID FROM Request WHERE requestID = ? ');
+        $stmt->execute(array($requestID));
+        $row = $stmt->fetch();
+        return $row['userID'];
+    }
 
 
     public function save($db) {

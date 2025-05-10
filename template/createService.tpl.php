@@ -5,18 +5,18 @@
 ?>
 
 
-<?php function draw_createService_page($service, $filters, $userID) { ?>
+<?php function draw_createService_page($service, $filters) { ?>
     <?php
     $label = (isset($service)) ? "Edit your Service" : "Create and Publish your own Service";
     ?>
     <h1><?=$label?></h1>
     <?php
-    draw_form($service, $filters, $userID);
+    draw_form($service, $filters);
     ?>
 <?php } ?>
 
 
-<?php function draw_form($service, $filters, $userID) { ?>
+<?php function draw_form($service, $filters) { ?>
     <form id="serviceForm" action="/../action/actionCreateService.php" method="post" enctype="multipart/form-data">
         <?php 
             draw_text_inputs($service); 
@@ -34,7 +34,6 @@
 
         <input type="file" name="image"> 
 
-        <input type="hidden" value="<?=$userID?>" name="userID">    <!-- temporary until login --> 
         <input type="hidden" name="serviceID" value=<?=$service->serviceID?>>
         <button class="green-button" type="submit"><?=$label?></button>
     </form>    

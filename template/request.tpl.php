@@ -2,15 +2,20 @@
 <?php 
     require_once(__DIR__ . '/../template/input.tpl.php');
     require_once(__DIR__ . '/../template/comment.tpl.php');
+    session_start();
 ?>
 
-<?php function draw_request_page($request, $comments, $user) { ?>
+<?php function draw_request_page($request, $comments) { ?>
     <?php
         draw_request($request);
-        if ($request->status === 'pending') draw_decision_buttons($request);
-        draw_edit_request($request);
-        draw_delete_request($request->requestID);
-        draw_request_chat($comments, $request->requestID, $user);
+        if ($_SESSION['userID'] === $request->userID) {    //is creator
+            draw_edit_request($request);
+            draw_delete_request($request->requestID);
+        }
+        else {   //is freelancer
+            if ($request->status === 'pending') draw_decision_buttons($request);
+        }
+        draw_request_chat($comments, $request->requestID);
     ?>
 <?php } ?>
 
@@ -43,7 +48,7 @@
 <?php } ?>
 
 
-<?php function draw_request_chat($comments, $requestID, $user) { ?>
+<?php function draw_request_chat($comments, $requestID) { ?>
     <section class="card listing">
         <h1>Chat</h1>
         <?php if (empty($comments)): ?>
@@ -57,7 +62,6 @@
         <form action="/../action/actionCreateComment.php" method="post">
             <input type="text" name="message" placeholder="type your message">
             <input type="hidden" value=<?=$requestID?> name="requestID">
-            <input type="hidden" value=<?=$user->userID?> name="userID">
             <button type="submit">Send</button>
         </form>
     </section>
