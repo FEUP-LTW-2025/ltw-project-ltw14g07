@@ -5,7 +5,7 @@ body {
   }
   
   header {
-    background-color: #71d36e;
+    background-color: rgb(108, 215, 90);
     padding: 20px;
     text-align: center;
     color: white;
@@ -71,7 +71,7 @@ body {
     width: 100%;
     margin-top: 20px;
     padding: 10px;
-    background-color: #71d36e;
+    background-color: rgb(108, 215, 90);
     color: white;
     font-weight: bold;
     border: none;

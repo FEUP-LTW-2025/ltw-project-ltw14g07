@@ -11,7 +11,7 @@
 
     --big-label: 2.0rem;
     --med-label: 1.75rem;
-    --label: 1.25rem;
+    --label: 1.50rem;
     --big-text: 1.25rem;
     --med-text: 1.0rem;
 }
@@ -20,53 +20,101 @@ html {
     background-color: white;
 }
 
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/*----------------- FONTS ------------------*/
+
 * {
     font-family: "Inter";
+}
+
+h1 {
+    font-size: var(--big-label);
+    font-weight: 600
+}
+
+h2 {
+    font-size: var(--label);
+    font-weight: 500;
+}
+
+h3 {
+    font-size: var(--big-text);
+    font-weight: 500;
+}
+
+h4 {
+    font-weight: 500;
+}
+
+input, textarea {
+    font-size: var(--med-text);
 }
 
 
 /*----------------- TEMPLATE ------------------*/
 
-.title {
-    font-size: var(--big-label);
-    font-weight: 600
-}
-
-.med-label {
-    font-size: var(--label);
-    font-weight: 500;
-}
-
 .card {
     background-color: var(--dark-grey-color);
-    border: 2px solid;
+    border: 1px solid;
     border-radius: 50px;
+
+    > h1, > h2 {
+        text-align: center;
+        margin: 0;
+    }
 }
 
-.service-card {
+.info-card {
     border: 5px solid var(--primary-green);
     border-radius: 50px;
     background-color: white;
     padding: 1.5em;
 
-    h4 ~ p {
+    h4 ~ p, h2 {
         text-align: center;
     }
 
-    h4 {
-        font-weight: 500;
+    img {
+        width: 70px;
+        height: 70px;
+        border-radius: 80px;
     }
 } 
 
+.service {
+    aside img {
+        border-radius: 300px;
+        width: 150px;
+        height: 150px;
+    }
+
+    img {
+        max-width: 20em;
+    }
+
+    p {
+        font-size: var(--big-text);
+    }
+}
+
 .green-button {
-    background-color: var(--primary-green);    /* make general button*/
+    background-color: var(--primary-green);
     font-size: var(--label);
     padding: 0.5em;
     border: 1px solid;
     border-radius: 50px;
 }
 
-.tag-list {
+.wrap-list {
     span {
         background-color: var(--dark-grey-color);
         padding: 0.3em;
@@ -82,11 +130,7 @@ html {
 body > header {
     color: white;
     background: var(--primary-green);
-    padding:1em;
-
-    h1, h3 {
-        margin:0;
-    }
+    padding: 1em;
 }
 
 #signup a{
@@ -96,70 +140,14 @@ body > header {
 }
 
 
-/*----------------- MAIN PAGE ------------------*/
-
-#listing {
-    img {
-        width: 70px;
-        height: 70px;
-        border-radius: 80px;
-    }
-
-    > section {
-        padding: 3em;
-    }
-
-}
+/*----------------- PROFILE ------------------*/
 
 
-/*----------------- CREATE SERVICE PAGE ------------------*/
-
-#createService {
-    h1 {
-        font-size: var(--big-label);
-        font-weight: 600
-    }
-
-    input, textarea {
-        font-size: var(--med-text);
-    }
-
-    font-size: var(--med-text);
+#profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
 
-
-/*----------------- SELECT SERVICE PAGE ------------------*/
-
-#selectService {
-    img {
-        border-radius: 300px;
-        width: 150px;
-        height: 150px;
-    }
-
-    h2 {
-        font-weight: 500;
-    }
-
-    p {
-        font-size: var(--big-text);
-    }
-
-    input, textarea {
-        font-size: var(--med-text);
-    }
-
-    .skills, .pricing {
-        h1 {
-            font-size: var(--med-label);
-            font-weight: 500;
-        }
-
-        p {
-            margin: 0;
-        }
-    }
-
-}

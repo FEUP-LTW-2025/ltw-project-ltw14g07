@@ -8,68 +8,135 @@
 body {
     margin: 0;
 
-    header ~ * {                    /* maybe change to main for footer */
+    header ~ * {                 
         padding: 1em;
+    }
+}
+
+textarea {
+    width: 100%;
+}
+
+main {
+    max-width: 80em;
+    margin: auto;
+}
+
+ul {
+    padding-left: 3em;
+    padding-right: 3em;
+
+    li:not(:last-child) { 
+        margin-bottom: 1em;  
     }
 }
 
 
 /*----------------- TEMPLATE ------------------*/
 
+.wrap-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-bottom: 5px;
+}
+
+
+.spaced {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.overflow {
+    max-height: 30em;
+    overflow: scroll;
+}
+
+
 .card {
     padding: 1em;
 }
 
-.service-card {
-    > section {
+
+.pin-board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em;
+    
+    li {
+        max-width: 20em;
+    }
+}
+
+
+.info-card {
+    max-width: 50em;
+    overflow-wrap: break-word;
+
+    a > section {
         display: flex;
         gap: 2em;
         align-items: center
     }
 
     h2, h3, h4 {
-        margin:0;
+        margin: 0;
     }
 
     h4 ~ p {
         margin: 0;
     }
+        
+}
+
+.service {
+    display: flex;
+    gap: 4em;
+
+    aside p {
+        text-align: center;
+    }
+
+    > article {
+        width: 100%;
+    }
+
+    h1 {
+        margin-top: 0;
+    }
 }
 
 .labeled-input {
+    margin-bottom: 2em;
+
     h3 {
         margin: 0;
         margin-bottom: 0.5em;
     } 
 }
 
-.tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
-    margin-bottom: 5px;
+.skills, .pricing {
+    h1, h2, p {
+        margin: 0;
+    }
 }
 
 
 /*----------------- HEADER ------------------*/
 
 body > header {
-    section {
-        display: flex;
-        justify-content: space-between;
+    h1, h3 {
+        margin:0;
     }
 
     > div {
         max-width:100em;
         margin: auto;
     }
-
-    ~ * {
-        max-width: 80em;
-        margin: auto;
-    }
+    margin-bottom: 2em;
 }
-
 
 #signup {
     text-align: right;
@@ -82,32 +149,14 @@ body > header {
 
 /*----------------- MAIN PAGE ------------------*/
 
-#listing {
+#mainPage {
     display: flex;
     align-items: flex-start;
     gap: 4em;
-    margin-top: 3em;
 
-    > section {
-        display: flex;
-        flex-direction: column;
-        gap: 2em;
-    }
-}
-
-#listing aside {
-    width: 35em;
-    padding-left: 1em;
-
-    div {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5em;
-    }
-
-    section  {
-        margin-top: 1em;
-        margin-bottom: 1em;
+    aside {
+        max-width: 20em;
+        padding: 1em;
     }
 }
 
@@ -115,86 +164,76 @@ body > header {
 /*----------------- CREATE SERVICE PAGE ------------------*/
 
 #createService {
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 4em;    
-    }
-
     h1 {
         text-align: center;
     }
 
-    & > :last-child {
-        display: flex;
-        justify-content: right;
+    form {
+        
+        > section input {
+            width: 40em;
+        }
+
+        > div {
+            gap: 4em;
+
+            section {
+                width: 50%;
+            }
+        }
     }
-
-}
-
-#createService form > section {
-    textarea {
-        width: 100%;
-    }
-
-    &:nth-child(1) input {
-        width: 40em;
-    }
-}
-
-#createService form > div {
-    display: flex;
-    justify-content: space-between;
-    gap: 4em;
-
-    section {
-        width: 50%;
-    }
-}
-
-#createService div[class="card"] {
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
 }
 
 
 /*----------------- SELECT SERVICE PAGE ------------------*/
 
 #selectService {
-    > section {
-        display: flex;
-        gap: 4em;
-    }
-
-    h2, aside p {
+    > h2 {
         text-align: center;
-    }
-
-    h2 {
-        margin-top: 6em;
+        margin-top: 5em;
     }
 
     input {
         width: 40em;
-        margin-bottom: 3em;
-    }
-
-    textarea {
-        width: 100%;
     }
 }
 
-#selectService > section > article {
-    div {
-        display: flex;
-        justify-content: space-between;
-    }
-} 
 
-.skills, .pricing {
-    h1 {
-        margin: 0;
+/*----------------- PROFILE PAGE ------------------*/
+
+#profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3em;
+
+}
+
+
+/*----------------- MANAGE PAGE ------------------*/
+
+#manageServices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/*----------------- REQUEST PAGE ------------------*/
+ 
+#request {
+    .info-card {
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+
+        p {
+            margin:0;
+        }
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
