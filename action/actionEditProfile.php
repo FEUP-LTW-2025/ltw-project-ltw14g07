@@ -24,8 +24,15 @@ if ($name === null || $description === null) {
     exit();
 }
 
+$user = User::getUserByID($db, $userID);
+$user->name = $name;
+$user->description = $description;
+//role in the future
+//$user->role = $role;
+
+
 // Update the user's profile in the database
-User::updateUserProfile($db, $userID, $name, $description);
+$user->updateDatabase($db);
 
 // Redirect back to the profile page with a success message
 header('Location: ../pages/profile.php?success=profile_updated');

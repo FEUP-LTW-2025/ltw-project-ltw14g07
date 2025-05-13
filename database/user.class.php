@@ -71,6 +71,15 @@
       ]);
   }
 
+
+  public function updateDatabase($db) {
+    $stmt = $db->prepare('UPDATE Users 
+                        SET name = ?, description = ?, role = ?
+                        WHERE UserID = ?');
+
+    $stmt->execute(array($this->name, $this->description, $this->role, $this->userID));
+}
+
     
 
 }
