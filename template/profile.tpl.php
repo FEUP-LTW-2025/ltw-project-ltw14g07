@@ -13,7 +13,7 @@
         </article>
     </section>
 
-    <a>Edit Profile</a>
+    <a href="profile_editor.php">Edit Profile</a>
 
 <?php } 
 
