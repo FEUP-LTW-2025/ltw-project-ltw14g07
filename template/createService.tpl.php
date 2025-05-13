@@ -35,6 +35,7 @@
         <input type="file" name="image"> 
 
         <input type="hidden" name="serviceID" value=<?=$service->serviceID?>>
+        <input type="hidden" name="csrf" value=<?=$_SESSION['csrf']?>>
         <button class="green-button" type="submit"><?=$label?></button>
     </form>    
 <?php } ?>

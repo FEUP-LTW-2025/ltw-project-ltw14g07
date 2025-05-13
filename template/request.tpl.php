@@ -62,6 +62,7 @@
         <form action="/../action/actionCreateComment.php" method="post">
             <input type="text" name="message" placeholder="type your message">
             <input type="hidden" value=<?=$requestID?> name="requestID">
+            <input type="hidden" value=<?=$_SESSION['csrf']?> name="csrf">
             <button type="submit">Send</button>
         </form>
     </section>
@@ -118,6 +119,7 @@
         <?php draw_text_inputs($request); ?>
         <input type="hidden" value="<?=$serviceID?>" name="serviceID">
         <input type="hidden" value="<?=$requestID?>" name="requestID">
+        <input type="hidden" value=<?=$_SESSION['csrf']?> name="csrf">
     </form>
 
     <div>

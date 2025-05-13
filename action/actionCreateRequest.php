@@ -6,6 +6,15 @@
     session_start();
     if (!isset($_SESSION['userID'])) header('Location: ../pages/signup.php');
 
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        die("Request is not legitimate");
+    }
+
+    if (!preg_match ("/^[a-zA-Z\s]+$/", $_POST['title']) ||
+        !preg_match ("/^[a-zA-Z\s]+$/", $_POST['description'])) {
+        die("Forbidden characters were used");
+    }
+
     $db = getDatabaseConnection();
 
     //updating request
