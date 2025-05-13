@@ -6,6 +6,11 @@
     session_start();
     if (!isset($_SESSION['userID'])) header('Location: ../pages/signup.php');
 
+    if (!preg_match ("/^[a-zA-Z\s]+$/", $_POST['title']) ||
+        !preg_match ("/^[a-zA-Z\s]+$/", $_POST['description'])) {
+        die("Forbidden characters were used");
+    }
+
 
     // CREATE/EDIT DATABASE SERVICE
 

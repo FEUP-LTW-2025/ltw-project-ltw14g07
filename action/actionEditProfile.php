@@ -10,6 +10,11 @@ if (!isset($_SESSION['userID'])) {
     exit();
 }
 
+if (!preg_match ("/^[a-zA-Z\s]+$/", $_POST['title']) ||
+    !preg_match ("/^[a-zA-Z\s]+$/", $_POST['description'])) {
+    die("Forbidden characters were used");
+}
+
 $db = getDatabaseConnection();
 $userID = $_SESSION['userID'];
 

@@ -25,11 +25,11 @@
     <section class='service'>
         <aside>
             <img src="https://picsum.photos/id/237/200/300">
-            <p><?=$service->userName?></p>
+            <p><?=htmlspecialchars($service->userName)?></p>
         </aside>
         <article>
-            <h1><?=$service->title?></h1>
-            <p><?=$service->description?></p>
+            <h1><?=htmlspecialchars($service->title)?></h1>
+            <p><?=htmlspecialchars($service->description)?></p>
 
             <div class="spaced">
                 <section class="skills">
@@ -114,8 +114,8 @@
             <section>
                 <img src="https://picsum.photos/id/237/200/300">
                 <div>
-                    <h3><?=$service->title?></h3>
-                    <p><?=$service->userName?></p>
+                    <h3><?=htmlspecialchars($service->title)?></h3>
+                    <p><?=htmlspecialchars($service->userName)?></p>
                 </div>
             </section>
             <p><?=$shortDescription?></p>

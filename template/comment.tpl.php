@@ -8,8 +8,8 @@
 
 <?php function draw_comment($comment) { ?>
     <li class="info-card">
-        <p><?=$comment->userName?></p>
-        <p><?=$comment->text?></p>
+        <p><?=htmlspecialchars($comment->userName)?></p>
+        <p><?=htmlspecialchars($comment->text)?></p>
      </li>
  <?php } ?>
 
