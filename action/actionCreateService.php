@@ -22,7 +22,7 @@
 
     $creationDate = '2025-04-20';
 
-    if (isset($serviceID) && $_SESSION['userID'] !== Service::getCreatorByID($db, $serviceID))  {
+    if (!empty($serviceID) && $_SESSION['userID'] !== Service::getCreatorByID($db, $serviceID))  {
         die("Forbidden access to update content");
     }
 
@@ -38,8 +38,10 @@
     // CREATE/EDIT SERVICE IMAGE
 
     $basePath = __DIR__ . '/../images';
-    $hasUploaded = isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name']);
+    if (!is_dir($basePath)) mkdir($basePath);
+    if (!is_dir($basePath . "/service")) mkdir($basePath . "/service");
 
+    $hasUploaded = isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name']);
     if (file_exists("$basePath/service/$serviceID.jpg")) {
         if (!$hasUploaded) {
             header('Location: ../pages/service.php?serviceID=' . $serviceID);
@@ -47,12 +49,6 @@
         }
         unlink("$basePath/service/$serviceID.jpg");
     }
-    
-
-    //if ($serviceID == 0) $serviceID = $db->lastInsertId();
-
-    if (!is_dir($basePath)) mkdir($basePath);
-    if (!is_dir($basePath . "/service")) mkdir($basePath . "/service");
 
     $tempFileName = $_FILES['image']['tmp_name'];
 

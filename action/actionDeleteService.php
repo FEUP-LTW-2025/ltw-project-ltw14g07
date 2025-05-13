@@ -8,7 +8,7 @@ $db = getDatabaseConnection();
 $serviceID = $_POST['serviceID'];
 Service::delete($db, $serviceID);
 
-$path = __DIR__ . "images/service/$serviceID.jpg";
+$path = __DIR__ . "/../images/service/$serviceID.jpg";
 if (file_exists($path)) {
     unlink($path);
 }

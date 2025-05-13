@@ -26,10 +26,14 @@
     $title = $_POST['title'];
     $description = $_POST['description'];
 
-    $creationDate = '2025-04-20';
+    print_r($serviceID);
+    print_r($userID);
+
+    print_r($_SESSION);
+
 
     $request = new Request(null, $serviceID, $userID, $title,
-                        $description, $creationDate, null, 'pending');
+                        $description, null, null, 'pending');
     
     $request->save($db);   
 

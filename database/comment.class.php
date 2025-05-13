@@ -4,10 +4,10 @@
         public int $requestID;
         public int $userID;
         public string $text;
-        public string $creationDate;
+        public ?string $creationDate;
         public ?string $userName;  // complementary
 
-    public function __construct(?int $commentID, int $requestID, int $userID, string $text, string $creationDate, ?string $userName) {
+    public function __construct(?int $commentID, int $requestID, int $userID, string $text, ?string $creationDate, ?string $userName) {
         $this->commentID = $commentID;
         $this->requestID = $requestID;
         $this->userID = $userID;
@@ -40,10 +40,10 @@
 
 
     public function insertIntoDatabase($db) {
-        $stmt = $db->prepare('INSERT INTO Comment (commentID, requestID, userID, text, creationDate) VALUES 
-        (?, ?, ?, ?, ?)');
+        $stmt = $db->prepare('INSERT INTO Comment (commentID, requestID, userID, text) VALUES 
+        (?, ?, ?, ?)');
 
-        $stmt->execute(array(null, $this->requestID, $this->userID, $this->text, $this->creationDate));
+        $stmt->execute(array(null, $this->requestID, $this->userID, $this->text));
 
     }
 }

@@ -5,11 +5,11 @@
         public int $userID;
         public string $title;
         public string $description;
-        public string $creationDate;
+        public ?string $creationDate;
         public ?string $completionDate;
         public ?string $status = 'pending';
 
-    public function __construct(?int $requestID, int $serviceID, int $userID, string $title, string $description, string $creationDate, ?string $completionDate, ?string $status) {
+    public function __construct(?int $requestID, int $serviceID, int $userID, string $title, string $description, ?string $creationDate, ?string $completionDate, ?string $status) {
         $this->requestID = $requestID;
         $this->serviceID = $serviceID;
         $this->userID = $userID;
@@ -107,10 +107,10 @@
 
 
     public function insertIntoDatabase($db) {
-        $stmt = $db->prepare('INSERT INTO Request (requestID, serviceID, userID, title, description, creationDate, completionDate, status) VALUES 
-        (?, ?, ?, ?, ?, ?, ?, ?)');
+        $stmt = $db->prepare('INSERT INTO Request (requestID, serviceID, userID, title, description, completionDate, status) VALUES 
+        (?, ?, ?, ?, ?, ?, ?)');
 
-        $stmt->execute(array(null, $this->serviceID, $this->userID, $this->title, $this->description, $this->creationDate, $this->completionDate, $this->status));
+        $stmt->execute(array(null, $this->serviceID, $this->userID, $this->title, $this->description, null, $this->status));
 
     }
 

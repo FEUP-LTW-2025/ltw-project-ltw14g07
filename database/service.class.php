@@ -7,11 +7,11 @@
         public string $description;
         public int $hourlyRate;
         public int $deliveryTime;
-        public string $creationDate;
+        public ?string $creationDate;
         public $languages;
         public $fields;
 
-    public function __construct(?int $serviceID, int $userID, ?string $userName, string $title, string $description, int $hourlyRate, int $deliveryTime, string $creationDate, $languages, $fields) {
+    public function __construct(?int $serviceID, int $userID, ?string $userName, string $title, string $description, int $hourlyRate, int $deliveryTime, ?string $creationDate, $languages, $fields) {
       $this->serviceID = $serviceID;
       $this->userID = $userID;
       $this->userName = $userName;
@@ -95,10 +95,10 @@
     }
 
     public function insertIntoDatabase($db) {
-        $stmt = $db->prepare('INSERT INTO Service (userID, title, description, hourlyRate, deliveryTime, creationDate) VALUES 
-        (?, ?, ?, ?, ?, ?)');
+        $stmt = $db->prepare('INSERT INTO Service (userID, title, description, hourlyRate, deliveryTime) VALUES 
+        (?, ?, ?, ?, ?)');
 
-        $stmt->execute(array($this->userID, $this->title, $this->description, $this->hourlyRate, $this->deliveryTime, $this->creationDate));
+        $stmt->execute(array($this->userID, $this->title, $this->description, $this->hourlyRate, $this->deliveryTime));
 
         $this->serviceID = intval($db->lastInsertId());
 

@@ -29,7 +29,7 @@ CREATE TABLE Service (
 	description TEXT NOT NULL,
 	hourlyRate INTEGER NOT NULL CHECK (hourlyRate >= 0),
 	deliveryTime INTEGER CHECK(deliveryTime > 0),
-	creationDate DATE NOT NULL DEFAULT CURRENT_DATE,
+	creationDate DATE DEFAULT CURRENT_DATE,
 
 	FOREIGN KEY (userID) REFERENCES Users(userID)
 		ON DELETE CASCADE
@@ -43,7 +43,7 @@ CREATE TABLE Request (
 	userID INTEGER NOT NULL,      --user who requested
 	title TEXT NOT NULL,
 	description TEXT,
-	creationDate DATE NOT NULL,
+	creationDate DATE DEFAULT CURRENT_DATE,
 	completionDate DATE,
 	status TEXT NOT NULL CHECK(status IN ('pending', 'accepted', 'denied', 'done')),      --dar update para carrinho  
 	review INTEGER CHECK (review BETWEEN 1 AND 5) DEFAULT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE Comment (
 	requestID INTEGER NOT NULL,   --comment on this request
 	userID INTEGER NOT NULL,      --user who commented
 	text TEXT, 
-	creationDate DATE NOT NULL DEFAULT CURRENT_DATE,
+	creationDate DATE DEFAULT CURRENT_DATE,
 
 	FOREIGN KEY (requestID) REFERENCES Request(requestID)
 		ON DELETE CASCADE
@@ -127,14 +127,13 @@ CREATE TABLE ServiceField (
 INSERT INTO USERS (UserID, name, email, password, description, role)
 	VALUES (1, 'Roberto Céu', 'email@gmail.com', '123456', 'this is who i am', 'freelancer');
 
-INSERT INTO Service (serviceID, userID, title, description, hourlyRate, deliveryTime, creationDate) VALUES 
+INSERT INTO Service (serviceID, userID, title, description, hourlyRate, deliveryTime) VALUES 
 (1,
 1,
 'I will do modern mobile app ui ux design or website ui ux design',
 'As a UI UX designer, I put much value on trustful, transparent, long-term relationships. Thats why Im very accurate in performing a professional approach. Your privacy, terms, and deadlines will always be respected. All I need to start is your specifications, a description of a problem you face, or just an initial idea of the future design product. But in case you are not sure at all - no problem. We will work out the products vision together, and I will provide you with fresh and unique ideas and efficient methods to create something outstanding and productive. I will manage your design project from start to final result. Feel free to contact me to discuss the details.', 
 12, 
-3,
-'2024-01-15'
+3
 ),
 
 (2,
@@ -142,8 +141,7 @@ INSERT INTO Service (serviceID, userID, title, description, hourlyRate, delivery
 'I will do modern mobile app ui ux design or website ui ux design',
 'As a UI UX designer, I put much value on trustful, transparent, long-term relationships. Thats why Im very accurate in performing a professional approach. Your privacy, terms, and deadlines will always be respected. All I need to start is your specifications, a description of a problem you face, or just an initial idea of the future design product. But in case you are not sure at all - no problem. We will work out the products vision together, and I will provide you with fresh and unique ideas and efficient methods to create something outstanding and productive. I will manage your design project from start to final result. Feel free to contact me to discuss the details.', 
 15, 
-4,
-'2024-01-15'
+4
 );
 
 
