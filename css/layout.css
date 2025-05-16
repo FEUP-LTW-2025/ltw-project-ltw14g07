@@ -171,7 +171,7 @@ body > header {
     form {
         
         > section input {
-            width: 40em;
+            width: 50%;
         }
 
         > div {
@@ -180,6 +180,10 @@ body > header {
             section {
                 width: 50%;
             }
+        }
+
+        div input {
+            max-width: 8em;
         }
     }
 }
@@ -194,7 +198,7 @@ body > header {
     }
 
     input {
-        width: 40em;
+        width: 50%;
     }
 }
 

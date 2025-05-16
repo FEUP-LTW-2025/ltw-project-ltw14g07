@@ -8,3 +8,25 @@
     color: black;
     cursor: pointer;
 }
+
+@media (max-width: 600px) {
+    aside {
+      display: none;
+    }
+
+    #mainPage, #manageServices {
+        img {
+            display: none;
+        }
+
+        .wrap-list {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    #mainPage aside {
+      display: none;
+    }
+}

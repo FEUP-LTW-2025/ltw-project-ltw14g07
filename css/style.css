@@ -84,7 +84,7 @@ input, textarea {
     background-color: white;
     padding: 1.5em;
 
-    h4 ~ p, h2 {
+    h4 ~ p, h2, h4 {
         text-align: center;
     }
 
