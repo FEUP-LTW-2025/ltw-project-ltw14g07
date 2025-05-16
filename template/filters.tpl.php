@@ -48,12 +48,12 @@
     <div class='spaced'>
         <section class="labeled-input">
             <h3>Hourly Rate ($/h)</h3>
-            <input type="number" name="hourlyRate" value=<?=$hr?>>
+            <input type="number" name="hourlyRate" value=<?=$hr?> min="1" max="50" required>
         </section>
 
         <section class="labeled-input">
             <h3>Delivery Time (weeks)</h3>
-            <input type="number" name="deliveryTime" value="<?=$dt?>"> 
+            <input type="number" name="deliveryTime" value="<?=$dt?>" min="1" max="20" required> 
         </section>  
     </div>
 <?php } ?>
