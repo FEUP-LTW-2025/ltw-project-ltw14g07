@@ -36,6 +36,8 @@
 
         <input type="hidden" name="serviceID" value=<?=$service->serviceID?>>
         <input type="hidden" name="csrf" value=<?=$_SESSION['csrf']?>>
-        <button class="green-button" type="submit"><?=$label?></button>
+        <div class="right">
+            <button class="green-button" type="submit"><?=$label?></button>
+        </div>
     </form>    
 <?php } ?>

@@ -13,5 +13,5 @@
 
 
 <?php function draw_createService_button() { ?>
-    <a href="/pages/createService.php"> Create Service</a>
+    <a class="green-button" href="/pages/createService.php"> Create Service</a>
 <?php } ?>

@@ -10,9 +10,11 @@
         die("Request is not legitimate");
     }
 
-    if (!preg_match ("/^[a-zA-Z\s]+$/", $_POST['title']) ||
-        !preg_match ("/^[a-zA-Z\s]+$/", $_POST['description'])) {
-        die("Forbidden characters were used");
+    if (!empty($_POST['title']) && !empty($_POST['description'])) {
+        if (!preg_match ("/^[a-zA-Z\s]+$/", $_POST['title']) ||
+            !preg_match ("/^[a-zA-Z\s]+$/", $_POST['description'])) {
+            die("Forbidden characters were used");
+        }
     }
 
     $db = getDatabaseConnection();

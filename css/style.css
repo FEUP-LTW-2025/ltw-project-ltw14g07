@@ -35,6 +35,15 @@ input:invalid, textarea:invalid {
 }
 
 
+button:hover {
+    cursor: pointer;
+}
+
+p, h1, h2, h3, h4 {
+    text-align: justify;
+}
+
+
 /*----------------- FONTS ------------------*/
 
 * {
@@ -119,6 +128,14 @@ input, textarea {
     border-radius: 50px;
 }
 
+.red-button {
+    background-color: rgb(240, 50, 50);
+    font-size: var(--label);
+    padding: 0.5em;
+    border: 1px solid;
+    border-radius: 50px;
+}
+
 .wrap-list {
     span {
         background-color: var(--dark-grey-color);
@@ -154,5 +171,18 @@ body > header {
     align-items: center;
 }
 
+
+/*----------------- REQUEST ------------------*/
+
+#request {
+     section > form button {
+        font-size: var(--med-text);
+    }
+
+    input {
+        border-width: 1px;
+        border-color: black;
+    }
+}
 
 

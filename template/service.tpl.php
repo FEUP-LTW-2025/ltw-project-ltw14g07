@@ -7,8 +7,7 @@
 <?php function draw_service_page($service, $requests, $request) { 
     draw_service($service);
     if ($_SESSION['userID'] === $service->userID) {
-        draw_edit_service($service->serviceID);
-        draw_delete_service($service->serviceID);
+        draw_user_options($service->serviceID);
         draw_request_cards($requests, 'Pending');
     } else {
         draw_request_form($service->userName, $service->serviceID, $request);
@@ -74,16 +73,24 @@
  } ?>
 
 
+<?php function draw_user_options($serviceID) { ?>
+    <div class="right">
+        <?php
+        draw_edit_service($serviceID);
+        draw_delete_service($serviceID);
+        ?>
+    </div>
+<?php } ?>
 
 <?php function draw_edit_service($serviceID) { ?>
-    <a href="/../pages/createService.php?serviceID=<?=$serviceID?>">Edit Service</a>
+    <a class="green-button" href="/../pages/createService.php?serviceID=<?=$serviceID?>">Edit</a>
 <?php } ?>
 
 
 <?php function draw_delete_service($serviceID) { ?>
     <form action="/../action/actionDeleteService.php" method="post">
         <input type="hidden" name="serviceID" value=<?=$serviceID?>>
-        <button type="submit">Delete Service</button>
+        <button class="red-button" type="submit">Delete</button>
     </form>
 <?php } ?>
 
