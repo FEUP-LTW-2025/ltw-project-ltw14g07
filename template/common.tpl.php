@@ -20,10 +20,11 @@
                     <h1><a href="index.php">Placeholder</a></h1>
                     <section class="spaced">
                         <h3>Let programmers work for you</h3>
-                        <div id="signup">
-                        <a href="/pages/signup.php?q=r">Register</a>
-                        <a href="/pages/signup.php?q=l">Login</a>
-                        </div>
+                        <?php
+                        if (!empty($_SESSION['userID'])) {
+                            draw_loggedIn();
+                        } else draw_signup();
+                        ?>
                     </section>
                 </div>
             </header>
@@ -41,4 +42,23 @@
             <a href ="/pages/manageServices.php">manage services</a>
         </body>
     </html>
+<?php } ?>
+
+
+
+<?php function draw_signup() { ?>
+     <div id="signup">
+        <a href="/pages/signup.php?q=r">Register</a>
+        <a href="/pages/signup.php?q=l">Login</a>
+    </div>
+<?php } ?>
+
+
+<?php function draw_loggedIn() { ?>
+     <div id="signup">
+        <a href="/pages/profile.php">Profile</a>
+        <form action="/../action/actionLogout.php">
+            <button class="red-button" type="submit">Logout</button>
+        </form>
+    </div>
 <?php } ?>

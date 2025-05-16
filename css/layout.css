@@ -144,6 +144,7 @@ body > header {
 }
 
 #signup {
+    display: flex;
     text-align: right;
 
     a {
@@ -190,10 +191,6 @@ body > header {
         div input {
             max-width: 8em;
         }
-    }
-
-    > div {
-
     }
 }
 

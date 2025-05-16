@@ -161,6 +161,12 @@ body > header {
     border-radius: 20px;
 }
 
+#signup {
+    button {
+        font-size: 1rem;
+    }
+}
+
 
 /*----------------- PROFILE ------------------*/
 
