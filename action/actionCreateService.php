@@ -3,11 +3,13 @@
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/service.class.php');
 
-    session_start();
+    require_once(__DIR__ . '/../utils/session.php');
 
-    if (!isset($_SESSION['userID'])) header('Location: ../pages/signup.php');
+    $session = new Session();
 
-    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    if (!$session->getUserID()) header('Location: ../pages/signup.php');
+
+    if ($session->getCsrf() !== $_POST['csrf']) {
         die("Request is not legitimate");
     }
     
@@ -22,7 +24,7 @@
     $db = getDatabaseConnection();
 
     $serviceID = ((int)$_POST['serviceID']) ?? null;
-    $userID = $_SESSION['userID'];
+    $userID = $session->getUserID();
     $title = $_POST['title'];
     $description = $_POST['description'];
     $languages = $_POST['languages'];
@@ -30,7 +32,7 @@
     $hourlyRate = $_POST["hourlyRate"];
     $deliveryTime = $_POST["deliveryTime"];
 
-    if (!empty($serviceID) && $_SESSION['userID'] !== Service::getCreatorByID($db, $serviceID))  {
+    if (!empty($serviceID) && $session->getUserID() !== Service::getCreatorByID($db, $serviceID))  {
         die("Forbidden access to update content");
     }
 

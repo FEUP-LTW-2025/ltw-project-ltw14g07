@@ -8,13 +8,17 @@
     require_once(__DIR__ . '/../database/service.class.php');
     require_once(__DIR__ . '/../database/filters.class.php');
 
+    require_once(__DIR__ . '/../utils/session.php');
+
+
 
 
     $db = getDatabaseConnection();
     $services = Service::getAllServices($db, 8);
     $filters = FIlters::getAllFilters($db);
+    $session = new Session();
 
-    draw_header('mainPage');
+    draw_header('mainPage', $session);
     draw_vert_filters($filters);
     draw_service_cards($services);
     draw_footer();

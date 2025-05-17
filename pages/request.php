@@ -9,9 +9,12 @@
     require_once(__DIR__ . '/../database/comment.class.php');
     require_once(__DIR__ . '/../database/user.class.php');
 
-    session_start();
+    require_once(__DIR__ . '/../utils/session.php');
 
-    if (!isset($_SESSION['userID'])) header('Location: ../pages/index.php');
+
+    $session = new Session();
+
+    if (!$session->isLoggedIn()) header('Location: ../pages/index.php');
 
     $db = getDatabaseConnection();
     $request = Request::getRequestByID($db, $_GET['id']);
@@ -20,14 +23,14 @@
         die("No such Request");
     }
 
-    if ($_SESSION['userID'] !== $request->userID && 
-    $_SESSION['userID'] !== Service::getCreatorByID($db, $request->serviceID)) {
+    if ($session->getUserID() !== $request->userID && 
+        $session->getUserID() !== Service::getCreatorByID($db, $request->serviceID)) {
         die("Insufficient permissions");
     }
 
     $comments = Comment::getCommentsByRequestID($db, $_GET['id']);
 
-    draw_header('request');
-    draw_request_page($request, $comments);
+    draw_header('request', $session);
+    draw_request_page($request, $comments, $session);
     draw_footer();
 ?>

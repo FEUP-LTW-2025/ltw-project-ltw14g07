@@ -2,10 +2,12 @@
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/user.class.php');
 
-session_start();
+require_once(__DIR__ . '/../utils/session.php');
+
+$session = new Session();
 
 // Check if the user is logged in
-if (!isset($_SESSION['userID'])) {
+if (!$session->isLoggedIn()) {
     header('Location: ../pages/signup.php');
     exit();
 }
@@ -16,7 +18,7 @@ if (!preg_match ("/^[a-zA-Z\s]+$/", $_POST['title']) ||
 }
 
 $db = getDatabaseConnection();
-$userID = $_SESSION['userID'];
+$userID = $session->getUserID();
 
 // Get the submitted form data
 $name = $_POST['title'] ?? null;

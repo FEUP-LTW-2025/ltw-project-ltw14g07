@@ -3,10 +3,13 @@
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/request.class.php');
 
-    session_start();
-    if (!isset($_SESSION['userID'])) header('Location: ../pages/signup.php');
+    require_once(__DIR__ . '/../utils/session.php');
 
-    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    $session = new Session();
+
+    if (!$session->isLoggedIn()) header('Location: ../pages/signup.php');
+
+    if ($session->getCsrf() !== $_POST['csrf']) {
         die("Request is not legitimate");
     }
 
@@ -32,16 +35,10 @@
     } 
 
     //creating request
-    $userID = $_SESSION['userID'];
+    $userID = $session->getUserID();
     $serviceID = $_POST['serviceID'];
     $title = $_POST['title'];
     $description = $_POST['description'];
-
-    print_r($serviceID);
-    print_r($userID);
-
-    print_r($_SESSION);
-
 
     $request = new Request(null, $serviceID, $userID, $title,
                         $description, null, null, 'pending');

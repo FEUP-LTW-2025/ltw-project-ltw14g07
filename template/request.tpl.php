@@ -2,19 +2,19 @@
 <?php 
     require_once(__DIR__ . '/../template/input.tpl.php');
     require_once(__DIR__ . '/../template/comment.tpl.php');
-    session_start();
+    require_once(__DIR__ . '/../utils/session.php');
 ?>
 
-<?php function draw_request_page($request, $comments) { ?>
+<?php function draw_request_page($request, $comments, Session $session) { ?>
     <?php
         draw_request($request);
-        if ($_SESSION['userID'] === $request->userID) {    //is creator
+        if ($session->getUserID() === $request->userID) {    //is creator
             draw_creator_options($request);
         }
         else {   //is freelancer
-            if ($request->status === 'pending') draw_decision_buttons($request);
+            if ($request->status === 'pending') draw_decision_buttons($request, $session);
         }
-        draw_request_chat($comments, $request->requestID);
+        draw_request_chat($comments, $request->requestID, $session);
     ?>
 <?php } ?>
 
@@ -48,18 +48,18 @@
 
 
 
-<?php function draw_decision_buttons($request) {  ?>
+<?php function draw_decision_buttons($request, Session $session) {  ?>
     <form class="wrap-list right" method="post" action="/../action/actionCreateRequest.php">
         <input type="hidden" name="requestID" value="<?=$request->requestID?>">
         <input type="hidden" name="serviceID" value="<?=$request->serviceID?>">
-        <input type="hidden" name="csrf" value=<?=$_SESSION['csrf']?>>
+        <input type="hidden" name="csrf" value=<?=$session->getCsrf()?>>
         <button class="green-button" type="submit" name="decision" value="accepted">Accept</button>
         <button class="red-button" type="submit" name="decision" value="denied">Deny</button>
     </form>
 <?php } ?>
 
 
-<?php function draw_request_chat($comments, $requestID) { ?>
+<?php function draw_request_chat($comments, $requestID, Session $session) { ?>
     <section class="card listing">
         <h1>Chat</h1>
         <?php if (empty($comments)): ?>
@@ -73,7 +73,7 @@
         <form action="/../action/actionCreateComment.php" method="post">
             <input class="info-card" type="text" name="message" placeholder="type your message">
             <input type="hidden" value=<?=$requestID?> name="requestID">
-            <input type="hidden" value=<?=$_SESSION['csrf']?> name="csrf">
+            <input type="hidden" value=<?=$session->getCsrf()?> name="csrf">
             <button class="green-button" type="submit">Send</button>
         </form>
     </section>
@@ -114,7 +114,7 @@
 
 
 
-<?php function draw_request_form($userName, $serviceID, $request) { ?>
+<?php function draw_request_form($userName, $serviceID, $request, Session $session) { ?>
     <?php
     $requestID = "";
     $label = "Hire " . $userName . " and make your Request";
@@ -130,7 +130,7 @@
         <?php draw_text_inputs($request); ?>
         <input type="hidden" value="<?=$serviceID?>" name="serviceID">
         <input type="hidden" value="<?=$requestID?>" name="requestID">
-        <input type="hidden" value=<?=$_SESSION['csrf']?> name="csrf">
+        <input type="hidden" value=<?=$session->getCsrf()?> name="csrf">
     </form>
 
     <div class="right">

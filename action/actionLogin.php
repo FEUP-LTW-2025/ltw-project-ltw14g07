@@ -10,7 +10,10 @@ echo "Checkpoint A<br>";
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/user.class.php');
 require_once(__DIR__ . '/../utils/utils.php');
+require_once(__DIR__ . '/../utils/session.php');
 
+
+$session = new Session();
 
 try {
     $db = getDatabaseConnection();
@@ -29,9 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($user) {
         echo "Checkpoint C: User found<br>";
-        $_SESSION["userID"] = $user->userID;
-        $_SESSION["username"] = $user->name;
-        $_SESSION["csrf"] = generate_random_token();
+        $session->setUserID($user->userID);
+        $session->setUsername($user->name);
+        $session->setCsrf((int) generate_random_token());
         header("Location: ../pages/profile.php");
         
     } else {

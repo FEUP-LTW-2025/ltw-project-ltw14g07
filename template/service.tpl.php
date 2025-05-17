@@ -1,16 +1,15 @@
 <?php
     require_once(__DIR__ . '/../database/service.class.php');
     require_once(__DIR__ . '/../template/request.tpl.php');
-    session_start();
 ?>
 
-<?php function draw_service_page($service, $requests, $request) { 
+<?php function draw_service_page($service, $requests, $request, Session $session) { 
     draw_service($service);
-    if ($_SESSION['userID'] === $service->userID) {
+    if ($session->getUserID() === $service->userID) {
         draw_user_options($service->serviceID);
         draw_request_cards($requests, 'Pending');
     } else {
-        draw_request_form($service->userName, $service->serviceID, $request);
+        draw_request_form($service->userName, $service->serviceID, $request, $session);
     }
  } 
  ?>

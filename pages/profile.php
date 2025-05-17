@@ -12,17 +12,18 @@
     require_once(__DIR__ . '/../database/request.class.php');
     require_once(__DIR__ . '/../database/user.class.php');
 
+    require_once(__DIR__ . '/../utils/session.php');
 
-    session_start();
+    $session = new Session();
 
-    if (!isset($_SESSION['userID'])) {
+    if (!$session->isLoggedIn()) {
         header('Location: signup.php');  
         exit();
     }
     
     $db = getDatabaseConnection();
     
-    $userID = $_SESSION['userID'];
+    $userID = $session->getUserID();
     $user = User::getUserByID($db, $userID);
     
 
@@ -31,7 +32,7 @@
     $doneRequests= Request::getRequestByUserID($db, $userID, 'done');
 
 
-    draw_header('profile');
+    draw_header('profile', $session);
     draw_profile_resume($user);
     draw_request_cards($pendingRequests, 'Pending');
     draw_request_cards($acceptedRequests, 'Accepted');

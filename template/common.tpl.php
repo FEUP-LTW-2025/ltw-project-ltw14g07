@@ -1,9 +1,9 @@
 <?php
     declare(strict_types=1);
-    session_start();
+    require_once(__DIR__ . '/../utils/session.php');
 ?>
 
-<?php function draw_header($id) { ?>
+<?php function draw_header($id, Session $session) { ?>
     <!DOCTYPE html>
     <html>
         <head>
@@ -24,7 +24,7 @@
                             <h3>Let programmers work for you</h3>
 
                             <?php
-                            if (!empty($_SESSION['userID'])) {
+                            if ($session->isLoggedIn()) {
                                 draw_loggedIn();
                             } else draw_signup();
                             ?>
@@ -32,7 +32,7 @@
                         <nav class="wrap-list">
                             <a href="/pages/index.php">Main</a>
                             <?php
-                            if (!empty($_SESSION['userID']))
+                            if ($session->isLoggedIn())
                                 draw_loggedIn_nav();
                             ?>
                         </nav>

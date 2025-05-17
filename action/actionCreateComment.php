@@ -3,9 +3,11 @@
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/comment.class.php');
 
-    session_start();
+    require_once(__DIR__ . '/../utils/session.php');
 
-    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    $session = new Session();
+
+    if ($session->getCsrf() !== $_POST['csrf']) {
         die("Request is not legitimate");
     }
 
@@ -17,7 +19,7 @@
         die("Forbidden characters were used in the comment");
     }
 
-    if (!isset($_SESSION['userID'])) header('Location: ../pages/index.php');
+    if (!$session->isLoggedIn()) header('Location: ../pages/index.php');
 
 
     $db = getDatabaseConnection();
@@ -26,7 +28,7 @@
     $comment = new Comment(
         null, 
         $_POST['requestID'],
-        $_SESSION['userID'],
+        $session->getUserID(),
         $_POST['message'],
         null,
         null,
