@@ -1,12 +1,16 @@
-#signup a{
+#signup a, #signup button{
     transition: background-color 200ms;
 }
 
 #signup a:hover {
     background-color: white;
-    border-style: solid;
     color: black;
     cursor: pointer;
+}
+
+header #signup button:hover {
+    background-color: rgb(240, 50, 50);
+    color: black;
 }
 
 @media (max-width: 600px) {

@@ -153,6 +153,17 @@ body > header {
     color: white;
     background: var(--primary-green);
     padding: 1em;
+
+    nav {
+        a {
+            text-align: center;
+            padding-right: 0.5em;
+            
+        }
+        a:not(:last-child) { 
+            border-right: 1px solid white;  
+        }
+    }
 }
 
 #signup a{
@@ -161,10 +172,14 @@ body > header {
     border-radius: 20px;
 }
 
-#signup {
-    button {
-        font-size: 1rem;
-    }
+header #signup button{
+    font-size: 1rem;
+    padding:0.5em;
+    border:none;
+    border-radius:20px;
+    background-color: inherit;
+    text-decoration: underline;
+    color: white;
 }
 
 
