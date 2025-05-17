@@ -73,6 +73,10 @@ input, textarea {
     font-size: var(--med-text);
 }
 
+footer {
+    font-size: 0.9rem;
+}
+
 
 /*----------------- TEMPLATE ------------------*/
 
@@ -182,6 +186,13 @@ header #signup button{
     color: white;
 }
 
+
+/*----------------- HEADER ------------------*/
+
+footer {
+    background-color: rgb(64, 61, 55);
+    color:rgb(240, 235, 235);
+}
 
 /*----------------- PROFILE ------------------*/
 

@@ -7,17 +7,18 @@
     <!DOCTYPE html>
     <html>
         <head>
-            <title>Easy Code</title>
+            <title>Easy_Code</title>
             <meta charset="utf-8">
             <link rel="stylesheet" href="../css/style.css">
             <link rel="stylesheet" href="../css/layout.css">
             <link rel="stylesheet" href="../css/responsive.css">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         </head>
         <body>
             <header>
                 <div>
-                    <h1><a href="index.php">Easy Code</a></h1>
+                    <h1><a href="index.php">Easy_Code</a></h1>
                     <section class="spaced wrap-list">
                         <h3>Let programmers work for you</h3>
 
@@ -43,6 +44,19 @@
 
 <?php function draw_footer() { ?>
             </main>
+            <footer>
+                <section>
+                    <p>Easy_Code provides a website for safe transactions between programmers, specializing in providing custom coding solutions to your problems.</p>
+                    <section class="spaced">
+                        <label>Copyright &copy; 2025 Easy_Code. All rights reserved.</label>
+                        <nav>
+                            <a href="#">LinkedIn <i class="fa fa-linkedin-square"></i></a> |
+                            <a href="#">GitHub <i class="fa fa-github-square"></i></a> |
+                            <a href="#">Twitter <i class="fa fa-twitter-square"></i></a>
+                        </nav>
+                    </section>
+                </section>
+            </footer>
         </body>
     </html>
 <?php } ?>

@@ -154,6 +154,22 @@ body > header {
 }
 
 
+/*----------------- HEADER ------------------*/
+
+footer {
+    margin-top: 2em;
+
+    > section {
+        max-width:100em;
+        margin: auto;
+    }
+
+    p {
+        margin: 0.5em 0 0.5em 0;
+    }
+}
+
+
 /*----------------- MAIN PAGE ------------------*/
 
 #mainPage {
