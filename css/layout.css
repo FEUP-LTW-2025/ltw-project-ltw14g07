@@ -13,14 +13,24 @@ body {
     }
 }
 
-textarea {
-    width: 100%;
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
     max-width: 80em;
+    width:100%;
+    flex:1;
     margin: auto;
 }
+
+
+textarea {
+    width: 100%;
+}
+
 
 ul {
     padding-left: 3em;
@@ -30,7 +40,6 @@ ul {
         margin-bottom: 1em;  
     }
 }
-
 
 /*----------------- TEMPLATE ------------------*/
 
@@ -131,7 +140,7 @@ ul {
 
 /*----------------- HEADER ------------------*/
 
-body > header {
+body > div > header {
     h1, h3 {
         margin:0;
     }

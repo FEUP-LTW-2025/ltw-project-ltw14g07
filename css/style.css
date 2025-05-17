@@ -153,7 +153,7 @@ footer {
 
 /*----------------- HEADER ------------------*/
 
-body > header {
+body > div > header {
     color: white;
     background: var(--primary-green);
     padding: 1em;
