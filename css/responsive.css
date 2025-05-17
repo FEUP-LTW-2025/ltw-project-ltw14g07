@@ -14,23 +14,23 @@ header #signup button:hover {
 }
 
 @media (max-width: 600px) {
-    aside {
-      display: none;
-    }
-
     #mainPage, #manageServices {
         img {
             display: none;
         }
 
-        .wrap-list {
+        .listing .wrap-list {
             display: none;
         }
     }
 }
 
-@media (max-width: 1000px) {
-    #mainPage aside {
-      display: none;
+@media (max-width: 900px) {
+    #mainPage {
+        flex-direction: column;
+
+        aside {
+            max-width: 100%;
+        }
     }
 }
