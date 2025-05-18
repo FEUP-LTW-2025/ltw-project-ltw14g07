@@ -14,13 +14,6 @@
         return;
     }
     
-    if (!preg_match ("/^[a-zA-Z\s]+$/", $_POST['title']) ||
-        !preg_match ("/^[a-zA-Z\s]+$/", $_POST['description'])) {
-        $session->addMessage('error', 'Forbidden characters were used');
-        header('Location: ../pages/index.php');
-        return;
-    }
-
 
     // CREATE/EDIT DATABASE SERVICE
 

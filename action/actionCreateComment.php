@@ -17,9 +17,6 @@
         return;
     }
 
-    if (!preg_match ("/^[a-zA-Z\s]+$/", $_POST['message'])) {
-        die("Forbidden characters were used in the comment");
-    }
 
     if (!$session->isLoggedIn()) header('Location: ../pages/index.php');
 

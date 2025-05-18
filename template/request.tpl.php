@@ -19,8 +19,8 @@
 <?php } ?>
 
 <?php function draw_request($request) { ?>
-    <h1><?=$request->title?></h1>
-    <p><?=$request->description?></p>
+    <h1><?=htmlspecialchars($request->title)?></h1>
+    <p><?=htmlspecialchars($request->description)?></p>
     <p>Status: <?=$request->status?></p>
 <?php } ?>
 
@@ -35,7 +35,7 @@
 <?php } ?>
 
 
-<?php function draw_delete_request($requestID) { ?>
+<?php function draw_delete_request($requestID) { ?>w
     <form action="/../action/actionDeleteRequest.php" method="post">
         <input type="hidden" name="requestID" value=<?=$requestID?>>
         <button type="submit" class="red-button">Delete</button>
@@ -105,8 +105,8 @@
     ?>
     <li class="info-card">
         <a href="request.php?id=<?=$request->requestID?>">
-            <h2><?=$request->title?></h2>
-            <p><?=$shortDescription?></p>
+            <h2><?=htmlspecialchars($request->title)?></h2>
+            <p><?=htmlspecialchars($shortDescription)?></p>
         </a>
     </li>
  <?php } ?>

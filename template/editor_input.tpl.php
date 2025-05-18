@@ -5,12 +5,12 @@
     ?>
     <section class="labeled-input">
         <h3>Your name</h3>
-        <input class="card" type="textarea" name="title" placeholder="Write your Title.." value="<?=$name?>">
+        <input class="card" type="textarea" name="title" placeholder="Write your Title.." value="<?=htmlspecialchars($name)?>">
     </section>
 
     <section class="labeled-input">
         <h3>Your Description</h3>
-        <textarea class="card" name="description" rows="7" placeholder="Write your Description..."><?=$description?></textarea>
+        <textarea class="card" name="description" rows="7" placeholder="Write your Description..."><?=htmlspecialchars($description)?></textarea>
     </section>
 <?php } ?>
 
