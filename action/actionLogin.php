@@ -41,7 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: ../pages/profile.php");
         
     } else {
-        echo "Invalid credentials.";
+        $session->addMessage('error', 'Invalid credentials');
+        header("Location: ../pages/signup.php");
     }
 }
 ?>

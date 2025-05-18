@@ -13,6 +13,11 @@ header #signup button:hover {
     color: black;
 }
 
+#messages:hover {
+    cursor: pointer;
+    scale: 1.05;
+}
+
 @media (max-width: 600px) {
     #mainPage, #manageServices {
         img {

@@ -12,6 +12,7 @@
             <link rel="stylesheet" href="../css/style.css">
             <link rel="stylesheet" href="../css/layout.css">
             <link rel="stylesheet" href="../css/responsive.css">
+            <script src="../js/closeMessage.js" defer></script> 
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         </head>
@@ -39,13 +40,16 @@
                     </div>
                 </header>
 
-                <section id="messages">
-                    <?php foreach ($session->getMessages() as $messsage) { ?>
-                        <article class="<?=$messsage['type']?>">
-                            <?=$messsage['text']?>
-                        </article>
-                    <?php } ?>
-                </section>
+                <?php if (!empty($session->getMessages())):?>
+                    <section id="messages">
+                        <?php foreach ($session->getMessages() as $messsage) { ?>
+                            <article class="<?=$messsage['type']?>">
+                                <?=$messsage['text']?>
+                            </article>
+                        <?php } ?>
+                    </section>
+                <?php endif; ?>
+
             <main id='<?=$id?>'>
 <?php } ?>
 
