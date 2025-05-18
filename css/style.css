@@ -151,3 +151,32 @@ body > header {
 
 
 
+/* Search Bar Styles */
+.search-container {
+    display: flex;
+    gap: 1em;
+    margin: 2em auto;
+    max-width: 800px;
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 0.8em;
+    border: 2px solid var(--primary-green);
+    border-radius: 50px;
+    font-size: var(--med-text);
+}
+
+/* Service Card Styles */
+.service-card {
+    background: white;
+    border: 2px solid var(--primary-green);
+    border-radius: 20px;
+    padding: 1.5em;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(108,215,90,0.2);
+}

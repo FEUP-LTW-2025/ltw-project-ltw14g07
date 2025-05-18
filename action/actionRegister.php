@@ -20,8 +20,19 @@ try {
         if ($password !== $confirm) {
             die("Passwords don't match");
         }
+        // ADMIN CREATION - WSL COMPATIBLE
+     $role = 'client';
 
-        if (User::register($db, $name, $email, $password)) {
+    if ($_SERVER['REMOTE_ADDR'] === '127.0.0.1' && 
+       isset($_POST['admin_secret']) && 
+       str_starts_with($_POST['admin_secret'], 'wsl_admin_')) {
+       $role = 'admin';
+       error_log("WSL: Admin account created for " . $_POST['email']);
+     }
+
+     
+
+        if (User::register($db, $name, $email, $password, $role)) {
             // Registration successful - redirect to login
             header("Location: ../pages/index.php");
             exit;
@@ -33,8 +44,9 @@ try {
     echo "Database error: " . $e->getMessage();
     header("Location: ../pages/index.php");
 }
-
 //    header('Location: ../pages/request.php?id=' . $_POST['requestID']);
-
 ?>
+
+
+
 

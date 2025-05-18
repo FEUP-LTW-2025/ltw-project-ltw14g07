@@ -28,7 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($user) {
         echo "Checkpoint C: User found<br>";
-        $_SESSION["userID"] = $user->userID;
+        // After successful login:
+        $_SESSION['userID'] = (int)$user->userID; // Explicit cast to int
         $_SESSION["username"] = $user->name;
         header("Location: ../pages/profile.php");
         

@@ -35,7 +35,7 @@ CREATE TABLE Service (
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
-
+ALTER TABLE Service ADD COLUMN status TEXT DEFAULT 'active';
 
 CREATE TABLE Request (
 	requestID INTEGER  NOT NULL PRIMARY KEY,
@@ -122,7 +122,21 @@ CREATE TABLE ServiceField (
 		ON UPDATE CASCADE
 );
 
+CREATE TABLE ServiceCategories (
+    CategoryID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT NOT NULL UNIQUE,
+    Description TEXT,
+    CreatedBy INTEGER REFERENCES Users(UserID),
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
+CREATE TABLE SystemLogs (
+    LogID INTEGER PRIMARY KEY AUTOINCREMENT,
+    UserID INTEGER REFERENCES Users(UserID),
+    Action TEXT NOT NULL,
+    Details TEXT,
+    Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 INSERT INTO USERS (UserID, name, email, password, description, role)
 	VALUES (1, 'Roberto Céu', 'email@gmail.com', '123456', 'this is who i am', 'freelancer');

@@ -14,5 +14,15 @@ if (file_exists($path)) {
 }
 
 header('Location: ../pages');
+// In actionDeleteService.php
+require_once(__DIR__ . '/../middleware/admin_auth.php');
+ensureAdminAccess();
+
+// Or for regular user actions (actionDeleteRequest.php)
+$user = User::requireLogin();
+if ($user->userID !== $request->userID && !$user->isAdmin()) {
+    header("Location: /pages/index.php");
+    exit();
+}
 
 ?>

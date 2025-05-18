@@ -1,27 +1,31 @@
 <?php
-    class Service {
-        public ?int $serviceID;
-        public int $userID;
-        public ?string $userName;
-        public string $title;
-        public string $description;
-        public int $hourlyRate;
-        public int $deliveryTime;
-        public string $creationDate;
-        public $languages;
-        public $fields;
+class Service {
+    public ?int $serviceID;
+    public int $userID;
+    public ?string $userName;
+    public string $title;
+    public string $description;
+    public int $hourlyRate;
+    public int $deliveryTime;
+    public string $creationDate;
+    public $languages;
+    public $fields;
+    public ?string $status;
 
-    public function __construct(?int $serviceID, int $userID, ?string $userName, string $title, string $description, int $hourlyRate, int $deliveryTime, string $creationDate, $languages, $fields) {
-      $this->serviceID = $serviceID;
-      $this->userID = $userID;
-      $this->userName = $userName;
-      $this->title = $title;
-      $this->description = $description;
-      $this->hourlyRate = $hourlyRate;
-      $this->deliveryTime = $deliveryTime;
-      $this->creationDate = $creationDate;
-      $this->languages = $languages;
-      $this->fields = $fields;
+    public function __construct(?int $serviceID, int $userID, ?string $userName, string $title, 
+                              string $description, int $hourlyRate, int $deliveryTime, 
+                              string $creationDate, $languages, $fields, ?string $status = null) {
+        $this->serviceID = $serviceID;
+        $this->userID = $userID;
+        $this->userName = $userName;
+        $this->title = $title;
+        $this->description = $description;
+        $this->hourlyRate = $hourlyRate;
+        $this->deliveryTime = $deliveryTime;
+        $this->creationDate = $creationDate;
+        $this->languages = $languages;
+        $this->fields = $fields;
+        $this->status = $status;
     }
 
     public static function getAllServices($db, $limit) {
@@ -35,7 +39,6 @@
         return $services;
     }
 
-
     public static function getAllServicesByUserID($db, $userID) {
         $stmt = $db->prepare('SELECT serviceID FROM Service WHERE userID = ?');
         $stmt->execute(array($userID));
@@ -46,7 +49,6 @@
         }
         return $services;
     }
-
 
     public static function getService($db, $serviceID) {
         $stmt1 = $db->prepare('SELECT * FROM Service WHERE serviceID = ? ');
@@ -74,7 +76,8 @@
             $service['deliveryTime'],
             $service['creationDate'],
             array_column($languages, 'language'),
-            array_column($fields, 'field')
+            array_column($fields, 'field'),
+            $service['status'] ?? null
         );
     }
 
@@ -85,10 +88,18 @@
     }
 
     public function insertIntoDatabase($db) {
-        $stmt = $db->prepare('INSERT INTO Service (userID, title, description, hourlyRate, deliveryTime, creationDate) VALUES 
-        (?, ?, ?, ?, ?, ?)');
+        $stmt = $db->prepare('INSERT INTO Service (userID, title, description, hourlyRate, deliveryTime, creationDate, status) VALUES 
+        (?, ?, ?, ?, ?, ?, ?)');
 
-        $stmt->execute(array($this->userID, $this->title, $this->description, $this->hourlyRate, $this->deliveryTime, $this->creationDate));
+        $stmt->execute(array(
+            $this->userID, 
+            $this->title, 
+            $this->description, 
+            $this->hourlyRate, 
+            $this->deliveryTime, 
+            $this->creationDate,
+            $this->status ?? 'active'
+        ));
 
         $this->serviceID = intval($db->lastInsertId());
 
@@ -105,11 +116,17 @@
 
     public function updateDatabase($db) {
         $stmt = $db->prepare('UPDATE Service 
-                            SET title = ?, description = ?, hourlyRate = ?, deliveryTime = ?
+                            SET title = ?, description = ?, hourlyRate = ?, deliveryTime = ?, status = ?
                             WHERE serviceID = ?');
 
-        $stmt->execute(array($this->title, $this->description, $this->hourlyRate, $this->deliveryTime, $this->serviceID));
-
+        $stmt->execute(array(
+            $this->title, 
+            $this->description, 
+            $this->hourlyRate, 
+            $this->deliveryTime,
+            $this->status,
+            $this->serviceID
+        ));
 
         $stmt = $db->prepare('DELETE FROM ServiceLanguage WHERE serviceID = ?');
         $stmt->execute(array($this->serviceID));
@@ -118,7 +135,6 @@
         foreach ($this->languages as $language) {
             $stmt->execute(array($this->serviceID, $language));
         }
-
 
         $stmt = $db->prepare('DELETE FROM ServiceField WHERE serviceID = ?');
         $stmt->execute(array($this->serviceID));
@@ -134,32 +150,109 @@
         $stmt->execute(array($serviceID));
     }
 
+    /* =================== */
+    /* ADMIN-ONLY METHODS  */
+    /* =================== */
+    
+    public static function getActiveCount(PDO $db): int {
+        $stmt = $db->prepare("SELECT COUNT(*) FROM Service WHERE status = 'active'");
+        $stmt->execute();
+        return (int)$stmt->fetchColumn();
+    }
 
+    public static function getStatusStats(PDO $db): array {
+        $stmt = $db->prepare("
+            SELECT status, COUNT(*) as count 
+            FROM Service 
+            GROUP BY status
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
+    public static function getRecentServices(PDO $db, int $limit = 5): array {
+        $stmt = $db->prepare("
+            SELECT s.*, u.name as userName
+            FROM Service s
+            JOIN Users u ON s.userID = u.UserID
+            ORDER BY s.creationDate DESC
+            LIMIT :limit
+        ");
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $services = [];
+        while ($row = $stmt->fetch()) {
+            $services[] = new Service(
+                $row['serviceID'],
+                $row['userID'],
+                $row['userName'],
+                $row['title'],
+                $row['description'],
+                $row['hourlyRate'],
+                $row['deliveryTime'],
+                $row['creationDate'],
+                [],
+                [],
+                $row['status'] ?? null
+            );
+        }
+        return $services;
+    }
+
+    public static function getFilteredServices(PDO $db, array $filters = []): array {
+        $query = "SELECT s.*, u.name as userName FROM Service s JOIN Users u ON s.userID = u.UserID";
+        $conditions = [];
+        $params = [];
+
+        if (!empty($filters['status'])) {
+            $conditions[] = "s.status = :status";
+            $params[':status'] = $filters['status'];
+        }
+
+        if (!empty($filters['userID'])) {
+            $conditions[] = "s.userID = :userID";
+            $params[':userID'] = $filters['userID'];
+        }
+
+        if (!empty($conditions)) {
+            $query .= " WHERE " . implode(" AND ", $conditions);
+        }
+
+        $query .= " ORDER BY s.creationDate DESC";
+
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+
+        $services = [];
+        while ($row = $stmt->fetch()) {
+            $services[] = new Service(
+                $row['serviceID'],
+                $row['userID'],
+                $row['userName'],
+                $row['title'],
+                $row['description'],
+                $row['hourlyRate'],
+                $row['deliveryTime'],
+                $row['creationDate'],
+                [],
+                [],
+                $row['status']
+            );
+        }
+        return $services;
+    }
+
+    public static function updateStatus(PDO $db, int $serviceID, string $status): bool {
+        $stmt = $db->prepare("
+            UPDATE Service 
+            SET status = :status 
+            WHERE serviceID = :serviceID
+        ");
+        return $stmt->execute([
+            ':status' => $status,
+            ':serviceID' => $serviceID
+        ]);
+    }
 }
-
-
-
-
-//
-//INSERT INTO Service (serviceID, userID, title, description, hourlyRate, deliveryTime, creationDate) VALUES 
-//(1,
-//1,
-//'I will do modern mobile app ui ux design or website ui ux design',
-//'As a UI UX designer, I put much value on trustful, transparent, long-term relationships. Thats why Im very accurate in performing a professional approach. Your privacy, terms, and deadlines will always be respected. All I need to start is your specifications, a description of a problem you face, or just an initial idea of the future design product. But in case you are not sure at all - no problem. We will work out the products vision together, and I will provide you with fresh and unique ideas and efficient methods to create something outstanding and productive. I will manage your design project from start to final result. Feel free to contact me to discuss the details.', 
-//12, 
-//3,
-//'2024-01-15'
-//),
-//
-//(2,
-//1,
-//'I will do modern mobile app ui ux design or website ui ux design',
-//'As a UI UX designer, I put much value on trustful, transparent, long-term relationships. Thats why Im very accurate in performing a professional approach. Your privacy, terms, and deadlines will always be respected. All I need to start is your specifications, a description of a problem you face, or just an initial idea of the future design product. But in case you are not sure at all - no problem. We will work out the products vision together, and I will provide you with fresh and unique ideas and efficient methods to create something outstanding and productive. I will manage your design project from start to final result. Feel free to contact me to discuss the details.', 
-//15, 
-//4,
-//'2024-01-15'
-//);
-//
-
 ?>
