@@ -20,12 +20,16 @@
     $request = Request::getRequestByID($db, $_GET['id']);
 
     if ($request == NULL) {
-        die("No such Request");
+        $session->addMessage('warning', 'Request does not exist');
+        header('Location: ../pages/index.php');
+        return;
     }
 
     if ($session->getUserID() !== $request->userID && 
         $session->getUserID() !== Service::getCreatorByID($db, $request->serviceID)) {
-        die("Insufficient permissions");
+        $session->addMessage('warning', 'You do not have permission to access to this content');
+        header('Location: ../pages/index.php');
+        return;
     }
 
     $comments = Comment::getCommentsByRequestID($db, $_GET['id']);

@@ -30,6 +30,8 @@
         $r->status = (!empty($_POST['decision'])) ? $_POST['decision'] : $r->status;
         $r->save($db);
 
+        $session->addMessage('success', 'Request edited successfully');
+
         header('Location: ../pages/request.php?id=' . $r->requestID);
         return;
     } 
@@ -43,7 +45,9 @@
     $request = new Request(null, $serviceID, $userID, $title,
                         $description, null, null, 'pending');
     
-    $request->save($db);   
+    $requestID = $request->save($db);   
 
-    header('Location: ../pages');
+    $session->addMessage('success', 'Request created successfully');
+
+    header('Location: ../pages/request.php?id=' . $requestID);
 ?>

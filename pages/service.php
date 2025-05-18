@@ -19,14 +19,18 @@
     $request = null;
 
     if ($service == NULL) {
-        die ("Content does not exits");
+        $session->addMessage('warning', 'Service does not exist');
+        header('Location: ../pages/index.php');
+        return;
     }
     
     if (isset($_GET['requestID'])) {
         $request = Request::getRequestByID($db, $_GET['requestID']);
 
         if ($session->getUserID() !== $request->userID) {
-            die("Forbidden access to content");
+            $session->addMessage('warning', 'You do not have permission to access to this content');
+            header('Location: ../pages/index.php');
+            return;
         }
     }    
     

@@ -1,11 +1,14 @@
 <?php
 declare(strict_types=1);
-session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/user.class.php');
+
+require_once(__DIR__ . '/../utils/session.php');
+
+$session = new Session();
 
 try {
     $db = getDatabaseConnection();
@@ -18,15 +21,18 @@ try {
 
         // Validate input
         if ($password !== $confirm) {
-            die("Passwords don't match");
+            $session->addMessage('error', 'Passwords dont match');
+            header("Location: ../pages/signup.php?q=r");
+            return;
         }
 
         if (User::register($db, $name, $email, $password)) {
-            // Registration successful - redirect to login
+            $session->addMessage('successs', 'Registration done successefully');
             header("Location: ../pages/index.php");
             exit;
         } else {
-            echo "Registration failed (email may already exist)";
+            $session->addMessage('error', 'Registration failed (email might already exist)');
+            header("Location: ../pages/signup.php?q=r");
         }
     }
 } catch (PDOException $e) {

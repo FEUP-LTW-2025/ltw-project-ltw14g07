@@ -149,8 +149,6 @@ body > div > header {
         max-width:100em;
         margin: auto;
     }
-
-    margin-bottom: 2em;
 }
 
 #signup {
@@ -163,7 +161,7 @@ body > div > header {
 }
 
 
-/*----------------- HEADER ------------------*/
+/*----------------- FOOTER ------------------*/
 
 footer {
     margin-top: 2em;
@@ -176,6 +174,14 @@ footer {
     p {
         margin: 0.5em 0 0.5em 0;
     }
+}
+
+
+/*----------------- MESSAGES ------------------*/
+
+#messages {
+    max-width: fit-content;
+    margin: auto;
 }
 
 

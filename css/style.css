@@ -187,11 +187,35 @@ header #signup button{
 }
 
 
-/*----------------- HEADER ------------------*/
+/*----------------- FOOTER ------------------*/
 
 footer {
     background-color: rgb(64, 61, 55);
     color:rgb(240, 235, 235);
+}
+
+
+/*----------------- MESSAGES ------------------*/
+
+#messages article {
+  margin: 1em 0;
+  padding: 1em;
+}
+
+#messages article.success {
+  background-color: #DFF2BF;
+}
+
+#messages article.warning {
+  background-color: #FEEFB3;
+}
+
+#messages article.error {
+  background-color: #FFD2D2;
+}
+
+#messages article.info {
+  background-color: #BDE5F8;
 }
 
 /*----------------- PROFILE ------------------*/

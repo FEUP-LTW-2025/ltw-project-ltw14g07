@@ -35,6 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $session->setUserID($user->userID);
         $session->setUsername($user->name);
         $session->setCsrf((int) generate_random_token());
+
+        $session->addMessage('success', 'Logged in successefully');
+
         header("Location: ../pages/profile.php");
         
     } else {

@@ -2,7 +2,6 @@
 
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/service.class.php');
-
     require_once(__DIR__ . '/../utils/session.php');
 
     $session = new Session();
@@ -10,12 +9,16 @@
     if (!$session->getUserID()) header('Location: ../pages/signup.php');
 
     if ($session->getCsrf() !== $_POST['csrf']) {
-        die("Request is not legitimate");
+        $session->addMessage('error', 'Request was forged');
+        header('Location: ../pages/index.php');
+        return;
     }
     
     if (!preg_match ("/^[a-zA-Z\s]+$/", $_POST['title']) ||
         !preg_match ("/^[a-zA-Z\s]+$/", $_POST['description'])) {
-        die("Forbidden characters were used");
+        $session->addMessage('error', 'Forbidden characters were used');
+        header('Location: ../pages/index.php');
+        return;
     }
 
 
@@ -23,7 +26,7 @@
 
     $db = getDatabaseConnection();
 
-    $serviceID = ((int)$_POST['serviceID']) ?? null;
+    $serviceID = isset($_POST['serviceID']) ? (int)$_POST['serviceID'] : null;
     $userID = $session->getUserID();
     $title = $_POST['title'];
     $description = $_POST['description'];
@@ -32,15 +35,15 @@
     $hourlyRate = $_POST["hourlyRate"];
     $deliveryTime = $_POST["deliveryTime"];
 
-    if (!empty($serviceID) && $session->getUserID() !== Service::getCreatorByID($db, $serviceID))  {
-        die("Forbidden access to update content");
-    }
 
     $service = new Service($serviceID, $userID, null, $title,
                         $description, $hourlyRate, $deliveryTime,
                         null, $languages, $fields);
 
     
+    $label = !empty($serviceID) ? "edited" : "created";
+    $session->addMessage('success', 'Service ' . $label . " with success");
+
     $serviceID = $service->save($db);
 
 

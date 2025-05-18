@@ -12,7 +12,9 @@
     }
 
     if (trim($_POST['message']) === '') {
-        die(header('Location: ../pages/request.php?id=' . $_POST['requestID']));
+        $session->addMessage('warning', 'Message is empty');
+        header('Location: ../pages/request.php?id=' . $_POST['requestID']);
+        return;
     }
 
     if (!preg_match ("/^[a-zA-Z\s]+$/", $_POST['message'])) {
@@ -29,7 +31,7 @@
         null, 
         $_POST['requestID'],
         $session->getUserID(),
-        $_POST['message'],
+        trim($_POST['message']),
         null,
         null,
     );

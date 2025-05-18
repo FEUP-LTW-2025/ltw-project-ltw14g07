@@ -13,11 +13,16 @@
 
     $db = getDatabaseConnection();
     $filters = Filters::getAllFilters($db);
-    $session = new Session();
 
     $service = null;
     if (!empty($_GET['serviceID'])) {
         $service = Service::getService($db, $_GET['serviceID']);
+
+        if ($session->getUserID() !== $service->userID) {
+            $session->addMessage('warning', 'You cant edit this content');
+            header('Location: ../pages/index.php');
+            return;
+        }
     }
 
     draw_header('createService', $session);

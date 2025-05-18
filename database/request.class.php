@@ -94,6 +94,7 @@
     public function save($db) {
         if (!empty($this->requestID)) $this->updateDatabase($db);
         else $this->insertIntoDatabase($db);
+        return $this->requestID;
     }
 
     
@@ -111,7 +112,7 @@
         (?, ?, ?, ?, ?, ?, ?)');
 
         $stmt->execute(array(null, $this->serviceID, $this->userID, $this->title, $this->description, null, $this->status));
-
+        $this->requestID = intval($db->lastInsertId());
     }
 
     public static function delete($db, $requestID) {
