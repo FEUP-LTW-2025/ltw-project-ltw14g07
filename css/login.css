@@ -1,11 +1,11 @@
-body {
+/*body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
 }
 
-
+/*
 header {
     background-color: rgb(108, 215, 90);
     color: white;
@@ -16,7 +16,7 @@ header {
 header h1 {
     margin: 0;
 }
-
+*/
 
 #login {
     width: 300px;
@@ -57,7 +57,7 @@ header h1 {
     background-color:rgb(108, 215, 90);
 }
 
-
+/*
 footer {
     background-color:rgb(108, 215, 90);
     color: white;
@@ -67,3 +67,4 @@ footer {
     bottom: 0;
     width: 100%;
 }
+*/
