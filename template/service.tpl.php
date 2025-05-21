@@ -19,10 +19,12 @@
     <?php
         $hourlyRate = "$service->hourlyRate" . "$/h";
         $deliveryTime = "$service->deliveryTime" . " weeks";
+        $path = __DIR__ . "/../images/profile/$service->userID.jpg";
+        $src = file_exists($path) ? "/../images/profile/$service->userID.jpg" : "/../images/profile/default.jpg";
     ?>
     <section class='service'>
         <aside>
-            <img src="https://picsum.photos/id/237/200/300">
+            <img src=<?=$src?>>
             <p><?=htmlspecialchars($service->userName)?></p>
         </aside>
         <article>
@@ -110,6 +112,8 @@
     $shortDescription = substr($service->description, 0, 250);
     $hourlyRate = "$service->hourlyRate" . "$/h";
     $deliveryTime = "$service->deliveryTime" . " weeks";
+    $path = __DIR__ . "/../images/profile/$service->userID.jpg";
+    $src = file_exists($path) ? "/../images/profile/$service->userID.jpg" : "/../images/profile/default.jpg";
 
     if (strlen($service->description) > 250) {
         $shortDescription .= '...';
@@ -118,7 +122,7 @@
     <li class="info-card">
         <a href="/pages/service.php?serviceID=<?=$service->serviceID?>">
             <section>
-                <img src="https://picsum.photos/id/237/200/300">
+                <img src=<?=$src?>>
                 <div>
                     <h3><?=htmlspecialchars($service->title)?></h3>
                     <p><?=htmlspecialchars($service->userName)?></p>

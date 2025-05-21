@@ -18,6 +18,9 @@
         <h3>Your Password</h3>
         <input class="card" type="password" name="password" placeholder="(Optional)Change your Password.." value="">
     </section>
+
+    <input type="file" name="image"> 
+
 <?php } ?>
 
 <?php function draw_pubs_button() { ?>

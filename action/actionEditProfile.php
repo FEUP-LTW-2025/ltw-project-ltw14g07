@@ -49,7 +49,32 @@ if($password !== null && $password !== '') {
 // Update the user's profile in the database
 $user->updateDatabase($db);
 
-// Redirect back to the profile page with a success message
-header('Location: ../pages/profile.php?success=profile_updated');
+
+//CREATE / EDIT PROFILE PICTURE
+$basePath = __DIR__ . '/../images';
+if (!is_dir($basePath)) mkdir($basePath);
+if (!is_dir($basePath . "/profile")) mkdir($basePath . "/profile");
+
+$hasUploaded = isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name']);
+if (!$hasUploaded) {
+    header('Location: ../pages/profile.php');
+    return;
+}
+
+if (file_exists("$basePath/profile/$userID.jpg")) {
+    unlink("$basePath/profile/$userID.jpg");
+}
+
+$tempFileName = $_FILES['image']['tmp_name'];
+$image = @imagecreatefromjpeg($tempFileName);
+if (!$image) $image = @imagecreatefrompng($tempFileName);
+if (!$image) $image = @imagecreatefromgif($tempFileName);
+if (!$image) die('Unknown image format!');
+
+$imageFileName = "$basePath/profile/$userID.jpg";  
+imagejpeg($image, $imageFileName);
+
+header('Location: ../pages/profile.php');
+
 exit();
 ?>

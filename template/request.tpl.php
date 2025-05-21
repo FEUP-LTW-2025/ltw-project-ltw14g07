@@ -35,7 +35,7 @@
 <?php } ?>
 
 
-<?php function draw_delete_request($requestID) { ?>w
+<?php function draw_delete_request($requestID) { ?>
     <form action="/../action/actionDeleteRequest.php" method="post">
         <input type="hidden" name="requestID" value=<?=$requestID?>>
         <button type="submit" class="red-button">Delete</button>

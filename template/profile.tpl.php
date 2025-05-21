@@ -3,7 +3,9 @@
 <?php function draw_profile_resume($user) { ?>
     <section class='service'>
         <aside>
-            <img src="https://picsum.photos/id/237/200/300">
+            <?php   
+            draw_profile_pic($user->userID);
+            ?>
             <p><?=htmlspecialchars($user->name)?></p>
         </aside>
         <article>
@@ -16,4 +18,13 @@
     <a class="green-button" href="profile_editor.php">Edit Profile</a>
 
 <?php } ?> 
-www
+
+<?php function draw_profile_pic($userID)  { 
+        $path = __DIR__ . "/../images/profile/$userID.jpg";
+        if (!file_exists($path)) {
+            $src = "/../images/profile/default.jpg";
+        }
+        else $src = "/../images/profile/$userID.jpg";
+        ?>
+        <img src=<?=$src?> >
+ <?php }  ?>
