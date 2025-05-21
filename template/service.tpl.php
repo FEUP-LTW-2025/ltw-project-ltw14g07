@@ -24,7 +24,9 @@
     ?>
     <section class='service'>
         <aside>
-            <img src=<?=$src?>>
+            <a href="/pages/profile.php?id=<?=$service->userID?>">
+                <img src=<?=$src?>>
+            </a>
             <p><?=htmlspecialchars($service->userName)?></p>
         </aside>
         <article>
@@ -116,39 +118,38 @@
     $src = file_exists($path) ? "/../images/profile/$service->userID.jpg" : "/../images/profile/default.jpg";
 
     if (strlen($service->description) > 250) {
-        $shortDescription .= '...';
+        $shortDescription .= '...';           
     }
     ?>
-    <li class="info-card">
-        <a href="/pages/service.php?serviceID=<?=$service->serviceID?>">
-            <section>
+    <li class="info-card" data-id="<?=$service->serviceID?>">
+        <section>
+            <a href="/pages/profile.php?id=<?=$service->userID?>">
                 <img src=<?=$src?>>
-                <div>
-                    <h3><?=htmlspecialchars($service->title)?></h3>
-                    <p><?=htmlspecialchars($service->userName)?></p>
-                </div>
-            </section>
-            <p><?=$shortDescription?></p>
-            <section>
-                <div>
-                    <h4>Hourly Rate</h4>
-                    <p><?=$hourlyRate?></p>
-                </div>
+            </a>
+            <div>
+                <h3><?=htmlspecialchars($service->title)?></h3>
+                <p><?=htmlspecialchars($service->userName)?></p>
+            </div>
+        </section>
+        <p><?=$shortDescription?></p>
+        <section>
+            <div>
+                <h4>Hourly Rate</h4>
+                <p><?=$hourlyRate?></p>
+            </div>
 
-                <div>
-                    <h4>Delivery Time</h4>
-                    <p><?=$deliveryTime?></p>
-                </div>
+            <div>
+                <h4>Delivery Time</h4>
+                <p><?=$deliveryTime?></p>
+            </div>
 
-                <article>
-                    <?php 
-                    draw_tags($service->languages);
-                    draw_tags($service->fields);
-                    ?>
-                </article>
-            </section>
-            <input type="hidden" name="serviceID" value="<?=$service->serviceID?>">
-        </a>
+            <article>
+                <?php 
+                draw_tags($service->languages);
+                draw_tags($service->fields);
+                ?>
+            </article>
+        </section>
     </li>
 <?php } ?> 
 

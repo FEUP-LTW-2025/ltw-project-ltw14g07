@@ -13,6 +13,12 @@ header #signup button:hover {
     color: black;
 }
 
+#mainPage, #profile {
+    .info-card {
+        cursor: pointer;
+    }
+} 
+
 #messages:hover {
     cursor: pointer;
     scale: 1.05;

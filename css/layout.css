@@ -93,7 +93,7 @@ ul {
     max-width: 50em;
     overflow-wrap: break-word;
 
-    a > section {
+    > section {
         display: flex;
         gap: 2em;
         align-items: center

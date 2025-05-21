@@ -3,10 +3,9 @@
 function addClickEvent() {
     const service_cards = document.querySelectorAll('.info-card')
     for (const card of service_cards) {
-        const input = card.querySelector('input')
-        const id = input.value
+        const id = card.dataset.id
         card.addEventListener("click", function () {
-            window.location.href = `/../pages/service.php?id=${id}`    
+            window.location.href = `/../pages/service.php?serviceID=${id}`    
         })
     }
 }
