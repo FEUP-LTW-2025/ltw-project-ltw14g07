@@ -14,9 +14,6 @@
             </div>
         </article>
     </section>
-
-    <a class="green-button" href="profile_editor.php">Edit Profile</a>
-
 <?php } ?> 
 
 <?php function draw_profile_pic($userID)  { 
@@ -27,4 +24,9 @@
         else $src = "/../images/profile/$userID.jpg";
         ?>
         <img src=<?=$src?> >
+ <?php }  ?>
+
+
+<?php function draw_edit_profile()  { ?>
+    <a class="green-button" href="profile_editor.php">Edit Profile</a>
  <?php }  ?>

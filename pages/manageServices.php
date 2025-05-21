@@ -10,11 +10,9 @@
 
 
     $db = getDatabaseConnection();
-    //$user = User::getUserByID();
-    $userID = 1;  //temp 
     $session = new Session();
 
-    $services = Service::getAllServicesByUserID($db, $userID);
+    $services = Service::getAllServicesByUserID($db, $session->getUserID());
 
     draw_header('manageServices', $session);
     draw_manageServices_page($services);  

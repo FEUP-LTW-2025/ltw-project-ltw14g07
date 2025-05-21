@@ -20,22 +20,29 @@
         header('Location: signup.php');  
         exit();
     }
-    
+
     $db = getDatabaseConnection();
-    
-    $userID = $session->getUserID();
+
+    $userID = !empty($_GET['id']) ? (int) $_GET['id']  : $session->getUserID();
     $user = User::getUserByID($db, $userID);
-    
 
     $pendingRequests = Request::getRequestByUserID($db, $userID, 'pending');
     $acceptedRequests = Request::getRequestByUserID($db, $userID, 'accepted');
     $doneRequests= Request::getRequestByUserID($db, $userID, 'done');
 
+    $services = Service::getAllServicesByUserID($db, $userID);
 
     draw_header('profile', $session);
     draw_profile_resume($user);
-    draw_request_cards($pendingRequests, 'Pending');
-    draw_request_cards($acceptedRequests, 'Accepted');
-    draw_request_cards($doneRequests, 'Done');
+
+    if ($session->getUserID() != $userID) {
+        draw_service_cards($services);
+    } else {
+        draw_edit_profile();
+        draw_request_cards($pendingRequests, 'Pending');
+        draw_request_cards($acceptedRequests, 'Accepted');
+        draw_request_cards($doneRequests, 'Done');
+    }
+
     draw_footer();
 ?>
