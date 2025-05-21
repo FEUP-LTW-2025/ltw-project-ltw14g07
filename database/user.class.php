@@ -6,14 +6,16 @@
         public ?string $description;
         public string $role;
         public ?string $profilePicture;
+        public ?string $password;
 
-    public function __construct(int $userID, string $name, string $email, ?string $description, string $role, ?string $profilePicture) {
+    public function __construct(int $userID, string $name, string $email, ?string $description, string $role, ?string $profilePicture,?string $password = null) {
       $this->userID = $userID;
       $this->name = $name;
       $this->email = $email;
       $this->description = $description;
       $this->role = $role;
       $this->profilePicture = $profilePicture;
+      $this->password = $password;
     }
 
     public static function getUserByID($db, int $userID) {
@@ -27,7 +29,8 @@
         $user['email'],
         $user['description'],
         $user['role'],
-        $user['profilePicture']
+        $user['profilePicture'],
+        $user['password']
       );
     }
     public static function login(PDO $db, string $email, string $password): ?User {
@@ -42,7 +45,8 @@
               $user['email'],
               $user['description'] ?? null,
               $user['role'] ?? 'client',
-              $user['profilePicture'] ?? null
+              $user['profilePicture'] ?? null,
+              $user['password'] ?? null
           );
       }
       return null;
@@ -71,16 +75,28 @@
       ]);
   }
 
+  public function save($db) {
+    if (!empty($this->userID)) $this->updateDatabase($db);
+    else $this->insertIntoDatabase($db);
+    return $this->userID;
+}
+
 
   public function updateDatabase($db) {
     $stmt = $db->prepare('UPDATE Users 
-                        SET name = ?, description = ?, role = ?
+                        SET name = ?, description = ?, role = ?,password = ?
                         WHERE UserID = ?');
 
-    $stmt->execute(array($this->name, $this->description, $this->role, $this->userID));
+    $stmt->execute(array($this->name, $this->description, $this->role,$this->password,$this->userID));
 }
 
-    
+    public function insertIntoDatabase($db) {
+        $stmt = $db->prepare('INSERT INTO Users (UserID, name, profilePicture, email, password, description, role) VALUES 
+        (?, ?, ?, ?, ?, ?, ?)');
+
+        $stmt->execute(array(null, $this->name, $this->profilePicture, $this->email, $this->password, $this->description, 'client'));
+        $this->requestID = intval($db->lastInsertId());
+}
 
 }
 

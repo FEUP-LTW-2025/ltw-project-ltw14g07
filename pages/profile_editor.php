@@ -7,6 +7,7 @@
     require_once(__DIR__ . '/../template/request.tpl.php');
     require_once(__DIR__ . '/../template/profile_editor.tpl.php');
 
+
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/service.class.php');
     require_once(__DIR__ . '/../database/request.class.php');
@@ -26,10 +27,10 @@
     
     $userID = $session->getUserID();
     $user = User::getUserByID($db, $userID);
-    
 
 
     draw_header('profile', $session);
+
     draw_profile_editor($user);
     draw_footer();
 ?>
