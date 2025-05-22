@@ -16,11 +16,13 @@ if (!empty($userID)) {
     $services = Service::getAllServices($db, $limit, $offset);
 }
 
-
+if (empty($services)) {
+    echo 'no more data';
+    exit;
+}
 
 foreach ($services as $service) {
     draw_service_card($service);
 }
-
 
 ?>
