@@ -21,6 +21,11 @@
         $r->title =  (!empty($_POST['title'])) ? $_POST['title'] : $r->title;
         $r->description =  (!empty($_POST['description'])) ? $_POST['description'] : $r->description;
         $r->status = (!empty($_POST['decision'])) ? $_POST['decision'] : $r->status;
+        if ($r->status === 'done') {
+            $curr_date = date("Y-m-d");
+            $r->completionDate = $curr_date;
+        }
+
         $r->save($db);
 
         $session->addMessage('success', 'Request edited successfully');

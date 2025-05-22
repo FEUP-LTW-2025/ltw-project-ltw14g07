@@ -100,10 +100,10 @@
     
     public function updateDatabase($db) {
         $stmt = $db->prepare('UPDATE Request 
-                            SET title = ?, description = ?, status = ?
+                            SET title = ?, description = ?, status = ?, completionDate = ?
                             WHERE requestID = ?');
 
-        $stmt->execute(array($this->title, $this->description, $this->status, $this->requestID));
+        $stmt->execute(array($this->title, $this->description, $this->status, $this->completionDate, $this->requestID));
     }
 
 
