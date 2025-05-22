@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/user.class.php');
 
+require_once(__DIR__ . '/../utils/utils.php');
 require_once(__DIR__ . '/../utils/session.php');
 
 $session = new Session();
@@ -27,7 +28,12 @@ try {
         }
 
         if (User::register($db, $name, $email, $password)) {
-            $session->addMessage('successs', 'Registration done successefully');
+            $userID = (int) $db->lastInsertId();
+            $session->setUserID($userID);
+            $session->setUsername($name);
+            $session->setCsrf((int) generate_random_token());
+
+            $session->addMessage('success', 'Registration done successefully');
             header("Location: ../pages/index.php");
             exit;
         } else {
