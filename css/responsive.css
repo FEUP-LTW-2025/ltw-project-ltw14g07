@@ -13,7 +13,7 @@ header #signup button:hover {
     color: black;
 }
 
-#mainPage, #profile {
+#mainPage, #manageServices {
     .info-card {
         cursor: pointer;
     }

@@ -13,6 +13,7 @@
         }
         else {   //is freelancer
             if ($request->status === 'pending') draw_decision_buttons($request, $session);
+            if ($request->status === 'accepted') draw_done_button($request, $session);
         }
         draw_request_chat($comments, $request->requestID, $session);
     ?>
@@ -55,6 +56,15 @@
         <input type="hidden" name="csrf" value=<?=$session->getCsrf()?>>
         <button class="green-button" type="submit" name="decision" value="accepted">Accept</button>
         <button class="red-button" type="submit" name="decision" value="denied">Deny</button>
+    </form>
+<?php } ?>
+
+<?php function draw_done_button($request, Session $session) {  ?>
+    <form class="wrap-list right" method="post" action="/../action/actionCreateRequest.php">
+        <input type="hidden" name="requestID" value="<?=$request->requestID?>">
+        <input type="hidden" name="serviceID" value="<?=$request->serviceID?>">
+        <input type="hidden" name="csrf" value=<?=$session->getCsrf()?>>
+        <button class="green-button" type="submit" name="decision" value="done">Done</button>
     </form>
 <?php } ?>
 
