@@ -14,7 +14,7 @@
 
 
     $db = getDatabaseConnection();
-    $services = Service::getAllServices($db, 8);
+    $services = Service::getAllServices($db);
     $filters = FIlters::getAllFilters($db);
     $session = new Session();
 

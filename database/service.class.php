@@ -24,9 +24,9 @@
       $this->fields = $fields;
     }
 
-    public static function getAllServices($db, $limit) {
-        $stmt = $db->prepare('SELECT serviceID FROM Service LIMIT ?');
-        $stmt->execute(array($limit));
+    public static function getAllServices($db, $limit = 6, $offset = 0) {
+        $stmt = $db->prepare('SELECT serviceID FROM Service LIMIT ? OFFSET ?');
+        $stmt->execute(array($limit, $offset));
 
         $services = array();
         while($row = $stmt->fetch()) {
@@ -36,9 +36,9 @@
     }
 
 
-    public static function getAllServicesByUserID($db, $userID) {
-        $stmt = $db->prepare('SELECT serviceID FROM Service WHERE userID = ?');
-        $stmt->execute(array($userID));
+    public static function getAllServicesByUserID($db, $userID, $offset = 0) {
+        $stmt = $db->prepare('SELECT serviceID FROM Service WHERE userID = ? LIMIT ? OFFSET ?');
+        $stmt->execute(array($userID, 6, $offset));
 
         $services = array();
         while($row = $stmt->fetch()) {

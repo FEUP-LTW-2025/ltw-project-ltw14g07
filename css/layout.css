@@ -59,6 +59,11 @@ ul {
     justify-content: right;
 }
 
+.center {
+    display: flex;
+    justify-content: center;
+}
+
 
 .spaced {
     display: flex;

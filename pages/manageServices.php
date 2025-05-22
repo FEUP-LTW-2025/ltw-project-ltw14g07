@@ -15,6 +15,6 @@
     $services = Service::getAllServicesByUserID($db, $session->getUserID());
 
     draw_header('manageServices', $session);
-    draw_manageServices_page($services);  
+    draw_manageServices_page($services, $session->getUserID());  
     draw_footer();
 ?>

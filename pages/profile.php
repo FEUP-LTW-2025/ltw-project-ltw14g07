@@ -36,7 +36,7 @@
     draw_profile_resume($user);
 
     if ($session->getUserID() != $userID) {
-        draw_service_cards($services);
+        draw_service_cards($services, $userID);
     } else {
         draw_edit_profile();
         draw_request_cards($pendingRequests, 'Pending');

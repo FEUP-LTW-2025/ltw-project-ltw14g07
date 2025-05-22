@@ -16,6 +16,7 @@
             <link rel="stylesheet" href="../css/register.css">
             <script src="../js/closeMessage.js" defer></script> 
             <script src="../js/click.js" defer></script> 
+            <script src="../js/loadMore.js" defer></script> 
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         </head>

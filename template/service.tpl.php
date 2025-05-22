@@ -98,14 +98,17 @@
 <?php } ?>
 
 
-<?php function draw_service_cards($services) { ?>
-    <section class="card listing">
+<?php function draw_service_cards($services, $userID = null) { ?>
+    <section class="card listing" data-id="<?=$userID?>">
         <h1>Services</h1>
         <ul>
         <?php foreach($services as $service) { 
             draw_service_card($service);
         } ?>
         </ul>
+        <div class="center">
+            <button id="loadMore" class="green-button">Load More</button>
+        </div>
     </section>
 <?php } ?>
 
@@ -120,6 +123,7 @@
     if (strlen($service->description) > 250) {
         $shortDescription .= '...';           
     }
+
     ?>
     <li class="info-card" data-id="<?=$service->serviceID?>">
         <section>
