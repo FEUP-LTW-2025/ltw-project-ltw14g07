@@ -19,18 +19,18 @@
     $db = getDatabaseConnection();
     $request = Request::getRequestByID($db, $_GET['id']);
 
-    //if ($request == NULL) {
-    //    $session->addMessage('warning', 'Request does not exist');
-    //    header('Location: ../pages/index.php');
-    //    return;
-    //}
-
-    //if ($session->getUserID() !== $request->userID && 
-    //    $session->getUserID() !== Service::getCreatorByID($db, $request->serviceID)) {
-    //    $session->addMessage('warning', 'You do not have permission to access to this content');
-    //    header('Location: ../pages/index.php');
-    //    return;
-    //}
+    if ($request == NULL) {
+        $session->addMessage('warning', 'Request does not exist');
+        header('Location: ../pages/index.php');
+        return;
+    }
+    
+    if ($session->getUserID() !== $request->userID && 
+        $session->getUserID() !== Service::getCreatorByID($db, $request->serviceID)) {
+        $session->addMessage('warning', 'You do not have permission to access to this content');
+        header('Location: ../pages/index.php');
+        return;
+    }
 
     $comments = Comment::getCommentsByRequestID($db, $_GET['id']);
 
