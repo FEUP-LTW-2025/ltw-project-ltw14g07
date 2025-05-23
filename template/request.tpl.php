@@ -72,15 +72,15 @@
 <?php function draw_request_chat($comments, $requestID, Session $session) { ?>
     <section class="card listing">
         <h1>Chat</h1>
-        <?php if (empty($comments)): ?>
+        <ul class="overflow">
+            <?php if (empty($comments)): ?>
             <h3>No comments yet</h3>
         <?php else: ?>
-            <ul class="overflow">
-                <?php draw_comments($comments) ?>
-            </ul>
+            <?php draw_comments($comments) ?>
         <?php endif; ?>
+        </ul>
 
-        <form action="/../action/actionCreateComment.php" method="post">
+        <form>
             <input class="info-card" type="text" name="message" placeholder="type your message">
             <input type="hidden" value=<?=$requestID?> name="requestID">
             <input type="hidden" value=<?=$session->getCsrf()?> name="csrf">

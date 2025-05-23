@@ -2,6 +2,7 @@
 
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/comment.class.php');
+    require_once(__DIR__ . '/../template/comment.tpl.php');
 
     require_once(__DIR__ . '/../utils/session.php');
 
@@ -17,12 +18,9 @@
         return;
     }
 
-
     if (!$session->isLoggedIn()) header('Location: ../pages/index.php');
 
-
     $db = getDatabaseConnection();
-
 
     $comment = new Comment(
         null, 
@@ -35,6 +33,7 @@
 
     $comment->insertIntoDatabase($db);
 
-    header('Location: ../pages/request.php?id=' . $_POST['requestID']);
-
+    $comment->userName = $session->getUsername();
+    draw_comment($comment);
+    exit;
 ?>
