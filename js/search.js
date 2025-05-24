@@ -1,52 +1,64 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.getElementById('serviceSearch');
-    const searchButton = document.getElementById('searchButton');
-    const servicesList = document.getElementById('servicesList');
+const searchInput = document.getElementById('serviceSearch');
+const servicesList = document.getElementById('servicesList');
+const filterLanguage = document.getElementById('filterLanguage');
+const filterField = document.getElementById('filterField');
+const toggleFilters = document.getElementById('toggleFilters');
+const advancedFilters = document.getElementById('advancedFilters');
 
-    // Function to fetch and render services
-    async function fetchServices(searchTerm = '') {
-        const url = `/api/services?search=${encodeURIComponent(searchTerm)}`;
-        console.log('Fetching services from URL:', url); // Debugging line to check URL
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const services = await response.json();
-            renderServices(services);
-        } catch (error) {
-            console.error('Error fetching services:', error);
-        }
-    }
+// Debounce function to limit API calls
+function debounce(func, timeout = 300) {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+}
 
-    // Function to render services
-    function renderServices(services) {
+// Fetch and display search results
+async function performSearch() {
+    const searchTerm = searchInput.value.trim();
+    
+    if (searchTerm.length < 2) {
         servicesList.innerHTML = '';
-        
-        if (services.length === 0) {
-            servicesList.innerHTML = '<p>No services found</p>';
-            return;
-        }
-
-        services.forEach(service => {
-            const serviceCard = document.createElement('div');
-            serviceCard.className = 'service-card';
-            serviceCard.innerHTML = `
-                <h3>${service.title}</h3>
-                <p>${service.description.substring(0, 100)}...</p>
-                <p><strong>$${service.hourlyRate}/hr</strong></p>
-                <span class="service-status">${service.status}</span>
-            `;
-            servicesList.appendChild(serviceCard);
-        });
+        return;
     }
 
-    // Listen for search button click
-    searchButton.addEventListener('click', function () {
-        const searchTerm = searchInput.value.trim();
-        fetchServices(searchTerm);
-    });
+    try {
+        const response = await fetch(`/api/search_fields_languages.php?search=${encodeURIComponent(searchTerm)}`);
+        const results = await response.json();
+        
+        updateFiltersDropdown(filterLanguage, results.languages || []);
+        updateFiltersDropdown(filterField, results.fields || []);
+        
+        // You can also search services here if needed
+        // const servicesResponse = await fetch(`/api/search_services.php?search=${encodeURIComponent(searchTerm)}`);
+        // const services = await servicesResponse.json();
+        // displayServices(services);
+        
+    } catch (error) {
+        console.error('Search failed:', error);
+    }
+}
 
-    // Initial load: fetch all services without a search term
-    fetchServices();
+// Update filter dropdowns with search results
+function updateFiltersDropdown(dropdown, items) {
+    dropdown.innerHTML = '<option value="">All ' + dropdown.id.replace('filter', '') + '</option>';
+    items.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item;
+        option.textContent = item;
+        dropdown.appendChild(option);
+    });
+}
+
+// Toggle advanced filters visibility
+toggleFilters.addEventListener('click', () => {
+    advancedFilters.style.display = advancedFilters.style.display === 'none' ? 'block' : 'none';
 });
+
+// Initialize search with debouncing
+searchInput.addEventListener('input', debounce(performSearch));
+
+// Optional: Add event listeners for filter changes
+filterLanguage.addEventListener('change', performSearch);
+filterField.addEventListener('change', performSearch);

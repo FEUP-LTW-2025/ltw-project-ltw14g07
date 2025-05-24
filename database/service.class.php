@@ -80,6 +80,60 @@ class Service {
             $service['status'] ?? null
         );
     }
+    public static function searchServices(PDO $db, array $filters = []): array {
+        $query = "SELECT DISTINCT s.* FROM Service s
+                  LEFT JOIN ServiceLanguage sl ON s.serviceID = sl.serviceID
+                  LEFT JOIN ServiceField sf ON s.serviceID = sf.serviceID
+                  WHERE 1=1";
+        
+        $params = [];
+        
+        if (!empty($filters['search'])) {
+            $query .= " AND (s.title LIKE :search OR s.description LIKE :search 
+                        OR sl.language LIKE :searchLang OR sf.field LIKE :searchField)";
+            $params[':search'] = '%' . $filters['search'] . '%';
+            $params[':searchLang'] = '%' . $filters['search'] . '%';
+            $params[':searchField'] = '%' . $filters['search'] . '%';
+        }
+        
+        error_log("Final query: " . $query); // Debug
+        error_log("Parameters: " . print_r($params, true)); // Debug
+        
+        $stmt = $db->prepare($query);
+        
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+        
+        $stmt->execute();
+        
+        // Debug: Check what's actually being returned
+        $results = $stmt->fetchAll(PDO::FETCH_CLASS, 'Service');
+        error_log("Found " . count($results) . " services");
+        if (count($results) > 0) {
+            error_log("First result: " . print_r($results[0], true));
+        }
+        
+        return $results;
+    }
+    
+    public function getLanguages(PDO $db): array {
+        $stmt = $db->prepare("
+            SELECT language FROM ServiceLanguage 
+            WHERE serviceID = ?
+        ");
+        $stmt->execute([$this->serviceID]);
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+    
+    public function getFields(PDO $db): array {
+        $stmt = $db->prepare("
+            SELECT field FROM ServiceField 
+            WHERE serviceID = ?
+        ");
+        $stmt->execute([$this->serviceID]);
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
 
     public function save($db) {
         if (!empty($this->serviceID)) $this->updateDatabase($db);

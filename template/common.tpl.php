@@ -38,10 +38,37 @@ if (isset($_SESSION['userID']) && is_int($_SESSION['userID'])) {
                 <section class="spaced">
                     <h3>Let programmers work for you</h3>
 
-                    <!-- Search bar inside the header -->
+                    <!-- Integrated Search Bar -->
                     <div class="search-container">
-                        <input type="text" id="serviceSearch" placeholder="Search services..." class="search-input">
+                        <input type="text" id="serviceSearch" placeholder="Search services, fields, languages..." class="search-input">
+                        
+                        <!-- Advanced Filters Dropdown -->
+                        <div id="advancedFilters" style="display:none;">
+                            <select id="filterLanguage" class="filter-dropdown">
+                                <option value="">All Languages</option>
+                                <?php
+                                if (isset($currentUser) && class_exists('Filters')) {
+                                    $filters = Filters::getAllFilters(getDatabaseConnection());
+                                    foreach ($filters->languages as $language): ?>
+                                        <option value="<?= htmlspecialchars($language) ?>"><?= htmlspecialchars($language) ?></option>
+                                    <?php endforeach;
+                                }
+                                ?>
+                            </select>
+                            <select id="filterField" class="filter-dropdown">
+                                <option value="">All Fields</option>
+                                <?php
+                                if (isset($currentUser) && class_exists('Filters')) {
+                                    foreach ($filters->fields as $field): ?>
+                                        <option value="<?= htmlspecialchars($field) ?>"><?= htmlspecialchars($field) ?></option>
+                                    <?php endforeach;
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        
                         <button id="searchButton" class="green-button">Search</button>
+                        <button id="toggleFilters" class="filter-button">Filters</button>
                     </div>
 
                     <div id="signup">

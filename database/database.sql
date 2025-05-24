@@ -20,7 +20,8 @@ CREATE TABLE Users (
 	description TEXT,
 	role TEXT CHECK (role IN ('client', 'freelancer', 'admin'))
 );
-
+ALTER TABLE Users ADD COLUMN failed_attempts INTEGER DEFAULT 0;
+ALTER TABLE Users ADD COLUMN last_failed_login TIMESTAMP;
 
 CREATE TABLE Service (
 	serviceID INTEGER  NOT NULL PRIMARY KEY,

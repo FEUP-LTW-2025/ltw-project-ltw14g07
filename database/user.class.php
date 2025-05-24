@@ -15,7 +15,8 @@ class User {
         $this->role = $role;
         $this->profilePicture = $profilePicture;
     }
-    public static function getUserByID($db, ?int $userID): ?User {
+
+    public static function getUserByID(PDO $db, ?int $userID): ?User {
         if ($userID === null) {
             return null;
         }
@@ -25,7 +26,7 @@ class User {
         
         $user = $stmt->fetch();
         return $user ? new User(
-            (int)$user['UserID'],  // Ensure this is cast to int
+            (int)$user['UserID'],
             $user['name'],
             $user['email'],
             $user['description'] ?? null,
@@ -51,7 +52,7 @@ class User {
         }
         return null;
     }
-  
+
     public static function register(PDO $db, string $name, string $email, string $password, string $role = 'client'): bool {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return false;
@@ -68,7 +69,7 @@ class User {
             $name,
             $email,
             password_hash($password, PASSWORD_DEFAULT),
-            $role
+            'client' // Force client role
         ]);
     }
 
@@ -94,10 +95,16 @@ class User {
         }
         return $admins;
     }
-
-    public static function logSystemAction(PDO $db, int $userID, string $action, ?string $details = null): bool {
-        $stmt = $db->prepare("INSERT INTO SystemLogs (UserID, Action, Details) VALUES (?, ?, ?)");
-        return $stmt->execute([$userID, $action, $details]);
+    public static function logSystemAction(PDO $db, ?int $userId, string $action, string $details = "") {
+        $stmt = $db->prepare("
+            INSERT INTO SystemLogs (UserID, Action, Details, Timestamp)
+            VALUES (:userId, :action, :details, datetime('now'))
+        ");
+        $stmt->execute([
+            ':userId' => $userId,
+            ':action' => $action,
+            ':details' => $details
+        ]);
     }
 
     public static function getRecentLogs(PDO $db, int $limit = 10): array {
@@ -140,6 +147,27 @@ class User {
         return $this->role === 'admin';
     }
 
+    public static function enforceAdminPasswordPolicy(string $password): bool {
+        return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{12,}$/', $password);
+    }
+
+    public static function changeAdminPassword(PDO $db, int $userID, string $currentPassword, string $newPassword): bool {
+        $user = self::getUserByID($db, $userID);
+        if (!$user || !password_verify($currentPassword, $user->password)) {
+            return false;
+        }
+        
+        if (!self::enforceAdminPasswordPolicy($newPassword)) {
+            return false;
+        }
+        
+        $stmt = $db->prepare("UPDATE Users SET password = ? WHERE UserID = ?");
+        return $stmt->execute([
+            password_hash($newPassword, PASSWORD_DEFAULT),
+            $userID
+        ]);
+    }
+
     public static function getCurrentUser(PDO $db): ?User {
         if (!isset($_SESSION['userID'])) return null;
         return self::getUserByID($db, $_SESSION['userID']);
@@ -154,19 +182,37 @@ class User {
         }
         return $user;
     }
+
+    public static function loginNewUser(PDO $db, string $email, string $password): ?User {
+        $stmt = $db->prepare('SELECT * FROM Users WHERE email = ?');
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+
+        if ($user && password_verify($password, $user['password'])) {
+            return new User(
+                (int)$user['UserID'],
+                $user['name'],
+                $user['email'],
+                $user['description'] ?? null,
+                $user['role'],
+                $user['profilePicture'] ?? null
+            );
+        }
+        return null;
+    }
 }
 
-//    CREATE TABLE Users (
-//      UserID INTEGER NOT NULL PRIMARY KEY,
-//      name TEXT NOT NULL,
-//      profilePicture TEXT,    --filepath, not sure how to actually store it
-//      email TEXT NOT NULL UNIQUE,
-//      password TEXT NOT NULL,   --should be hashed or something like that
-//      description TEXT,
-//      role TEXT CHECK (role IN ('client', 'freelancer', 'admin'))
-//    );
-//    
-
+/* 
+CREATE TABLE Users (
+  UserID INTEGER NOT NULL PRIMARY KEY,
+  name TEXT NOT NULL,
+  profilePicture TEXT,
+  email TEXT NOT NULL UNIQUE,
+  password TEXT NOT NULL,
+  description TEXT,
+  role TEXT CHECK (role IN ('client', 'freelancer', 'admin'))
+);
+*/
 ?>
 
 
