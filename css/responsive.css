@@ -29,11 +29,12 @@ header #signup button:hover {
         img {
             display: none;
         }
-
-        .listing .wrap-list {
-            display: none;
-        }
     }
+
+    .listing .wrap-list {
+            display: none;
+    }
+
 }
 
 @media (max-width: 900px) {
@@ -42,6 +43,12 @@ header #signup button:hover {
 
         aside {
             max-width: 100%;
+        }
+    }
+
+    #selectService, #profile {
+        aside {
+            display: none;
         }
     }
 }

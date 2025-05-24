@@ -217,14 +217,6 @@ footer {
   background-color: #BDE5F8;
 }
 
-/*----------------- PROFILE ------------------*/
-
-
-#profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 
 /*----------------- REQUEST ------------------*/

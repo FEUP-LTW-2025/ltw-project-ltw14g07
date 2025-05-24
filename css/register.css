@@ -47,6 +47,7 @@ header {
     padding: 30px;
     width: 300px;
     border: 2px solid #ccc;
+    margin:auto;
 }
 
 .register-form h2 {

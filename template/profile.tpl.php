@@ -1,6 +1,9 @@
 
 
 <?php function draw_profile_resume($user) { ?>
+    <?php
+    $description = $user->description ? $user->description : "No user description"
+    ?>
     <section class='service'>
         <aside>
             <?php   
@@ -10,7 +13,7 @@
         </aside>
         <article>
             <div class="card">
-                <p><?=htmlspecialchars($user->description)?></p>
+                <p><?=htmlspecialchars($description)?></p>
             </div>
         </article>
     </section>
@@ -28,5 +31,7 @@
 
 
 <?php function draw_edit_profile()  { ?>
-    <a class="green-button" href="profile_editor.php">Edit Profile</a>
+    <section class="right">
+        <a class="green-button" href="profile_editor.php">Edit Profile</a>
+    </section>
  <?php }  ?>
