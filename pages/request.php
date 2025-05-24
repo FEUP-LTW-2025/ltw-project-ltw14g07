@@ -8,6 +8,7 @@
     require_once(__DIR__ . '/../database/service.class.php');
     require_once(__DIR__ . '/../database/comment.class.php');
     require_once(__DIR__ . '/../database/user.class.php');
+    require_once(__DIR__ . '/../database/payment.class.php');
 
     require_once(__DIR__ . '/../utils/session.php');
 
@@ -18,6 +19,9 @@
 
     $db = getDatabaseConnection();
     $request = Request::getRequestByID($db, $_GET['id']);
+    if ($request) {
+        $payment = Payment::getPaymentByRequestID($db, $request->requestID);
+    }
 
     if ($request == NULL) {
         $session->addMessage('warning', 'Request does not exist');
@@ -31,6 +35,15 @@
         header('Location: ../pages/index.php');
         return;
     }
+
+    if (empty($payment)) {
+        if ($session->getUserID() === $request->userID) {
+            $session->addMessage('warning', 'You have not inserted the payment credentials yet');
+            header('Location: ../pages/payment.php?requestID=' . $request->requestID . "&serviceID=" . $request->serviceID);
+            return;
+        }
+    }
+
 
     $comments = Comment::getCommentsByRequestID($db, $_GET['id']);
 

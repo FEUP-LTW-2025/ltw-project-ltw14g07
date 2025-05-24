@@ -61,6 +61,8 @@ CREATE TABLE Payment (
 	requestID INTEGER NOT NULL,
 	amount DECIMAL(10, 2),
 	status TEXT CHECK (status IN ('pending', 'completed')),
+	paymentMethod TEXT CHECK (paymentMethod IN ('visa', 'rupay', 'mastercard', 'paypal', 'mock')) NOT NULL,
+	transactionDate DATE,
 
 	FOREIGN KEY (requestID) REFERENCES Request(requestID)
 		ON DELETE CASCADE
