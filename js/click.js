@@ -1,7 +1,7 @@
 
 
 function addClickEvent() {
-    const service_cards = document.querySelectorAll('#mainPage .info-card, #manageServices .info-card, #profile .info-card')
+    const service_cards = document.querySelectorAll('#service-card')
     for (const card of service_cards) {
         const id = card.dataset.id
         card.addEventListener("click", function () {

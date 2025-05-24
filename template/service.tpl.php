@@ -130,7 +130,7 @@
     }
 
     ?>
-    <li class="info-card" data-id="<?=$service->serviceID?>">
+    <li id="service-card" class="info-card" data-id="<?=$service->serviceID?>">
         <section>
             <a href="/pages/profile.php?id=<?=$service->userID?>">
                 <img src=<?=$src?>>

@@ -46,7 +46,7 @@ CREATE TABLE Request (
 	creationDate DATE DEFAULT CURRENT_DATE,
 	completionDate DATE,
 	status TEXT NOT NULL CHECK(status IN ('pending', 'accepted', 'denied', 'done')),      --dar update para carrinho  
-	review INTEGER CHECK (review BETWEEN 1 AND 5) DEFAULT NULL,
+	review INTEGER CHECK (review IN (-1, 0, 1)) DEFAULT 0,
 
 	FOREIGN KEY (serviceID) REFERENCES Service(serviceID)
 		ON DELETE CASCADE

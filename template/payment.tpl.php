@@ -26,7 +26,6 @@
             <div>
                 <h3>Card Type* :
                     <select name="card_type" id="card_type" required="">
-                    <option value="">---Select a Card type---</option>
                     <option value="visa">Visa</option>
                     <option value="rupay">Rupay</option>
                     <option value="mastercard">Master Card</option>     
