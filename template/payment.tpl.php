@@ -22,7 +22,7 @@
 
         <h2>Payment Information</h2>
 
-        <section class="spaced">
+        <section class="spaced wrap-list">
             <div>
                 <h3>Card Type* :
                     <select name="card_type" id="card_type" required="">

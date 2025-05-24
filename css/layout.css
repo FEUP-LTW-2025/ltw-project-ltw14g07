@@ -335,3 +335,17 @@ footer {
         margin-left: 3em;
     }
 }
+
+
+/*----------------- PAYMENT PAGE ------------------*/
+
+#payment {
+    hr {
+        margin-top: 3em;
+        margin-bottom: 3em;
+    }
+
+    article {
+        margin-bottom: 3em;
+    }
+}
