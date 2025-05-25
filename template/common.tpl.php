@@ -30,6 +30,12 @@ if (isset($_SESSION['userID']) && is_int($_SESSION['userID'])) {
         <?php if (strpos($id, 'admin-') === 0): ?>
             <link rel="stylesheet" href="../css/admin.css?v=<?= filemtime('../css/admin.css') ?>">
         <?php endif; ?>
+        <?php 
+        // Load register/login CSS on signup page (adjust id accordingly)
+        if ($id === 'signup'): ?>
+            <link rel="stylesheet" href="../css/register.css?v=<?= filemtime('../css/register.css') ?>">
+            <link rel="stylesheet" href="../css/login.css?v=<?= filemtime('../css/login.css') ?>">
+        <?php endif; ?>
     </head>
     <body>
         <header>
