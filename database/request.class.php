@@ -63,9 +63,9 @@
         return $services;
      }
 
-     public static function getRequestByServiceID($db, $serviceID) {
-        $stmt = $db->prepare('SELECT * FROM Request where serviceID = ?');
-        $stmt->execute(array($serviceID));
+     public static function getRequestByServiceID($db, $serviceID, $status) {
+        $stmt = $db->prepare('SELECT * FROM Request where serviceID = ? and status = ?');
+        $stmt->execute(array($serviceID, $status));
 
         $services = array();
         while($row = $stmt->fetch()) {

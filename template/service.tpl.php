@@ -3,11 +3,12 @@
     require_once(__DIR__ . '/../template/request.tpl.php');
 ?>
 
-<?php function draw_service_page($service, $requests, $request, Session $session) { 
+<?php function draw_service_page($service, $pendingRequests, $acceptedRequests, $request, Session $session) { 
     draw_service($service);
     if ($session->getUserID() === $service->userID) {
         draw_user_options($service->serviceID);
-        draw_request_cards($requests, 'Pending');
+        draw_request_cards($pendingRequests, 'Pending');
+        draw_request_cards($acceptedRequests, 'Accepted');
     } else {
         draw_request_form($service->userName, $service->serviceID, $request, $session);
     }

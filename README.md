@@ -34,8 +34,9 @@
 
 ## Credentials
 
-- admin@example.com/admin123
 - test@gmail.com/1234
+- request@gmail.com/1234
+- admin@example.com/admin123
 
 ## Problems
 

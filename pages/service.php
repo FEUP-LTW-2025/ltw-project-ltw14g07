@@ -34,9 +34,11 @@
         }
     }    
     
-    $requests = Request::getRequestByServiceID($db, $_GET['serviceID']);
+    $pendingRequests = Request::getRequestByServiceID($db, $_GET['serviceID'], 'pending');
+    $acceptedRequests = Request::getRequestByServiceID($db, $_GET['serviceID'], 'accepted');
+
 
     draw_header('selectService', $session);
-    draw_service_page($service, $requests, $request, $session);
+    draw_service_page($service, $pendingRequests, $acceptedRequests, $request, $session);
     draw_footer();
 ?>
