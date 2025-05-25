@@ -98,6 +98,155 @@ draw_header('admin-services', true);
         </tbody>
     </table>
 </section>
+
+<style>
+/* Container & Layout */
+.admin-services {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Heading */
+.admin-services h1 {
+    font-weight: 700;
+    font-size: 2.4rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #2980b9;
+    padding-bottom: 0.5rem;
+}
+
+/* Filters */
+.filters {
+    margin-bottom: 1.5rem;
+}
+.filters label {
+    font-weight: 600;
+    margin-right: 0.8rem;
+    color: #34495e;
+}
+.filters select {
+    padding: 0.4rem 0.7rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+}
+.filters select:hover,
+.filters select:focus {
+    border-color: #2980b9;
+    outline: none;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.07);
+    border-radius: 10px;
+    overflow: hidden;
+}
+thead tr {
+    background-color: #2980b9;
+    color: #ecf0f1;
+    text-align: left;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+thead th {
+    padding: 1rem 1.2rem;
+}
+tbody tr {
+    background: #fff;
+    transition: background-color 0.25s ease;
+    cursor: default;
+}
+tbody tr:hover {
+    background-color: #f0f8ff;
+}
+
+/* Table cells */
+tbody td {
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid #ecf0f1;
+    vertical-align: middle;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+/* Status form select */
+.status-form select {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.95rem;
+    border: 1.5px solid #bbb;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.status-form select:hover,
+.status-form select:focus {
+    border-color: #2980b9;
+    box-shadow: 0 0 6px rgba(41, 128, 185, 0.5);
+    outline: none;
+}
+
+/* Action buttons */
+.btn-view {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #2980b9;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+.btn-view:hover {
+    background-color: #1f6391;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-services {
+        padding: 1rem;
+    }
+    thead tr {
+        display: none;
+    }
+    tbody tr {
+        display: block;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        padding: 1rem;
+    }
+    tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: none;
+    }
+    tbody td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: #2980b9;
+    }
+    .status-form select,
+    .btn-view {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+</style>
+
 <?php
 draw_footer();
 ?>

@@ -34,58 +34,72 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         switch ($action) {
             case 'promote_user':
-                // Require password confirmation for sensitive actions
-                if (!verifyAdminPassword($db, $currentUser, $_POST['password_confirm'] ?? '')) {
-                    $_SESSION['admin_error'] = "Password verification failed";
+                $userEmail = filter_input(INPUT_POST, 'user_email', FILTER_SANITIZE_EMAIL);
+            
+                // Get current admin user (must be logged in)
+                $admin = User::getUserByID($db, $_SESSION['userID'] ?? 0);
+            
+                if (!$admin || $admin->role !== 'admin') {
+                    $_SESSION['admin_error'] = "Unauthorized action.";
                     break;
                 }
-                
-                $userEmail = filter_input(INPUT_POST, 'user_email', FILTER_SANITIZE_EMAIL);
+            
+                if (!$userEmail) {
+                    $_SESSION['admin_error'] = "Invalid email.";
+                    break;
+                }
+            
+                // Get the target user by email
                 $targetUser = User::getUserByEmail($db, $userEmail);
-                
-                if ($targetUser && User::promoteToAdmin($db, $targetUser->userID)) {
-                    User::logSystemAction(
-                        $db, 
-                        $currentUser->userID, 
-                        "Promoted user to admin", 
-                        "Promoted: " . $targetUser->email
-                    );
-                    $_SESSION['admin_message'] = "User promoted successfully";
+            
+                if (!$targetUser) {
+                    $_SESSION['admin_error'] = "User not found.";
+                    break;
+                }
+            
+                if (User::promoteToAdmin($db, $targetUser->userID)) {
+                    $_SESSION['admin_message'] = "User promoted successfully.";
                 } else {
-                    $_SESSION['admin_error'] = "User not found or already admin";
+                    $_SESSION['admin_error'] = "Promotion failed.";
                 }
                 break;
+            
+            
                 
-           case 'demote_user':
-    // Verify admin password first
-    $password = $_POST['password_confirm'] ?? '';
-    $admin = User::getCurrentUser($db);
-    
-    if (!$admin || !password_verify($password, $admin->password)) {
-        $_SESSION['admin_error'] = "Password verification failed";
-        break;
-    }
-    
-    $userID = (int)($_POST['user_id'] ?? 0);
-    
-    // Prevent self-demotion
-    if ($userID === $admin->userID) {
-        $_SESSION['admin_error'] = "You cannot demote yourself";
-        break;
-    }
-    
-    if (User::demoteUser($db, $userID)) {
-        User::logSystemAction(
-            $db,
-            $admin->userID,
-            "Demoted admin",
-            "User ID: $userID"
-        );
-        $_SESSION['admin_message'] = "User demoted successfully";
-    } else {
-        $_SESSION['admin_error'] = "Demotion failed";
-    }
-    break;
+                case 'demote_user':
+                    $userID = isset($_POST['demoteUserID']) ? (int)$_POST['demoteUserID'] : 0;
+                    
+                    $admin = User::getUserByID($db, $_SESSION['userID'] ?? 0);
+                    
+                    if (!$admin || $admin->role !== 'admin') {
+                        $_SESSION['admin_error'] = "Unauthorized action.";
+                        break;
+                    }
+                    
+                    // Prevent self-demotion
+                    if ($userID === $admin->userID) {
+                        $_SESSION['admin_error'] = "You cannot demote yourself";
+                        break;
+                    }
+                    
+                    if ($userID <= 0) {
+                        $_SESSION['admin_error'] = "Invalid user ID.";
+                        break;
+                    }
+                    
+                    if (User::demoteUser($db, $userID)) {
+                        User::logSystemAction(
+                            $db,
+                            $admin->userID,
+                            "Demoted admin",
+                            "User ID: $userID"
+                        );
+                        $_SESSION['admin_message'] = "User demoted successfully";
+                    } else {
+                        $_SESSION['admin_error'] = "Demotion failed";
+                    }
+                    break;
+                
                 
             case 'add_category':
                 $name = trim($_POST['category_name']);

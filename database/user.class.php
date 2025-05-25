@@ -74,9 +74,14 @@ class User {
     }
 
     public static function promoteToAdmin(PDO $db, int $userID): bool {
-        $stmt = $db->prepare("UPDATE Users SET role = 'admin' WHERE UserID = ?");
-        return $stmt->execute([$userID]);
+        $stmt = $db->prepare('UPDATE Users SET role = :role WHERE UserID = :userID');
+        return $stmt->execute([
+            ':role' => 'admin',
+            ':userID' => $userID
+        ]);
     }
+    
+    
 
     public static function getAllAdmins(PDO $db): array {
         $stmt = $db->prepare("SELECT * FROM Users WHERE role = 'admin'");
@@ -181,6 +186,13 @@ class User {
             exit();
         }
         return $user;
+    }
+    public static function verifyPassword(PDO $db, int $userID, string $password): bool {
+        $stmt = $db->prepare("SELECT password FROM Users WHERE UserID = ?");
+        $stmt->execute([$userID]);
+        $user = $stmt->fetch();
+        
+        return $user && password_verify($password, $user['password']);
     }
 
     public static function loginNewUser(PDO $db, string $email, string $password): ?User {

@@ -15,15 +15,16 @@
         <section class="admin-section">
             <h2>User Management</h2>
             
-            <form method="POST" class="admin-form">
+                        <form method="POST" class="admin-form">
                 <input type="hidden" name="action" value="promote_user">
                 
                 <div class="form-group">
-                    <label for="user_email">Promote User to Admin:</label>
-                    <input type="email" id="user_email" name="user_email" required 
-                           placeholder="Enter user's email">
-                    <button type="submit">Elevate to Admin</button>
-                </div>
+                    <label for="user_email">User Email:</label>
+                    <input type="email" id="user_email" name="user_email" required>
+        </div>
+                
+        <button type="submit" class="btn-demote">Elevate to Admin</button>
+
             </form>
             
             <div class="current-admins">
@@ -35,7 +36,7 @@
                         <?php if ($admin->userID !== $_SESSION['userID']): ?>
                             <form method="POST" class="inline-form">
                                 <input type="hidden" name="action" value="demote_user">
-                                <input type="hidden" name="user_id" value="<?= $admin->userID ?>">
+                                <input type="hidden" name="demoteUserID" value="<?= $admin->userID ?>">
                                 <button type="submit" class="btn-demote" 
                                         onclick="return confirm('Demote <?= htmlspecialchars($admin->name) ?>?')">
                                     Demote
@@ -65,7 +66,8 @@
                             <input type="text" id="category_name" name="category_name" required>
                             <label for="category_description">Description:</label>
                             <textarea id="category_description" name="category_description"></textarea>
-                            <button type="submit">Add Category</button>
+                            <button type="submit" class="btn-demote">Add Category</button>
+
                         </div>
                     </form>
                     
@@ -115,7 +117,8 @@
                         <input type="hidden" name="action" value="add_language">
                         <div class="form-group">
                             <input type="text" name="language_name" placeholder="New language (e.g. Python)" required>
-                            <button type="submit">Add</button>
+                            <button type="submit" class="btn-demote">Add</button>
+                           
                         </div>
                     </form>
                     
@@ -135,6 +138,7 @@
                                                 onclick="return confirm('Delete <?= htmlspecialchars($lang['language']) ?>?')">
                                             Delete
                                         </button>
+
                                     </form>
                                 </td>
                             </tr>
@@ -154,7 +158,7 @@
                         <input type="hidden" name="action" value="add_field">
                         <div class="form-group">
                             <input type="text" name="field_name" placeholder="New field (e.g. Web Development)" required>
-                            <button type="submit">Add</button>
+                            <button type="submit" class="btn-demote">Add</button>
                         </div>
                     </form>
                     
@@ -286,35 +290,60 @@
                 }
             };
         </script>
-        
         <style>
-            .subsection {
-                margin-bottom: 1rem;
-                border: 1px solid #e0e0e0;
-                border-radius: 5px;
-                padding: 0 1rem;
-            }
-            .subsection-header {
-                cursor: pointer;
-                padding: 0.75rem 0;
-                margin: 0;
-                display: flex;
-                align-items: center;
-                font-size: 1.1rem;
-                color: #333;
-            }
-            .toggle-icon {
-                display: inline-block;
-                width: 20px;
-                text-align: center;
-                margin-right: 8px;
-                font-weight: bold;
-            }
-            .subsection-content {
-                padding: 0.5rem 0 1rem;
-                border-top: 1px solid #f0f0f0;
-                margin-top: 0.5rem;
-            }
+        .subsection {
+            margin-bottom: 1.5rem;
+            border: 1px solid #d1d5db; /* light gray-blue */
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            background-color: #fafafa;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #222;
+        }
+
+        .subsection-header {
+            cursor: pointer;
+            padding: 0.75rem 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #2c3e50; /* dark slate */
+            user-select: none;
+            transition: color 0.3s ease;
+        }
+        .subsection-header:hover {
+            color: #1abc9c; /* teal accent on hover */
+        }
+
+        .toggle-icon {
+            display: inline-block;
+            width: 20px;
+            text-align: center;
+            margin-right: 12px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        /* Add a class "open" to subsection-header when expanded */
+        .subsection-header.open .toggle-icon {
+            transform: rotate(90deg);
+            color: #1abc9c;
+        }
+
+        .subsection-content {
+            padding: 0.75rem 0 1.25rem;
+            border-top: 1px solid #e2e8f0; /* subtle border */
+            margin-top: 0.75rem;
+            color: #444;
+            font-size: 1rem;
+            line-height: 1.5;
+            transition: max-height 0.35s ease, opacity 0.3s ease;
+            overflow: hidden;
+        }
         </style>
+
     </div>
 <?php } ?>
