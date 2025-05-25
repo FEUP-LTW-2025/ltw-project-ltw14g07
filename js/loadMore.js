@@ -19,6 +19,8 @@ if (button) {
                 }
                 document.querySelector(".listing ul").insertAdjacentHTML('beforeend', service_cards)
                 offset+=6
+
+                addClickEvent();
         })
 })}
 
