@@ -39,4 +39,4 @@
 
 ## Problems
 
-Due to time limit constraints, a participant was not able to merge their work to the main branch. So the code remins in a branch 'new', and the respective features were pointed as '!'.
+Due to time limit constraints, a participant was not able to merge their work to the main branch. So the code remains in a branch 'new', and the respective features were pointed as '!'.
